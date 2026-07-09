@@ -1,8 +1,19 @@
-import { useState } from "react";
+import { useMemo, useState } from "react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
-import { Building2, CheckCircle2, ClipboardList, Send, UserRound } from "lucide-react";
+import {
+  ArrowLeft,
+  ArrowRight,
+  Building2,
+  CheckCircle2,
+  ClipboardList,
+  Send,
+  ShieldCheck,
+  Sparkles,
+  Target,
+  UserRound,
+} from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Checkbox } from "@/components/ui/checkbox";
 import {
@@ -24,6 +35,9 @@ import {
 import { Textarea } from "@/components/ui/textarea";
 import { Reveal } from "./Reveal";
 import { SectionHeading } from "./SectionHeading";
+import { cn } from "@/lib/utils";
+
+/* ---------- Optionen ---------- */
 
 const AREAS = [
   "Kundenkommunikation",
@@ -61,14 +75,23 @@ const INDUSTRIES = [
 ];
 
 const EMPLOYEE_RANGES = ["1–9", "10–49", "50–249", "250+"];
-
 const TIMELINES = ["Sofort", "In 1–3 Monaten", "Später", "Erst einmal informieren"];
-
 const PRIVACY_LEVELS = [
   "Sehr wichtig – Daten müssen in der EU bleiben",
   "Wichtig – sollte berücksichtigt werden",
   "Offen – wir lassen uns beraten",
 ];
+const GOALS = [
+  "Zeit sparen im Alltag",
+  "Angebote schneller erstellen",
+  "Kundenanfragen schneller beantworten",
+  "Fehlerquote senken",
+  "Wissen im Team leichter finden",
+  "Mitarbeiter entlasten",
+  "Mehr Umsatz durch bessere Nachverfolgung",
+];
+
+/* ---------- Schema ---------- */
 
 const formSchema = z.object({
   firstName: z.string().trim().min(1, "Bitte geben Sie Ihren Vornamen an.").max(100),
@@ -80,11 +103,12 @@ const formSchema = z.object({
   website: z.string().trim().max(255).optional().or(z.literal("")),
   industry: z.string().min(1, "Bitte wählen Sie Ihre Branche."),
   employees: z.string().min(1, "Bitte wählen Sie die Unternehmensgröße."),
-  areas: z.array(z.string()).min(1, "Bitte wählen Sie mindestens einen Bereich."),
   systems: z.array(z.string()),
   systemsOther: z.string().trim().max(500).optional().or(z.literal("")),
+  areas: z.array(z.string()).min(1, "Bitte wählen Sie mindestens einen Bereich."),
   timeEater: z.string().trim().max(1000).optional().or(z.literal("")),
   existingAiTools: z.string().trim().max(500).optional().or(z.literal("")),
+  goals: z.array(z.string()).min(1, "Bitte wählen Sie mindestens ein Ziel."),
   privacyImportance: z.string().min(1, "Bitte wählen Sie eine Option."),
   timeline: z.string().min(1, "Bitte wählen Sie einen Zeitraum."),
   message: z.string().trim().max(2000).optional().or(z.literal("")),
@@ -92,48 +116,52 @@ const formSchema = z.object({
 
 export type AiCheckFormValues = z.infer<typeof formSchema>;
 
+type FieldName = keyof AiCheckFormValues;
+
+const stepMeta = [
+  {
+    icon: UserRound,
+    title: "Ihre Kontaktdaten",
+    subtitle: "Damit wir uns bei Ihnen melden können.",
+    fields: ["firstName", "lastName", "company", "position", "email", "phone", "website"] as FieldName[],
+  },
+  {
+    icon: Building2,
+    title: "Ihr Unternehmen",
+    subtitle: "Ein paar Fakten für die Einordnung.",
+    fields: ["industry", "employees", "systems", "systemsOther"] as FieldName[],
+  },
+  {
+    icon: ClipboardList,
+    title: "Ihre aktuelle Situation",
+    subtitle: "Wo drückt der Schuh – und was ist schon im Einsatz?",
+    fields: ["areas", "timeEater", "existingAiTools"] as FieldName[],
+  },
+  {
+    icon: Target,
+    title: "Ziele & Rahmen",
+    subtitle: "Wohin soll die Reise gehen – und was ist wichtig?",
+    fields: ["goals", "privacyImportance", "timeline", "message"] as FieldName[],
+  },
+];
+
 /**
  * Übergabepunkt für die spätere Backend-Anbindung.
- * Hier später z. B. Supabase, Resend, Formspree oder eine eigene API anbinden:
- *
- *   await fetch("/api/ai-check", { method: "POST", body: JSON.stringify(values) })
+ * Später hier z. B. eine Server-Function, Resend, Formspree oder eigene API anbinden.
  */
 async function submitAiCheck(values: AiCheckFormValues): Promise<void> {
-  // Simulierte Verarbeitung – aktuell ohne Backend.
   console.info("AI-Check-Anfrage (noch ohne Backend):", values);
   await new Promise((resolve) => setTimeout(resolve, 600));
 }
 
-function GroupHeader({
-  icon: Icon,
-  step,
-  title,
-  subtitle,
-}: {
-  icon: typeof UserRound;
-  step: string;
-  title: string;
-  subtitle: string;
-}) {
-  return (
-    <div className="mb-6 flex items-start gap-4">
-      <span className="grid h-11 w-11 shrink-0 place-items-center rounded-xl bg-gradient-brand text-primary-foreground shadow-brand-glow">
-        <Icon className="h-5 w-5" />
-      </span>
-      <div className="min-w-0">
-        <p className="text-xs font-semibold tracking-widest text-accent uppercase">{step}</p>
-        <h3 className="text-lg font-bold text-primary">{title}</h3>
-        <p className="text-sm text-muted-foreground">{subtitle}</p>
-      </div>
-    </div>
-  );
-}
-
 export function AiCheckForm() {
   const [submitted, setSubmitted] = useState(false);
+  const [step, setStep] = useState(0);
+  const totalSteps = stepMeta.length;
 
   const form = useForm<AiCheckFormValues>({
     resolver: zodResolver(formSchema),
+    mode: "onBlur",
     defaultValues: {
       firstName: "",
       lastName: "",
@@ -149,11 +177,31 @@ export function AiCheckForm() {
       systemsOther: "",
       timeEater: "",
       existingAiTools: "",
+      goals: [],
       privacyImportance: "",
       timeline: "",
       message: "",
     },
   });
+
+  const progress = useMemo(() => ((step + 1) / totalSteps) * 100, [step, totalSteps]);
+  const current = stepMeta[step];
+  const isLast = step === totalSteps - 1;
+
+  const goNext = async () => {
+    const valid = await form.trigger(current.fields);
+    if (!valid) return;
+    setStep((s) => Math.min(s + 1, totalSteps - 1));
+    window.setTimeout(
+      () =>
+        document
+          .getElementById("ai-check")
+          ?.scrollIntoView({ behavior: "smooth", block: "start" }),
+      50,
+    );
+  };
+
+  const goBack = () => setStep((s) => Math.max(s - 1, 0));
 
   const onSubmit = async (values: AiCheckFormValues) => {
     await submitAiCheck(values);
@@ -161,431 +209,599 @@ export function AiCheckForm() {
   };
 
   return (
-    <section id="ai-check" className="bg-secondary/50 py-16 md:py-24">
+    <section id="ai-check" className="relative py-20 md:py-28">
+      <div
+        aria-hidden
+        className="absolute inset-0 -z-10 bg-gradient-to-b from-background via-secondary/50 to-background"
+      />
+      <div
+        aria-hidden
+        className="absolute top-24 left-1/2 -z-10 h-72 w-[42rem] -translate-x-1/2 rounded-full bg-gradient-to-b from-brand-soft/60 to-transparent blur-3xl"
+      />
       <div className="mx-auto max-w-3xl px-4 md:px-6">
         <SectionHeading
           eyebrow="Kostenloser AI-Check"
-          title="Starten Sie Ihre kostenlose Vorab-Analyse."
-          subtitle="Je mehr wir vorab über Ihren Betrieb wissen, desto konkreter wird unser Erstgespräch. Dauert ca. 3 Minuten – unverbindlich und kostenlos."
+          title="Starten Sie Ihre"
+          titleAccent="kostenlose Vorab-Analyse."
+          subtitle="Je mehr wir vorab über Ihren Betrieb wissen, desto konkreter wird unser Erstgespräch. Vier kurze Schritte – ca. 3 Minuten, unverbindlich und kostenlos."
         />
 
         {submitted ? (
-          <div
-            role="status"
-            className="rounded-2xl border border-border bg-card p-10 text-center shadow-elevated"
-          >
-            <span className="mx-auto grid h-16 w-16 place-items-center rounded-full bg-brand-soft">
-              <CheckCircle2 className="h-8 w-8 text-accent" />
-            </span>
-            <h3 className="mt-6 text-2xl font-bold text-primary">Vielen Dank für Ihre Anfrage!</h3>
-            <p className="mx-auto mt-3 max-w-md text-muted-foreground">
-              Wir haben Ihre Angaben erhalten und melden uns in der Regel innerhalb von 1–2
-              Werktagen bei Ihnen, um einen Termin für den kostenlosen AI-Check zu vereinbaren.
-            </p>
-            <p className="mt-6 text-sm text-muted-foreground">
-              Dringende Fragen? Rufen Sie uns gerne an:{" "}
-              <a href="tel:+4915565000062" className="font-semibold text-accent hover:underline">
-                015565000062
-              </a>
-            </p>
-          </div>
+          <Reveal variant="scale">
+            <div
+              role="status"
+              className="card-luxe relative overflow-hidden p-10 text-center md:p-14"
+            >
+              <span
+                aria-hidden
+                className="pointer-events-none absolute inset-x-0 top-0 h-40 bg-gradient-to-b from-brand-soft/70 to-transparent"
+              />
+              <span className="relative mx-auto grid h-16 w-16 place-items-center rounded-full bg-gradient-brand text-primary-foreground shadow-brand-glow">
+                <CheckCircle2 className="h-8 w-8" />
+              </span>
+              <h3 className="relative mt-6 text-2xl font-semibold text-primary md:text-3xl">
+                Vielen Dank für Ihre Anfrage!
+              </h3>
+              <p className="relative mx-auto mt-3 max-w-md text-muted-foreground">
+                Wir haben Ihre Angaben erhalten und melden uns in der Regel innerhalb von 1–2
+                Werktagen bei Ihnen, um einen Termin für den kostenlosen AI-Check zu vereinbaren.
+              </p>
+              <p className="relative mt-6 text-sm text-muted-foreground">
+                Dringende Fragen? Rufen Sie uns gerne an:{" "}
+                <a href="tel:+4915565000062" className="font-semibold text-accent hover:underline">
+                  015565000062
+                </a>
+              </p>
+            </div>
+          </Reveal>
         ) : (
           <Reveal>
-            <Form {...form}>
-              <form
-                onSubmit={form.handleSubmit(onSubmit)}
-                className="space-y-6"
-                noValidate
-              >
-                {/* Gruppe 1: Kontakt */}
-                <div className="rounded-2xl border border-border bg-card p-6 shadow-card md:p-8">
-                  <GroupHeader
-                    icon={UserRound}
-                    step="Schritt 1 von 3"
-                    title="Ihre Kontaktdaten"
-                    subtitle="Damit wir uns bei Ihnen melden können."
+            <div className="card-luxe relative overflow-hidden p-6 md:p-10">
+              {/* Stepper Header */}
+              <div className="mb-8">
+                <div className="mb-5 flex items-center justify-between text-xs font-semibold tracking-wider text-muted-foreground uppercase">
+                  <span>
+                    Schritt {step + 1} von {totalSteps}
+                  </span>
+                  <span className="text-accent">{Math.round(progress)}% abgeschlossen</span>
+                </div>
+                <div className="relative h-1.5 overflow-hidden rounded-full bg-secondary">
+                  <div
+                    className="absolute inset-y-0 left-0 rounded-full bg-gradient-brand shadow-brand-glow transition-all duration-700 ease-out"
+                    style={{ width: `${progress}%` }}
                   />
-                  <div className="grid gap-5 sm:grid-cols-2">
-                    <FormField
-                      control={form.control}
-                      name="firstName"
-                      render={({ field }) => (
-                        <FormItem>
-                          <FormLabel>Vorname *</FormLabel>
-                          <FormControl>
-                            <Input placeholder="Max" autoComplete="given-name" {...field} />
-                          </FormControl>
-                          <FormMessage />
-                        </FormItem>
-                      )}
-                    />
-                    <FormField
-                      control={form.control}
-                      name="lastName"
-                      render={({ field }) => (
-                        <FormItem>
-                          <FormLabel>Nachname *</FormLabel>
-                          <FormControl>
-                            <Input placeholder="Mustermann" autoComplete="family-name" {...field} />
-                          </FormControl>
-                          <FormMessage />
-                        </FormItem>
-                      )}
-                    />
-                    <FormField
-                      control={form.control}
-                      name="company"
-                      render={({ field }) => (
-                        <FormItem>
-                          <FormLabel>Firma *</FormLabel>
-                          <FormControl>
-                            <Input placeholder="Mustermann GmbH" autoComplete="organization" {...field} />
-                          </FormControl>
-                          <FormMessage />
-                        </FormItem>
-                      )}
-                    />
-                    <FormField
-                      control={form.control}
-                      name="position"
-                      render={({ field }) => (
-                        <FormItem>
-                          <FormLabel>Position / Funktion</FormLabel>
-                          <FormControl>
-                            <Input placeholder="z. B. Geschäftsführer" autoComplete="organization-title" {...field} />
-                          </FormControl>
-                          <FormMessage />
-                        </FormItem>
-                      )}
-                    />
-                    <FormField
-                      control={form.control}
-                      name="email"
-                      render={({ field }) => (
-                        <FormItem>
-                          <FormLabel>E-Mail *</FormLabel>
-                          <FormControl>
-                            <Input type="email" placeholder="max@firma.de" autoComplete="email" {...field} />
-                          </FormControl>
-                          <FormMessage />
-                        </FormItem>
-                      )}
-                    />
-                    <FormField
-                      control={form.control}
-                      name="phone"
-                      render={({ field }) => (
-                        <FormItem>
-                          <FormLabel>Telefonnummer *</FormLabel>
-                          <FormControl>
-                            <Input type="tel" placeholder="0151 23456789" autoComplete="tel" {...field} />
-                          </FormControl>
-                          <FormMessage />
-                        </FormItem>
-                      )}
-                    />
-                    <FormField
-                      control={form.control}
-                      name="website"
-                      render={({ field }) => (
-                        <FormItem className="sm:col-span-2">
-                          <FormLabel>Website des Unternehmens</FormLabel>
-                          <FormControl>
-                            <Input type="url" placeholder="https://www.firma.de" autoComplete="url" {...field} />
-                          </FormControl>
-                          <FormMessage />
-                        </FormItem>
-                      )}
-                    />
-                  </div>
                 </div>
 
-                {/* Gruppe 2: Unternehmen */}
-                <div className="rounded-2xl border border-border bg-card p-6 shadow-card md:p-8">
-                  <GroupHeader
-                    icon={Building2}
-                    step="Schritt 2 von 3"
-                    title="Ihr Unternehmen"
-                    subtitle="Ein paar Fakten für die Einordnung."
-                  />
-                  <div className="grid gap-5 sm:grid-cols-2">
-                    <FormField
-                      control={form.control}
-                      name="industry"
-                      render={({ field }) => (
-                        <FormItem>
-                          <FormLabel>Branche *</FormLabel>
-                          <Select onValueChange={field.onChange} value={field.value}>
-                            <FormControl>
-                              <SelectTrigger>
-                                <SelectValue placeholder="Bitte wählen" />
-                              </SelectTrigger>
-                            </FormControl>
-                            <SelectContent>
-                              {INDUSTRIES.map((ind) => (
-                                <SelectItem key={ind} value={ind}>
-                                  {ind}
-                                </SelectItem>
-                              ))}
-                            </SelectContent>
-                          </Select>
-                          <FormMessage />
-                        </FormItem>
-                      )}
-                    />
-                    <FormField
-                      control={form.control}
-                      name="employees"
-                      render={({ field }) => (
-                        <FormItem>
-                          <FormLabel>Anzahl Mitarbeiter *</FormLabel>
-                          <Select onValueChange={field.onChange} value={field.value}>
-                            <FormControl>
-                              <SelectTrigger>
-                                <SelectValue placeholder="Bitte wählen" />
-                              </SelectTrigger>
-                            </FormControl>
-                            <SelectContent>
-                              {EMPLOYEE_RANGES.map((r) => (
-                                <SelectItem key={r} value={r}>
-                                  {r} Mitarbeiter
-                                </SelectItem>
-                              ))}
-                            </SelectContent>
-                          </Select>
-                          <FormMessage />
-                        </FormItem>
-                      )}
-                    />
-                    <FormField
-                      control={form.control}
-                      name="systems"
-                      render={() => (
-                        <FormItem className="sm:col-span-2">
-                          <FormLabel>Welche Systeme werden bereits genutzt?</FormLabel>
-                          <div className="mt-1 flex flex-wrap gap-2">
-                            {SYSTEMS.map((system) => (
-                              <FormField
-                                key={system}
-                                control={form.control}
-                                name="systems"
-                                render={({ field }) => {
-                                  const checked = field.value.includes(system);
-                                  return (
-                                    <FormItem>
-                                      <FormLabel className="flex cursor-pointer items-center gap-2 rounded-full border border-border bg-background px-3.5 py-2 text-sm font-medium transition-colors has-[[data-state=checked]]:border-accent has-[[data-state=checked]]:bg-brand-soft has-[[data-state=checked]]:text-primary">
-                                        <FormControl>
-                                          <Checkbox
-                                            checked={checked}
-                                            onCheckedChange={(value) =>
-                                              field.onChange(
-                                                value
-                                                  ? [...field.value, system]
-                                                  : field.value.filter((s) => s !== system),
-                                              )
-                                            }
-                                          />
-                                        </FormControl>
-                                        {system}
-                                      </FormLabel>
-                                    </FormItem>
-                                  );
-                                }}
-                              />
-                            ))}
-                          </div>
-                          <FormMessage />
-                        </FormItem>
-                      )}
-                    />
-                    {form.watch("systems").includes("Sonstiges") && (
-                      <FormField
-                        control={form.control}
-                        name="systemsOther"
-                        render={({ field }) => (
-                          <FormItem className="sm:col-span-2">
-                            <FormLabel>Sonstige Systeme</FormLabel>
-                            <FormControl>
-                              <Input placeholder="Welche weiteren Systeme nutzen Sie?" {...field} />
-                            </FormControl>
-                            <FormMessage />
-                          </FormItem>
+                {/* Step Dots */}
+                <ol className="mt-6 grid grid-cols-4 gap-2">
+                  {stepMeta.map((s, i) => {
+                    const active = i === step;
+                    const done = i < step;
+                    const Icon = s.icon;
+                    return (
+                      <li
+                        key={s.title}
+                        className={cn(
+                          "flex items-center gap-2.5 rounded-xl border p-2.5 text-left transition-all",
+                          active
+                            ? "border-accent bg-brand-soft text-primary shadow-card"
+                            : done
+                              ? "border-border bg-card text-primary"
+                              : "border-border bg-secondary/50 text-muted-foreground",
                         )}
-                      />
+                      >
+                        <span
+                          className={cn(
+                            "grid h-8 w-8 shrink-0 place-items-center rounded-lg transition-all",
+                            active || done
+                              ? "bg-gradient-brand text-primary-foreground shadow-brand-glow"
+                              : "bg-background text-muted-foreground",
+                          )}
+                        >
+                          {done ? (
+                            <CheckCircle2 className="h-4 w-4" />
+                          ) : (
+                            <Icon className="h-4 w-4" />
+                          )}
+                        </span>
+                        <span className="hidden text-xs font-semibold sm:block">{i + 1}. {s.title.split(" ")[0]}</span>
+                      </li>
+                    );
+                  })}
+                </ol>
+              </div>
+
+              <div className="mb-7 flex items-start gap-4">
+                <span className="grid h-11 w-11 shrink-0 place-items-center rounded-xl bg-gradient-brand text-primary-foreground shadow-brand-glow">
+                  <current.icon className="h-5 w-5" />
+                </span>
+                <div className="min-w-0">
+                  <p className="text-[11px] font-semibold tracking-widest text-accent uppercase">
+                    Schritt {step + 1} von {totalSteps}
+                  </p>
+                  <h3 className="text-xl font-semibold text-primary md:text-2xl">
+                    {current.title}
+                  </h3>
+                  <p className="text-sm text-muted-foreground">{current.subtitle}</p>
+                </div>
+              </div>
+
+              <Form {...form}>
+                <form
+                  onSubmit={form.handleSubmit(onSubmit)}
+                  className="space-y-6"
+                  noValidate
+                >
+                  {step === 0 && <StepContact form={form} />}
+                  {step === 1 && <StepCompany form={form} />}
+                  {step === 2 && <StepSituation form={form} />}
+                  {step === 3 && <StepGoals form={form} />}
+
+                  {/* Navigation */}
+                  <div className="flex flex-col-reverse items-stretch gap-3 border-t border-border pt-6 sm:flex-row sm:items-center sm:justify-between">
+                    <Button
+                      type="button"
+                      variant="ghost"
+                      onClick={goBack}
+                      disabled={step === 0}
+                      className="rounded-full"
+                    >
+                      <ArrowLeft className="mr-1 h-4 w-4" />
+                      Zurück
+                    </Button>
+
+                    {isLast ? (
+                      <Button
+                        type="submit"
+                        size="lg"
+                        disabled={form.formState.isSubmitting}
+                        className="rounded-full bg-gradient-brand shadow-brand-glow transition-transform hover:scale-[1.02] sm:px-8"
+                      >
+                        <Send className="mr-1 h-4 w-4" />
+                        {form.formState.isSubmitting
+                          ? "Wird gesendet …"
+                          : "AI-Check kostenlos anfragen"}
+                      </Button>
+                    ) : (
+                      <Button
+                        type="button"
+                        size="lg"
+                        onClick={goNext}
+                        className="rounded-full bg-gradient-brand shadow-brand-glow transition-transform hover:scale-[1.02] sm:px-8"
+                      >
+                        Weiter
+                        <ArrowRight className="ml-1 h-4 w-4" />
+                      </Button>
                     )}
                   </div>
-                </div>
 
-                {/* Gruppe 3: Herausforderungen */}
-                <div className="rounded-2xl border border-border bg-card p-6 shadow-card md:p-8">
-                  <GroupHeader
-                    icon={ClipboardList}
-                    step="Schritt 3 von 3"
-                    title="Ihre Herausforderungen"
-                    subtitle="Wo drückt der Schuh – und wo soll es hingehen?"
-                  />
-                  <div className="grid gap-5">
-                    <FormField
-                      control={form.control}
-                      name="areas"
-                      render={() => (
-                        <FormItem>
-                          <FormLabel>Welche Bereiche sollen verbessert werden? *</FormLabel>
-                          <div className="mt-1 flex flex-wrap gap-2">
-                            {AREAS.map((area) => (
-                              <FormField
-                                key={area}
-                                control={form.control}
-                                name="areas"
-                                render={({ field }) => {
-                                  const checked = field.value.includes(area);
-                                  return (
-                                    <FormItem>
-                                      <FormLabel className="flex cursor-pointer items-center gap-2 rounded-full border border-border bg-background px-3.5 py-2 text-sm font-medium transition-colors has-[[data-state=checked]]:border-accent has-[[data-state=checked]]:bg-brand-soft has-[[data-state=checked]]:text-primary">
-                                        <FormControl>
-                                          <Checkbox
-                                            checked={checked}
-                                            onCheckedChange={(value) =>
-                                              field.onChange(
-                                                value
-                                                  ? [...field.value, area]
-                                                  : field.value.filter((a) => a !== area),
-                                              )
-                                            }
-                                          />
-                                        </FormControl>
-                                        {area}
-                                      </FormLabel>
-                                    </FormItem>
-                                  );
-                                }}
-                              />
-                            ))}
-                          </div>
-                          <FormMessage />
-                        </FormItem>
-                      )}
-                    />
-                    <FormField
-                      control={form.control}
-                      name="timeEater"
-                      render={({ field }) => (
-                        <FormItem>
-                          <FormLabel>Was ist aktuell der größte Zeitfresser im Unternehmen?</FormLabel>
-                          <FormControl>
-                            <Textarea
-                              rows={3}
-                              placeholder="z. B. E-Mails sortieren und beantworten, Angebote schreiben, Dokumente ablegen …"
-                              {...field}
-                            />
-                          </FormControl>
-                          <FormMessage />
-                        </FormItem>
-                      )}
-                    />
-                    <div className="grid gap-5 sm:grid-cols-2">
-                      <FormField
-                        control={form.control}
-                        name="existingAiTools"
-                        render={({ field }) => (
-                          <FormItem className="sm:col-span-2">
-                            <FormLabel>Gibt es bereits AI-Tools im Einsatz?</FormLabel>
-                            <FormControl>
-                              <Input placeholder="z. B. ChatGPT, Copilot – oder: noch keine" {...field} />
-                            </FormControl>
-                            <FormMessage />
-                          </FormItem>
-                        )}
-                      />
-                      <FormField
-                        control={form.control}
-                        name="privacyImportance"
-                        render={({ field }) => (
-                          <FormItem>
-                            <FormLabel>Wie wichtig ist Datenschutz / Speicherung in der EU? *</FormLabel>
-                            <Select onValueChange={field.onChange} value={field.value}>
-                              <FormControl>
-                                <SelectTrigger>
-                                  <SelectValue placeholder="Bitte wählen" />
-                                </SelectTrigger>
-                              </FormControl>
-                              <SelectContent>
-                                {PRIVACY_LEVELS.map((p) => (
-                                  <SelectItem key={p} value={p}>
-                                    {p}
-                                  </SelectItem>
-                                ))}
-                              </SelectContent>
-                            </Select>
-                            <FormMessage />
-                          </FormItem>
-                        )}
-                      />
-                      <FormField
-                        control={form.control}
-                        name="timeline"
-                        render={({ field }) => (
-                          <FormItem>
-                            <FormLabel>Wann soll das Thema umgesetzt werden? *</FormLabel>
-                            <Select onValueChange={field.onChange} value={field.value}>
-                              <FormControl>
-                                <SelectTrigger>
-                                  <SelectValue placeholder="Bitte wählen" />
-                                </SelectTrigger>
-                              </FormControl>
-                              <SelectContent>
-                                {TIMELINES.map((t) => (
-                                  <SelectItem key={t} value={t}>
-                                    {t}
-                                  </SelectItem>
-                                ))}
-                              </SelectContent>
-                            </Select>
-                            <FormMessage />
-                          </FormItem>
-                        )}
-                      />
-                    </div>
-                    <FormField
-                      control={form.control}
-                      name="message"
-                      render={({ field }) => (
-                        <FormItem>
-                          <FormLabel>Nachricht / Freitext</FormLabel>
-                          <FormControl>
-                            <Textarea
-                              rows={4}
-                              placeholder="Gibt es etwas, das wir vorab wissen sollten?"
-                              {...field}
-                            />
-                          </FormControl>
-                          <FormMessage />
-                        </FormItem>
-                      )}
-                    />
-                  </div>
-                </div>
-
-                <div className="flex flex-col items-center gap-3">
-                  <Button
-                    type="submit"
-                    size="lg"
-                    disabled={form.formState.isSubmitting}
-                    className="w-full bg-gradient-brand text-base shadow-brand-glow transition-transform hover:scale-[1.01] sm:w-auto sm:px-10"
-                  >
-                    <Send className="mr-1 h-4 w-4" />
-                    {form.formState.isSubmitting ? "Wird gesendet …" : "Kostenlosen AI-Check anfragen"}
-                  </Button>
-                  <p className="max-w-md text-center text-xs text-muted-foreground">
-                    Ihre Angaben werden vertraulich behandelt und ausschließlich zur Vorbereitung
-                    des Erstgesprächs genutzt. Kostenlos und unverbindlich.
-                  </p>
-                </div>
-              </form>
-            </Form>
+                  {isLast && (
+                    <p className="pt-1 text-center text-xs text-muted-foreground">
+                      <ShieldCheck className="mr-1 inline h-3.5 w-3.5 text-accent" />
+                      Ihre Angaben werden vertraulich behandelt und ausschließlich zur Vorbereitung
+                      des Erstgesprächs genutzt.
+                    </p>
+                  )}
+                </form>
+              </Form>
+            </div>
           </Reveal>
         )}
       </div>
     </section>
+  );
+}
+
+/* ---------- Step Components ---------- */
+
+type StepProps = { form: ReturnType<typeof useForm<AiCheckFormValues>> };
+
+function StepContact({ form }: StepProps) {
+  return (
+    <div className="grid gap-5 sm:grid-cols-2">
+      <FormField
+        control={form.control}
+        name="firstName"
+        render={({ field }) => (
+          <FormItem>
+            <FormLabel>Vorname *</FormLabel>
+            <FormControl>
+              <Input placeholder="Max" autoComplete="given-name" {...field} />
+            </FormControl>
+            <FormMessage />
+          </FormItem>
+        )}
+      />
+      <FormField
+        control={form.control}
+        name="lastName"
+        render={({ field }) => (
+          <FormItem>
+            <FormLabel>Nachname *</FormLabel>
+            <FormControl>
+              <Input placeholder="Mustermann" autoComplete="family-name" {...field} />
+            </FormControl>
+            <FormMessage />
+          </FormItem>
+        )}
+      />
+      <FormField
+        control={form.control}
+        name="company"
+        render={({ field }) => (
+          <FormItem>
+            <FormLabel>Firma *</FormLabel>
+            <FormControl>
+              <Input placeholder="Mustermann GmbH" autoComplete="organization" {...field} />
+            </FormControl>
+            <FormMessage />
+          </FormItem>
+        )}
+      />
+      <FormField
+        control={form.control}
+        name="position"
+        render={({ field }) => (
+          <FormItem>
+            <FormLabel>Position / Funktion</FormLabel>
+            <FormControl>
+              <Input
+                placeholder="z. B. Geschäftsführer"
+                autoComplete="organization-title"
+                {...field}
+              />
+            </FormControl>
+            <FormMessage />
+          </FormItem>
+        )}
+      />
+      <FormField
+        control={form.control}
+        name="email"
+        render={({ field }) => (
+          <FormItem>
+            <FormLabel>E-Mail *</FormLabel>
+            <FormControl>
+              <Input type="email" placeholder="max@firma.de" autoComplete="email" {...field} />
+            </FormControl>
+            <FormMessage />
+          </FormItem>
+        )}
+      />
+      <FormField
+        control={form.control}
+        name="phone"
+        render={({ field }) => (
+          <FormItem>
+            <FormLabel>Telefonnummer *</FormLabel>
+            <FormControl>
+              <Input type="tel" placeholder="0151 23456789" autoComplete="tel" {...field} />
+            </FormControl>
+            <FormMessage />
+          </FormItem>
+        )}
+      />
+      <FormField
+        control={form.control}
+        name="website"
+        render={({ field }) => (
+          <FormItem className="sm:col-span-2">
+            <FormLabel>Website des Unternehmens</FormLabel>
+            <FormControl>
+              <Input type="url" placeholder="https://www.firma.de" autoComplete="url" {...field} />
+            </FormControl>
+            <FormMessage />
+          </FormItem>
+        )}
+      />
+    </div>
+  );
+}
+
+function StepCompany({ form }: StepProps) {
+  const systems = form.watch("systems");
+  return (
+    <div className="grid gap-5 sm:grid-cols-2">
+      <FormField
+        control={form.control}
+        name="industry"
+        render={({ field }) => (
+          <FormItem>
+            <FormLabel>Branche *</FormLabel>
+            <Select onValueChange={field.onChange} value={field.value}>
+              <FormControl>
+                <SelectTrigger>
+                  <SelectValue placeholder="Bitte wählen" />
+                </SelectTrigger>
+              </FormControl>
+              <SelectContent>
+                {INDUSTRIES.map((ind) => (
+                  <SelectItem key={ind} value={ind}>
+                    {ind}
+                  </SelectItem>
+                ))}
+              </SelectContent>
+            </Select>
+            <FormMessage />
+          </FormItem>
+        )}
+      />
+      <FormField
+        control={form.control}
+        name="employees"
+        render={({ field }) => (
+          <FormItem>
+            <FormLabel>Anzahl Mitarbeiter *</FormLabel>
+            <Select onValueChange={field.onChange} value={field.value}>
+              <FormControl>
+                <SelectTrigger>
+                  <SelectValue placeholder="Bitte wählen" />
+                </SelectTrigger>
+              </FormControl>
+              <SelectContent>
+                {EMPLOYEE_RANGES.map((r) => (
+                  <SelectItem key={r} value={r}>
+                    {r} Mitarbeiter
+                  </SelectItem>
+                ))}
+              </SelectContent>
+            </Select>
+            <FormMessage />
+          </FormItem>
+        )}
+      />
+      <FormField
+        control={form.control}
+        name="systems"
+        render={() => (
+          <FormItem className="sm:col-span-2">
+            <FormLabel>Welche Systeme sind bereits im Einsatz?</FormLabel>
+            <div className="mt-1 flex flex-wrap gap-2">
+              {SYSTEMS.map((system) => (
+                <FormField
+                  key={system}
+                  control={form.control}
+                  name="systems"
+                  render={({ field }) => {
+                    const checked = field.value.includes(system);
+                    return (
+                      <FormItem>
+                        <FormLabel className="flex cursor-pointer items-center gap-2 rounded-full border border-border bg-background px-3.5 py-2 text-sm font-medium transition-all has-[[data-state=checked]]:border-accent has-[[data-state=checked]]:bg-brand-soft has-[[data-state=checked]]:text-primary has-[[data-state=checked]]:shadow-card">
+                          <FormControl>
+                            <Checkbox
+                              checked={checked}
+                              onCheckedChange={(value) =>
+                                field.onChange(
+                                  value
+                                    ? [...field.value, system]
+                                    : field.value.filter((s) => s !== system),
+                                )
+                              }
+                            />
+                          </FormControl>
+                          {system}
+                        </FormLabel>
+                      </FormItem>
+                    );
+                  }}
+                />
+              ))}
+            </div>
+            <FormMessage />
+          </FormItem>
+        )}
+      />
+      {systems.includes("Sonstiges") && (
+        <FormField
+          control={form.control}
+          name="systemsOther"
+          render={({ field }) => (
+            <FormItem className="sm:col-span-2">
+              <FormLabel>Sonstige Systeme</FormLabel>
+              <FormControl>
+                <Input placeholder="Welche weiteren Systeme nutzen Sie?" {...field} />
+              </FormControl>
+              <FormMessage />
+            </FormItem>
+          )}
+        />
+      )}
+    </div>
+  );
+}
+
+function StepSituation({ form }: StepProps) {
+  return (
+    <div className="grid gap-5">
+      <FormField
+        control={form.control}
+        name="areas"
+        render={() => (
+          <FormItem>
+            <FormLabel>Welche Bereiche sollen verbessert werden? *</FormLabel>
+            <div className="mt-1 flex flex-wrap gap-2">
+              {AREAS.map((area) => (
+                <FormField
+                  key={area}
+                  control={form.control}
+                  name="areas"
+                  render={({ field }) => {
+                    const checked = field.value.includes(area);
+                    return (
+                      <FormItem>
+                        <FormLabel className="flex cursor-pointer items-center gap-2 rounded-full border border-border bg-background px-3.5 py-2 text-sm font-medium transition-all has-[[data-state=checked]]:border-accent has-[[data-state=checked]]:bg-brand-soft has-[[data-state=checked]]:text-primary has-[[data-state=checked]]:shadow-card">
+                          <FormControl>
+                            <Checkbox
+                              checked={checked}
+                              onCheckedChange={(value) =>
+                                field.onChange(
+                                  value
+                                    ? [...field.value, area]
+                                    : field.value.filter((a) => a !== area),
+                                )
+                              }
+                            />
+                          </FormControl>
+                          {area}
+                        </FormLabel>
+                      </FormItem>
+                    );
+                  }}
+                />
+              ))}
+            </div>
+            <FormMessage />
+          </FormItem>
+        )}
+      />
+      <FormField
+        control={form.control}
+        name="timeEater"
+        render={({ field }) => (
+          <FormItem>
+            <FormLabel>Was ist aktuell der größte Zeitfresser im Unternehmen?</FormLabel>
+            <FormControl>
+              <Textarea
+                rows={4}
+                placeholder="z. B. E-Mails sortieren und beantworten, Angebote schreiben, Dokumente ablegen …"
+                {...field}
+              />
+            </FormControl>
+            <FormMessage />
+          </FormItem>
+        )}
+      />
+      <FormField
+        control={form.control}
+        name="existingAiTools"
+        render={({ field }) => (
+          <FormItem>
+            <FormLabel>Gibt es bereits AI-Tools im Einsatz?</FormLabel>
+            <FormControl>
+              <Input placeholder="z. B. ChatGPT, Copilot – oder: noch keine" {...field} />
+            </FormControl>
+            <FormMessage />
+          </FormItem>
+        )}
+      />
+    </div>
+  );
+}
+
+function StepGoals({ form }: StepProps) {
+  return (
+    <div className="grid gap-5">
+      <FormField
+        control={form.control}
+        name="goals"
+        render={() => (
+          <FormItem>
+            <FormLabel className="flex items-center gap-1.5">
+              <Sparkles className="h-4 w-4 text-accent" />
+              Welche Verbesserungen wünschen Sie sich? *
+            </FormLabel>
+            <div className="mt-1 flex flex-wrap gap-2">
+              {GOALS.map((goal) => (
+                <FormField
+                  key={goal}
+                  control={form.control}
+                  name="goals"
+                  render={({ field }) => {
+                    const checked = field.value.includes(goal);
+                    return (
+                      <FormItem>
+                        <FormLabel className="flex cursor-pointer items-center gap-2 rounded-full border border-border bg-background px-3.5 py-2 text-sm font-medium transition-all has-[[data-state=checked]]:border-accent has-[[data-state=checked]]:bg-brand-soft has-[[data-state=checked]]:text-primary has-[[data-state=checked]]:shadow-card">
+                          <FormControl>
+                            <Checkbox
+                              checked={checked}
+                              onCheckedChange={(value) =>
+                                field.onChange(
+                                  value
+                                    ? [...field.value, goal]
+                                    : field.value.filter((g) => g !== goal),
+                                )
+                              }
+                            />
+                          </FormControl>
+                          {goal}
+                        </FormLabel>
+                      </FormItem>
+                    );
+                  }}
+                />
+              ))}
+            </div>
+            <FormMessage />
+          </FormItem>
+        )}
+      />
+      <div className="grid gap-5 sm:grid-cols-2">
+        <FormField
+          control={form.control}
+          name="privacyImportance"
+          render={({ field }) => (
+            <FormItem>
+              <FormLabel>Wie wichtig ist Datenschutz / EU-Speicherung? *</FormLabel>
+              <Select onValueChange={field.onChange} value={field.value}>
+                <FormControl>
+                  <SelectTrigger>
+                    <SelectValue placeholder="Bitte wählen" />
+                  </SelectTrigger>
+                </FormControl>
+                <SelectContent>
+                  {PRIVACY_LEVELS.map((p) => (
+                    <SelectItem key={p} value={p}>
+                      {p}
+                    </SelectItem>
+                  ))}
+                </SelectContent>
+              </Select>
+              <FormMessage />
+            </FormItem>
+          )}
+        />
+        <FormField
+          control={form.control}
+          name="timeline"
+          render={({ field }) => (
+            <FormItem>
+              <FormLabel>Wann soll das Thema umgesetzt werden? *</FormLabel>
+              <Select onValueChange={field.onChange} value={field.value}>
+                <FormControl>
+                  <SelectTrigger>
+                    <SelectValue placeholder="Bitte wählen" />
+                  </SelectTrigger>
+                </FormControl>
+                <SelectContent>
+                  {TIMELINES.map((t) => (
+                    <SelectItem key={t} value={t}>
+                      {t}
+                    </SelectItem>
+                  ))}
+                </SelectContent>
+              </Select>
+              <FormMessage />
+            </FormItem>
+          )}
+        />
+      </div>
+      <FormField
+        control={form.control}
+        name="message"
+        render={({ field }) => (
+          <FormItem>
+            <FormLabel>Nachricht / Freitext</FormLabel>
+            <FormControl>
+              <Textarea
+                rows={4}
+                placeholder="Gibt es etwas, das wir vorab wissen sollten?"
+                {...field}
+              />
+            </FormControl>
+            <FormMessage />
+          </FormItem>
+        )}
+      />
+    </div>
   );
 }

@@ -40,20 +40,29 @@ const faqs = [
 
 export function FaqSection() {
   return (
-    <section id="faq" className="py-16 md:py-24">
+    <section id="faq" className="relative py-20 md:py-28">
       <div className="mx-auto max-w-3xl px-4 md:px-6">
         <SectionHeading
           eyebrow="FAQ"
-          title="Häufige Fragen – klar beantwortet."
+          title="Häufige Fragen –"
+          titleAccent="klar beantwortet."
         />
         <Reveal>
-          <Accordion type="single" collapsible className="rounded-2xl border border-border bg-card px-6 shadow-card">
+          <Accordion
+            type="single"
+            collapsible
+            className="card-luxe divide-y divide-border px-6"
+          >
             {faqs.map((faq, i) => (
-              <AccordionItem key={faq.q} value={`faq-${i}`} className={i === faqs.length - 1 ? "border-b-0" : ""}>
-                <AccordionTrigger className="text-left font-semibold text-primary hover:no-underline">
+              <AccordionItem
+                key={faq.q}
+                value={`faq-${i}`}
+                className="border-0"
+              >
+                <AccordionTrigger className="text-left text-base font-semibold text-primary hover:no-underline">
                   {faq.q}
                 </AccordionTrigger>
-                <AccordionContent className="leading-relaxed text-muted-foreground">
+                <AccordionContent className="text-[15px] leading-relaxed text-muted-foreground">
                   {faq.a}
                 </AccordionContent>
               </AccordionItem>
