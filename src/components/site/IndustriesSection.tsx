@@ -13,18 +13,23 @@ const industries = [
 
 export function IndustriesSection() {
   return (
-    <section id="branchen" className="bg-secondary/50 py-16 md:py-24">
+    <section id="branchen" className="relative py-20 md:py-28">
+      <div
+        aria-hidden
+        className="absolute inset-0 -z-10 bg-gradient-to-b from-background via-secondary/50 to-background"
+      />
       <div className="mx-auto max-w-6xl px-4 md:px-6">
         <SectionHeading
           eyebrow="Branchen-Fokus"
-          title="Wir kennen den Alltag im Mittelstand."
+          title="Wir kennen"
+          titleAccent="den Alltag im Mittelstand."
           subtitle="Eine gute Lösung muss nicht nur technisch funktionieren, sondern in den Arbeitsalltag passen."
         />
         <div className="grid grid-cols-2 gap-4 sm:grid-cols-3 lg:grid-cols-6">
           {industries.map((ind, i) => (
-            <Reveal key={ind.label} delay={i * 60}>
-              <div className="flex h-full flex-col items-center gap-3 rounded-xl border border-border bg-card p-5 text-center shadow-card transition-all hover:-translate-y-1 hover:border-accent/40 hover:shadow-elevated">
-                <span className="grid h-11 w-11 place-items-center rounded-xl bg-brand-soft text-accent">
+            <Reveal key={ind.label} delay={i * 70}>
+              <div className="card-luxe group flex h-full flex-col items-center gap-3 p-5 text-center">
+                <span className="grid h-12 w-12 place-items-center rounded-xl bg-brand-soft text-accent transition-all duration-500 group-hover:rotate-[-4deg] group-hover:bg-gradient-brand group-hover:text-primary-foreground group-hover:shadow-brand-glow">
                   <ind.icon className="h-5 w-5" />
                 </span>
                 <span className="text-xs leading-snug font-semibold text-primary md:text-sm">

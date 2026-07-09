@@ -1,29 +1,41 @@
 import { Link } from "@tanstack/react-router";
-import { Mail, MapPin, Phone } from "lucide-react";
-import logoAsset from "@/assets/nvd-logo.png.asset.json";
+import { ArrowUpRight, Mail, MapPin, Phone } from "lucide-react";
 
 export function Footer() {
   return (
-    <footer className="border-t border-border bg-card">
-      <div className="mx-auto max-w-6xl px-4 py-12 md:px-6 md:py-16">
-        <div className="grid gap-10 md:grid-cols-[1.2fr_1fr_1fr]">
+    <footer className="relative overflow-hidden border-t border-border bg-card">
+      <div
+        aria-hidden
+        className="pointer-events-none absolute -top-40 left-1/2 h-80 w-[70rem] -translate-x-1/2 rounded-full bg-gradient-to-b from-brand-soft/70 to-transparent blur-3xl"
+      />
+      <div className="relative mx-auto max-w-6xl px-4 py-14 md:px-6 md:py-20">
+        <div className="grid gap-12 md:grid-cols-[1.3fr_1fr_1fr]">
           <div>
-            <img
-              src={logoAsset.url}
-              alt="NewVisionData GmbH – Beraten. Umsetzen. Schulen. Zukunft gestalten."
-              className="h-24 w-auto rounded-lg"
-              loading="lazy"
-              width={384}
-              height={256}
-            />
-            <p className="mt-4 max-w-xs text-sm leading-relaxed text-muted-foreground">
-              AI- und Automatisierungslösungen für den deutschen Mittelstand.
+            <div className="flex items-center gap-2.5 font-display text-lg font-semibold tracking-tight text-primary">
+              <span
+                aria-hidden
+                className="grid h-9 w-9 place-items-center rounded-xl bg-gradient-brand font-display text-sm font-extrabold text-primary-foreground shadow-brand-glow"
+              >
+                N
+              </span>
+              NewVision<span className="text-accent">Data</span>
+            </div>
+            <p className="mt-5 max-w-sm text-sm leading-relaxed text-muted-foreground">
+              AI- und Automatisierungslösungen für den deutschen Mittelstand. Beraten, umsetzen,
+              schulen – seit dem Tag, an dem AI im Alltag wirklich ankommt.
             </p>
+            <a
+              href="#ai-check"
+              className="mt-6 inline-flex items-center gap-1.5 text-sm font-semibold text-accent transition-colors hover:text-primary"
+            >
+              Kostenlosen AI-Check starten
+              <ArrowUpRight className="h-4 w-4" />
+            </a>
           </div>
 
           <div>
-            <h3 className="text-sm font-bold tracking-wide text-primary uppercase">Kontakt</h3>
-            <ul className="mt-4 space-y-3 text-sm text-muted-foreground">
+            <h3 className="text-xs font-bold tracking-[0.22em] text-primary uppercase">Kontakt</h3>
+            <ul className="mt-5 space-y-3 text-sm text-muted-foreground">
               <li className="flex items-start gap-2.5">
                 <MapPin className="mt-0.5 h-4 w-4 shrink-0 text-accent" />
                 <span>
@@ -53,8 +65,10 @@ export function Footer() {
           </div>
 
           <div>
-            <h3 className="text-sm font-bold tracking-wide text-primary uppercase">Rechtliches</h3>
-            <ul className="mt-4 space-y-3 text-sm text-muted-foreground">
+            <h3 className="text-xs font-bold tracking-[0.22em] text-primary uppercase">
+              Rechtliches
+            </h3>
+            <ul className="mt-5 space-y-3 text-sm text-muted-foreground">
               <li>
                 <Link to="/impressum" className="transition-colors hover:text-primary">
                   Impressum
@@ -76,8 +90,9 @@ export function Footer() {
           </div>
         </div>
 
-        <div className="mt-12 border-t border-border pt-6 text-center text-xs text-muted-foreground">
-          © {new Date().getFullYear()} NewVisionData GmbH. Alle Rechte vorbehalten.
+        <div className="mt-14 flex flex-col items-center justify-between gap-3 border-t border-border pt-6 text-center text-xs text-muted-foreground sm:flex-row sm:text-left">
+          <p>© {new Date().getFullYear()} NewVisionData GmbH. Alle Rechte vorbehalten.</p>
+          <p className="font-serif italic">Beraten. Umsetzen. Schulen. Zukunft gestalten.</p>
         </div>
       </div>
     </footer>

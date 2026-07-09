@@ -4,25 +4,59 @@ import { cn } from "@/lib/utils";
 interface SectionHeadingProps {
   eyebrow?: string;
   title: string;
+  /** Zweiter, kursiver Serif-Akzent im Titel, z. B. "wirklich hilft". */
+  titleAccent?: string;
   subtitle?: string;
   align?: "center" | "left";
 }
 
-export function SectionHeading({ eyebrow, title, subtitle, align = "center" }: SectionHeadingProps) {
+export function SectionHeading({
+  eyebrow,
+  title,
+  titleAccent,
+  subtitle,
+  align = "center",
+}: SectionHeadingProps) {
   return (
-    <Reveal
+    <div
       className={cn(
-        "mb-12 max-w-2xl md:mb-16",
+        "mb-14 max-w-2xl md:mb-20",
         align === "center" ? "mx-auto text-center" : "text-left",
       )}
     >
       {eyebrow && (
-        <p className="mb-3 text-sm font-semibold tracking-widest text-accent uppercase">
-          {eyebrow}
-        </p>
+        <Reveal variant="fade">
+          <p
+            className={cn(
+              "mb-4 inline-flex items-center gap-2 text-[11px] font-semibold tracking-[0.22em] text-accent uppercase",
+              align === "center" ? "justify-center" : "",
+            )}
+          >
+            <span aria-hidden className="inline-block h-px w-6 bg-accent/60" />
+            {eyebrow}
+          </p>
+        </Reveal>
       )}
-      <h2 className="text-3xl font-bold text-primary md:text-4xl">{title}</h2>
-      {subtitle && <p className="mt-4 text-base text-muted-foreground md:text-lg">{subtitle}</p>}
-    </Reveal>
+      <Reveal delay={80}>
+        <h2 className="text-3xl leading-[1.1] font-semibold text-primary md:text-[2.6rem]">
+          {title}
+          {titleAccent && (
+            <>
+              {" "}
+              <span className="font-serif text-[1.15em] font-normal italic text-gradient-brand">
+                {titleAccent}
+              </span>
+            </>
+          )}
+        </h2>
+      </Reveal>
+      {subtitle && (
+        <Reveal delay={160}>
+          <p className="mt-5 text-base leading-relaxed text-muted-foreground md:text-lg">
+            {subtitle}
+          </p>
+        </Reveal>
+      )}
+    </div>
   );
 }

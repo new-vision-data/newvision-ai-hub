@@ -37,21 +37,34 @@ const benefits = [
 
 export function BenefitsSection() {
   return (
-    <section id="vorteile" className="bg-secondary/50 py-16 md:py-24">
+    <section id="vorteile" className="relative overflow-hidden py-20 md:py-28">
+      <div
+        aria-hidden
+        className="absolute inset-0 -z-10 bg-gradient-to-b from-background via-secondary/40 to-background"
+      />
+      <div
+        aria-hidden
+        className="absolute top-1/2 left-1/2 -z-10 h-[36rem] w-[36rem] -translate-x-1/2 -translate-y-1/2 rounded-full bg-gradient-to-br from-brand-soft/50 via-transparent to-ember-soft/40 blur-3xl"
+      />
       <div className="mx-auto max-w-6xl px-4 md:px-6">
         <SectionHeading
           eyebrow="Warum NewVisionData"
-          title="Ein Partner, der Ihre Sprache spricht."
+          title="Ein Partner,"
+          titleAccent="der Ihre Sprache spricht."
           subtitle="Sechs Gründe, warum mittelständische Unternehmen mit uns arbeiten."
         />
         <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
           {benefits.map((b, i) => (
-            <Reveal key={b.title} delay={i * 70}>
-              <div className="group h-full rounded-2xl border border-border bg-card p-6 shadow-card transition-all hover:-translate-y-1 hover:shadow-elevated">
-                <span className="grid h-11 w-11 place-items-center rounded-xl bg-brand-soft text-accent transition-colors group-hover:bg-gradient-brand group-hover:text-primary-foreground">
+            <Reveal key={b.title} delay={i * 80}>
+              <div className="card-luxe group relative h-full overflow-hidden p-6">
+                <span
+                  aria-hidden
+                  className="pointer-events-none absolute -top-16 -right-10 h-40 w-40 rounded-full bg-gradient-to-br from-accent/20 to-transparent opacity-0 blur-2xl transition-opacity duration-500 group-hover:opacity-100"
+                />
+                <span className="grid h-12 w-12 place-items-center rounded-xl bg-brand-soft text-accent transition-all duration-500 group-hover:rotate-[-6deg] group-hover:bg-gradient-brand group-hover:text-primary-foreground group-hover:shadow-brand-glow">
                   <b.icon className="h-5 w-5" />
                 </span>
-                <h3 className="mt-4 font-bold text-primary">{b.title}</h3>
+                <h3 className="mt-5 text-lg font-semibold text-primary">{b.title}</h3>
                 <p className="mt-2 text-sm leading-relaxed text-muted-foreground">{b.text}</p>
               </div>
             </Reveal>
