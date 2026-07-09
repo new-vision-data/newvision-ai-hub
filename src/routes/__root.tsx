@@ -77,14 +77,25 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
     meta: [
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
-      { title: "Lovable App" },
-      { name: "description", content: "Lovable Generated Project" },
-      { name: "author", content: "Lovable" },
-      { property: "og:title", content: "Lovable App" },
-      { property: "og:description", content: "Lovable Generated Project" },
+      { title: "NewVisionData GmbH | AI-Beratung für den Mittelstand" },
+      {
+        name: "description",
+        content:
+          "AI- und Automatisierungslösungen für den deutschen Mittelstand. Herstellerunabhängig, DSGVO-bewusst, praxisnah. Kostenloser AI-Check.",
+      },
+      { name: "author", content: "NewVisionData GmbH" },
+      {
+        property: "og:title",
+        content: "NewVisionData GmbH | AI-Beratung für den Mittelstand",
+      },
+      {
+        property: "og:description",
+        content:
+          "Wir zeigen Unternehmen, welche AI- und Automatisierungslösungen wirklich sinnvoll sind – und setzen sie sicher und praxistauglich um.",
+      },
       { property: "og:type", content: "website" },
+      { property: "og:locale", content: "de_DE" },
       { name: "twitter:card", content: "summary_large_image" },
-      { name: "twitter:site", content: "@Lovable" },
     ],
     links: [
       {
@@ -92,6 +103,37 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
         href: appCss,
       },
       { rel: "icon", href: "/favicon.ico", type: "image/x-icon" },
+      { rel: "preconnect", href: "https://fonts.googleapis.com" },
+      { rel: "preconnect", href: "https://fonts.gstatic.com", crossOrigin: "anonymous" },
+      {
+        rel: "stylesheet",
+        href: "https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Sora:wght@500;600;700;800&display=swap",
+      },
+    ],
+    scripts: [
+      {
+        type: "application/ld+json",
+        children: JSON.stringify({
+          "@context": "https://schema.org",
+          "@type": "ProfessionalService",
+          name: "NewVisionData GmbH",
+          description:
+            "AI- und Automatisierungslösungen für den deutschen Mittelstand: Beratung, Integration und Schulung.",
+          telephone: "+49 15565000062",
+          email: "info@newvisiondata.de",
+          address: {
+            "@type": "PostalAddress",
+            streetAddress: "Lindenallee 13",
+            postalCode: "16831",
+            addressLocality: "Rheinsberg",
+            addressCountry: "DE",
+          },
+          founder: [
+            { "@type": "Person", name: "Dennis Schmidt Gantikow" },
+            { "@type": "Person", name: "Viola Schmidt Gantikow" },
+          ],
+        }),
+      },
     ],
   }),
   shellComponent: RootShell,
@@ -102,7 +144,7 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
 
 function RootShell({ children }: { children: ReactNode }) {
   return (
-    <html lang="en">
+    <html lang="de">
       <head>
         <HeadContent />
       </head>
