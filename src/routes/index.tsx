@@ -3,10 +3,8 @@ import { Navbar } from "@/components/site/Navbar";
 import { Hero } from "@/components/site/Hero";
 import { ProblemSection } from "@/components/site/ProblemSection";
 import { ApproachSection } from "@/components/site/ApproachSection";
-import { ServicesSection } from "@/components/site/ServicesSection";
-import { BenefitsSection } from "@/components/site/BenefitsSection";
+import { ExamplesSection } from "@/components/site/ExamplesSection";
 import { ResultsSection } from "@/components/site/ResultsSection";
-import { IndustriesSection } from "@/components/site/IndustriesSection";
 import { AboutSection } from "@/components/site/AboutSection";
 import { VoicesSection } from "@/components/site/VoicesSection";
 import { FaqSection } from "@/components/site/FaqSection";
@@ -26,10 +24,8 @@ function Index() {
         <Hero />
         <ProblemSection />
         <ApproachSection />
-        <ServicesSection />
-        <BenefitsSection />
+        <ExamplesSection />
         <ResultsSection />
-        <IndustriesSection />
         <AboutSection />
         <VoicesSection />
         <FaqSection />

@@ -9,32 +9,28 @@ import { SectionHeading } from "./SectionHeading";
 
 const faqs = [
   {
-    q: "Lohnt sich AI überhaupt für kleine Unternehmen?",
-    a: "Häufig ja – aber nicht überall. Gerade wiederkehrende Aufgaben wie E-Mail-Bearbeitung, Dokumentenablage oder Angebotserstellung lassen sich oft mit überschaubarem Aufwand automatisieren. Ob es sich in Ihrem Fall lohnt, prüfen wir ehrlich im kostenlosen AI-Check. Wenn es sich nicht lohnt, sagen wir Ihnen das genauso klar.",
+    q: "Was kostet mich das?",
+    a: "Der erste KI-Check ist kostenlos und unverbindlich – Sie gehen kein Risiko ein. Danach erhalten Sie für jedes Projekt ein Festpreis-Angebot, bevor irgendetwas startet. Keine versteckten Kosten, keine Abo-Fallen.",
   },
   {
-    q: "Was kostet eine Zusammenarbeit?",
-    a: "Der AI-Check ist kostenlos und unverbindlich. Danach hängt der Aufwand vom Projekt ab: Eine einzelne Automatisierung ist deutlich günstiger als eine umfassende Integration. Sie erhalten vor jedem Schritt ein transparentes Angebot mit festem Umfang – ohne versteckte Kosten.",
+    q: "Lohnt sich KI überhaupt für einen Betrieb unserer Größe?",
+    a: "Oft ja – aber nicht immer, und genau das prüfen wir zuerst. Gerade kleinere Betriebe profitieren bei wiederkehrenden Aufgaben: Angebote, E-Mails, Dokumentation, Recherche. Wenn sich bei Ihnen aktuell nichts rechnet, sagen wir Ihnen das klar. Dann haben Sie Gewissheit statt schlechtem Gewissen.",
   },
   {
-    q: "Wie läuft der kostenlose AI-Check ab?",
-    a: "Sie füllen das Formular auf dieser Seite aus, wir melden uns kurzfristig für einen Termin. Im Gespräch (ca. 45 Minuten, remote oder vor Ort) schauen wir uns Ihre Abläufe an und geben eine erste ehrliche Einschätzung, wo AI oder Automatisierung Nutzen bringen kann – und wo nicht.",
+    q: "Was passiert mit unseren Daten?",
+    a: "Ihre Daten bleiben Ihre Daten. Wir setzen bevorzugt auf Lösungen, die in Ihrem Firmennetzwerk oder in europäischen Rechenzentren laufen. Jede Empfehlung wird auf DSGVO-Konformität geprüft, der EU AI Act ist mitgedacht. Nichts wird ohne Ihre Freigabe an Dritte übertragen.",
   },
   {
-    q: "Was ist mit Datenschutz und DSGVO?",
-    a: "Datenschutz denken wir von Anfang an mit. Wir bevorzugen, wo möglich, Lösungen mit Datenverarbeitung in der EU, klären Auftragsverarbeitung sauber und achten darauf, dass sensible Daten nicht unkontrolliert an Dritte fließen. Auch die Anforderungen des EU AI Act fließen in unsere Empfehlungen ein.",
+    q: "Wie viel Zeit müssen wir selbst investieren?",
+    a: "Weniger, als Sie denken. Für den KI-Check reichen zwei bis drei Stunden mit Ihnen oder einer verantwortlichen Person. Bei der Umsetzung übernehmen wir die Arbeit – Ihr Team wird nur dort eingebunden, wo es um seine eigenen Abläufe geht. Ihr Tagesgeschäft läuft normal weiter.",
   },
   {
-    q: "Müssen unsere Mitarbeiter programmieren können?",
-    a: "Nein. Die Lösungen, die wir einführen, sind für den normalen Arbeitsalltag gemacht. In unseren Schulungen lernt Ihr Team den sicheren Umgang – verständlich, praxisnah und ohne Fachchinesisch.",
+    q: "Sind Sie an bestimmte Hersteller gebunden?",
+    a: "Nein. Wir verkaufen keine Software, erhalten keine Provisionen und haben keine Partnerverträge, die unsere Empfehlung beeinflussen. Wir vergleichen den Markt neutral und empfehlen, was zu Ihrem Betrieb passt – das ist unser einziges Kriterium.",
   },
   {
-    q: "Können bestehende Systeme eingebunden werden?",
-    a: "In den meisten Fällen ja. Ob Microsoft 365, Google Workspace, DATEV, CRM-, ERP- oder Hausverwaltungssoftware: Wir prüfen die vorhandenen Schnittstellen und integrieren neue Lösungen so, dass Ihre gewohnten Abläufe erhalten bleiben.",
-  },
-  {
-    q: "Wie schnell sieht man erste Ergebnisse?",
-    a: "Kleinere Automatisierungen sind oft innerhalb weniger Wochen produktiv. Größere Integrationen planen wir in klaren Etappen, sodass Sie früh erste Ergebnisse im Alltag sehen – nicht erst am Ende des Projekts.",
+    q: "Unser Team hat wenig Technik-Erfahrung. Funktioniert das trotzdem?",
+    a: "Ja – das ist sogar der Normalfall. Wir wählen Lösungen, die sich in bestehende Arbeitsweisen einfügen, und schulen Ihr Team praxisnah an den eigenen Aufgaben, nicht mit Theorie-Folien. Erfahrungsgemäß sind gerade skeptische Mitarbeiter nach der ersten gesparten Stunde die größten Fürsprecher.",
   },
 ];
 
@@ -43,9 +39,9 @@ export function FaqSection() {
     <section id="faq" className="relative py-20 md:py-28">
       <div className="mx-auto max-w-3xl px-4 md:px-6">
         <SectionHeading
-          eyebrow="FAQ"
-          title="Häufige Fragen –"
-          titleAccent="klar beantwortet."
+          eyebrow="Häufige Fragen"
+          title="Berechtigte Bedenken,"
+          titleAccent="ehrliche Antworten."
         />
         <Reveal>
           <Accordion
@@ -54,11 +50,7 @@ export function FaqSection() {
             className="card-luxe divide-y divide-border px-6"
           >
             {faqs.map((faq, i) => (
-              <AccordionItem
-                key={faq.q}
-                value={`faq-${i}`}
-                className="border-0"
-              >
+              <AccordionItem key={faq.q} value={`faq-${i}`} className="border-0">
                 <AccordionTrigger className="text-left text-base font-semibold text-primary hover:no-underline">
                   {faq.q}
                 </AccordionTrigger>
