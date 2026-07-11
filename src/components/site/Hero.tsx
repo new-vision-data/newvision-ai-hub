@@ -59,8 +59,9 @@ export function Hero() {
         <Reveal delay={100}>
           <h1 className="text-[2.4rem] leading-[1.15] font-semibold tracking-tight text-primary md:text-[3.4rem] lg:text-[3.8rem]">
             KI, die zu Ihrem Betrieb passt
-            <span className="font-serif text-[1.05em] font-bold italic text-gradient-brand inline-block pl-[0.15em] pb-[0.12em] align-baseline">
-              Nicht umgekehrt.
+            <span className="mx-2 md:mx-3 inline-block text-primary md:text-[0.95em]">–</span>
+            <span className="font-serif text-[1.05em] font-bold italic text-gradient-brand inline-block pb-[0.12em] align-baseline">
+              nicht umgekehrt.
             </span>
           </h1>
         </Reveal>
