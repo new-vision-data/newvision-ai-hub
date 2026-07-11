@@ -5,7 +5,7 @@ import { SectionHeading } from "./SectionHeading";
 const problems = [
   {
     icon: Layers,
-    title: "Jede Woche ein neues „Wunder-Tool"",
+    title: 'Jede Woche ein neues „Wunder-Tool"',
     text: "Newsletter, LinkedIn, Messen: Überall heißt es, ohne KI verlieren Sie den Anschluss. Aber welches der hunderten Tools ist für Ihren Betrieb das richtige – und welches nur teures Spielzeug?",
   },
   {
