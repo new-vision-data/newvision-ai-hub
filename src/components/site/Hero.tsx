@@ -24,7 +24,7 @@ const aiTools = [
 const trustBullets = [
   "100 % herstellerunabhängig",
   "DSGVO-konform – Daten bleiben im Haus",
-  "EU AI Act berücksichtigt",
+  "Für den deutschen Mittelstand gemacht",
 ];
 
 export function Hero() {
