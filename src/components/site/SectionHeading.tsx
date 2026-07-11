@@ -38,12 +38,12 @@ export function SectionHeading({
         </Reveal>
       )}
       <Reveal delay={80}>
-        <h2 className="text-3xl leading-[1.1] font-semibold text-primary md:text-[2.6rem]">
+        <h2 className="text-3xl leading-[1.2] font-semibold text-primary md:text-[2.6rem]">
           {title}
           {titleAccent && (
             <>
               {" "}
-              <span className="font-serif text-[1.15em] font-normal italic text-gradient-brand">
+              <span className="font-serif text-[1.12em] font-normal italic text-gradient-brand inline-block pr-[0.2em] pb-[0.1em] align-baseline">
                 {titleAccent}
               </span>
             </>
