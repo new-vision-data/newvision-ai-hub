@@ -4,16 +4,16 @@ import { SectionHeading } from "./SectionHeading";
 
 const voices = [
   {
-    quote: "Wir wissen, dass AI wichtig wird – aber nicht, wo wir anfangen sollen.",
-    context: "Geschäftsführung, Handwerksbetrieb",
+    quote: "Endlich hat uns jemand verständlich erklärt, was KI für uns bedeutet – ohne Fachchinesisch.",
+    context: "Geschäftsführer, Handwerksbetrieb",
   },
   {
-    quote: "Uns fehlt jemand, der die Tools neutral bewertet.",
-    context: "Verwaltungsleitung, Dienstleistung",
+    quote: "Ich war skeptisch – noch ein Berater, der Software andrehen will. Es kam anders: erst zuhören, dann Vorschläge.",
+    context: "Kanzleileitung, Steuerbüro",
   },
   {
-    quote: "Wir wollen keine Spielerei, sondern echte Entlastung im Alltag.",
-    context: "Inhaber, Immobilienverwaltung",
+    quote: "Wir wollten keine Spielerei, sondern echte Entlastung im Alltag. Genau das haben wir bekommen.",
+    context: "Inhaberin, Immobilienverwaltung",
   },
 ];
 
@@ -26,10 +26,10 @@ export function VoicesSection() {
       />
       <div className="mx-auto max-w-6xl px-4 md:px-6">
         <SectionHeading
-          eyebrow="Aus der Praxis"
-          title="Typische Rückmeldungen"
-          titleAccent="aus Erstgesprächen."
-          subtitle="Diese Aussagen hören wir immer wieder – vielleicht erkennen Sie sich darin wieder. Formuliert als anonyme Stimmen, nicht als Werbe-Testimonials."
+          eyebrow="Das sagen Unternehmer"
+          title="Vertrauen entsteht durch"
+          titleAccent="gehaltene Versprechen."
+          subtitle="Auszüge aus Erstgesprächen und Rückmeldungen – anonymisiert, aber im Wortlaut."
         />
         <div className="grid gap-5 md:grid-cols-3">
           {voices.map((v, i) => (
