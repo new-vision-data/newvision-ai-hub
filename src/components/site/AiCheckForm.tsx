@@ -121,25 +121,25 @@ type FieldName = keyof AiCheckFormValues;
 const stepMeta = [
   {
     icon: UserRound,
-    title: "Ihre Daten",
+    title: "Daten",
     subtitle: "Damit wir uns bei Ihnen melden können.",
     fields: ["firstName", "lastName", "company", "position", "email", "phone", "website"] as FieldName[],
   },
   {
     icon: Building2,
-    title: "Ihr Unternehmen",
+    title: "Unternehmen",
     subtitle: "Ein paar Fakten für die Einordnung.",
     fields: ["industry", "employees", "systems", "systemsOther"] as FieldName[],
   },
   {
     icon: ClipboardList,
-    title: "aktuelle Situation",
+    title: "Situation",
     subtitle: "Wo drückt der Schuh – und was ist schon im Einsatz?",
     fields: ["areas", "timeEater", "existingAiTools"] as FieldName[],
   },
   {
     icon: Target,
-    title: "Ziele und Rahmen",
+    title: "Ziele",
     subtitle: "Wohin soll die Reise gehen – und was ist wichtig?",
     fields: ["goals", "privacyImportance", "timeline", "message"] as FieldName[],
   },
