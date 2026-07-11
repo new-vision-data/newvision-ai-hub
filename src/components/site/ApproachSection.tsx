@@ -6,30 +6,30 @@ const steps = [
   {
     icon: Search,
     step: "01",
-    title: "Analyse",
-    text: "Wir verstehen Ihre Prozesse, Engpässe und Ziele – bevor wir über Technik sprechen.",
-    tags: ["Ist-Aufnahme", "Zeitfresser", "Ziele"],
+    title: "Analyse vor Ort",
+    text: "Wir schauen uns Ihre Abläufe an – nicht zuerst Ihre Server. Wo geht Zeit verloren? Wo wiederholt sich Arbeit? Daraus entsteht Ihre Potenzial-Landkarte: welche Abläufe sich verschlanken lassen und was das bringt.",
+    tags: ["Ist-Aufnahme", "Zeitfresser", "Potenzial"],
   },
   {
     icon: ClipboardCheck,
     step: "02",
-    title: "Bewertung",
-    text: "Wir prüfen ehrlich, wo AI oder Automatisierung wirklich Nutzen bringt – und wo nicht.",
-    tags: ["Nutzen", "Aufwand", "Risiko"],
+    title: "Neutrale Tool-Auswahl",
+    text: "Wir vergleichen herstellerunabhängig, was zu Ihnen passt – und sagen auch klar, was Sie nicht brauchen. Wir verdienen an keiner Empfehlung mit.",
+    tags: ["Vergleich", "Nutzen", "Klartext"],
   },
   {
     icon: Wrench,
     step: "03",
-    title: "Umsetzung",
-    text: "Wir integrieren passende Lösungen sauber in Ihre bestehenden Abläufe und Systeme.",
-    tags: ["Integration", "Tests", "Rollout"],
+    title: "Sichere Integration",
+    text: "Wir binden die Lösung DSGVO-konform in Ihre bestehende IT ein – auf Wunsch komplett im eigenen Haus betrieben. Ihre Daten bleiben Ihre Daten.",
+    tags: ["DSGVO", "Integration", "On-Prem möglich"],
   },
   {
     icon: GraduationCap,
     step: "04",
     title: "Schulung & Betreuung",
-    text: "Wir sorgen dafür, dass Ihr Team die Lösungen versteht, akzeptiert und täglich nutzt.",
-    tags: ["Training", "Doku", "Support"],
+    text: "Ihr Team lernt, souverän damit zu arbeiten – ohne Fachchinesisch. Und wir bleiben ansprechbar, wenn Fragen kommen oder sich Ihr Bedarf ändert.",
+    tags: ["Training", "Praxis", "Support"],
   },
 ];
 
@@ -42,14 +42,13 @@ export function ApproachSection() {
       />
       <div className="mx-auto max-w-6xl px-4 md:px-6">
         <SectionHeading
-          eyebrow="Unser Ansatz"
-          title="Vom Prozess zur Wirkung –"
-          titleAccent="in vier klaren Schritten."
-          subtitle="Kein Tool-Verkauf, kein Blindflug. Sondern ein Weg, der zeigt, wo AI im Alltag wirklich trägt."
+          eyebrow="So arbeiten wir"
+          title="In vier Schritten zu Prozessen,"
+          titleAccent="die Zeit und Kosten sparen."
+          subtitle="Kein Projekt von der Stange. Wir schauen zuerst auf Ihre Abläufe – und erst danach auf Technik."
         />
 
         <div className="relative">
-          {/* Timeline-Rail */}
           <div
             aria-hidden
             className="absolute top-8 left-0 hidden h-px w-full bg-gradient-to-r from-transparent via-accent/40 to-transparent lg:block"
@@ -59,7 +58,6 @@ export function ApproachSection() {
             {steps.map((s, i) => (
               <Reveal key={s.step} delay={i * 110}>
                 <li className="group relative h-full">
-                  {/* Punkt auf der Rail */}
                   <span
                     aria-hidden
                     className="absolute top-[1.85rem] left-1/2 hidden h-4 w-4 -translate-x-1/2 rounded-full border-2 border-background bg-gradient-brand shadow-brand-glow lg:block"

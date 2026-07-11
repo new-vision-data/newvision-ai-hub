@@ -46,7 +46,7 @@ function Datenschutz() {
               <br />
               Telefon:{" "}
               <a href="tel:+4915565000062" className="text-accent hover:underline">
-                015565000062
+                +49 (0) 155 65 000 062
               </a>
               <br />
               E-Mail:{" "}

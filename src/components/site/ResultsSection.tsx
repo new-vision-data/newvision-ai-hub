@@ -4,37 +4,40 @@ import { SectionHeading } from "./SectionHeading";
 
 const results = [
   {
-    icon: Timer,
-    value: "5–8",
-    unit: "Std./Woche",
-    label: "weniger Routinearbeit",
-    text: "durch automatisierte E-Mail-Bearbeitung, Dokumentenablage und wiederkehrende Aufgaben.",
-  },
-  {
     icon: Gauge,
     value: "bis 60",
     unit: "%",
     label: "schnellere Angebotserstellung",
-    text: "wenn Vorlagen, Stammdaten und Texte automatisch vorbereitet werden.",
+    text: "Ein Metallbau-Betrieb erstellt Angebote automatisiert auf Basis früherer Kalkulationen – statt jedes Mal bei null anzufangen.",
+    context: "Handwerk · 12 Mitarbeiter",
+  },
+  {
+    icon: Timer,
+    value: "5–8",
+    unit: "Std./Woche",
+    label: "Routinearbeit zurückgewonnen",
+    text: "Eine Steuerkanzlei lässt E-Mails und Belege automatisch vorsortieren – die Zeit fließt zurück in die Mandantenberatung.",
+    context: "Kanzlei · 8 Mitarbeiter",
   },
   {
     icon: FileSearch,
     value: "deutlich",
     unit: "",
-    label: "weniger Suchzeit bei internen Infos",
-    text: "durch durchsuchbare Wissensdatenbanken, die Ihr Team wirklich nutzt.",
+    label: "weniger Suchzeit im Betrieb",
+    text: "Ein Produktionsbetrieb macht internes Wissen per intelligenter Suche auffindbar – Datenblätter, Anleitungen und Altprojekte in Sekunden statt Minuten.",
+    context: "Produktion · 45 Mitarbeiter",
   },
 ];
 
 export function ResultsSection() {
   return (
-    <section id="beispiele" className="relative py-20 md:py-28">
+    <section id="ergebnisse" className="relative py-20 md:py-28">
       <div className="mx-auto max-w-6xl px-4 md:px-6">
         <SectionHeading
-          eyebrow="Ergebnis-Potenziale"
-          title="Was Automatisierung"
-          titleAccent="im Alltag bewirken kann."
-          subtitle="Typische Potenziale aus Projekten und Analysen im deutschen Mittelstand – kein Marketing-Versprechen, sondern Erfahrungswerte."
+          eyebrow="Ergebnisse"
+          title="Keine Buzzwords."
+          titleAccent="Gesparte Stunden."
+          subtitle="So sieht es aus, wenn Abläufe im Mittelstand gezielt verschlankt werden – typische Potenziale aus Projekten im deutschen Mittelstand."
         />
         <div className="grid gap-6 md:grid-cols-3">
           {results.map((r, i) => (
@@ -53,18 +56,21 @@ export function ResultsSection() {
                   <r.icon className="h-5 w-5" />
                 </span>
 
-                <p className="relative mt-8 flex items-baseline gap-2 font-display text-[3.4rem] leading-none font-semibold tracking-tight">
+                <p className="relative mt-8 flex items-baseline gap-2 font-display text-[3rem] leading-none font-semibold tracking-tight">
                   {r.value}
                   {r.unit && (
-                    <span className="text-2xl font-medium text-primary-foreground/70">
+                    <span className="text-xl font-medium text-primary-foreground/70">
                       {r.unit}
                     </span>
                   )}
                 </p>
 
                 <p className="relative mt-3 font-serif text-xl italic font-normal">{r.label}</p>
-                <p className="relative mt-4 text-sm leading-relaxed text-primary-foreground/75">
+                <p className="relative mt-4 text-sm leading-relaxed text-primary-foreground/80">
                   {r.text}
+                </p>
+                <p className="relative mt-5 text-[11px] font-semibold tracking-wider text-primary-foreground/70 uppercase">
+                  {r.context}
                 </p>
               </div>
             </Reveal>

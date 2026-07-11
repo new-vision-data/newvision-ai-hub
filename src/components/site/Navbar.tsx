@@ -5,10 +5,10 @@ import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 
 const navLinks = [
-  { label: "Leistungen", href: "#leistungen" },
-  { label: "Ablauf", href: "#ablauf" },
-  { label: "Vorteile", href: "#vorteile" },
-  { label: "Ergebnisse", href: "#beispiele" },
+  { label: "So arbeiten wir", href: "#ablauf" },
+  { label: "Beispiele", href: "#beispiele" },
+  { label: "Ergebnisse", href: "#ergebnisse" },
+  { label: "Über uns", href: "#ueber-uns" },
   { label: "FAQ", href: "#faq" },
 ];
 
@@ -70,7 +70,7 @@ export function Navbar() {
             className="ml-3 rounded-full bg-gradient-brand pl-4 shadow-brand-glow transition-transform hover:scale-[1.03]"
           >
             <a href="#ai-check">
-              AI-Check starten
+              KI-Check starten
               <ArrowRight className="ml-1 h-4 w-4" />
             </a>
           </Button>
@@ -102,7 +102,7 @@ export function Navbar() {
             ))}
             <Button asChild className="mt-2 rounded-full bg-gradient-brand">
               <a href="#ai-check" onClick={() => setOpen(false)}>
-                Kostenlosen AI-Check buchen
+                Kostenlosen KI-Check buchen
               </a>
             </Button>
           </div>

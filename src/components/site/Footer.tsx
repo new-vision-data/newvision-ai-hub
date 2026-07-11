@@ -21,14 +21,14 @@ export function Footer() {
               NewVision<span className="text-accent">Data</span>
             </div>
             <p className="mt-5 max-w-sm text-sm leading-relaxed text-muted-foreground">
-              AI- und Automatisierungslösungen für den deutschen Mittelstand. Beraten, umsetzen,
-              schulen – seit dem Tag, an dem AI im Alltag wirklich ankommt.
+              Unabhängige KI-Beratung für den deutschen Mittelstand. Wir prüfen, wählen aus und
+              integrieren KI sicher und DSGVO-konform – damit Ihre Daten im Haus bleiben.
             </p>
             <a
               href="#ai-check"
               className="mt-6 inline-flex items-center gap-1.5 text-sm font-semibold text-accent transition-colors hover:text-primary"
             >
-              Kostenlosen AI-Check starten
+              Kostenlosen KI-Check starten
               <ArrowUpRight className="h-4 w-4" />
             </a>
           </div>
@@ -49,7 +49,7 @@ export function Footer() {
               <li className="flex items-center gap-2.5">
                 <Phone className="h-4 w-4 shrink-0 text-accent" />
                 <a href="tel:+4915565000062" className="transition-colors hover:text-primary">
-                  015565000062
+                  +49 (0) 155 65 000 062
                 </a>
               </li>
               <li className="flex items-center gap-2.5">
