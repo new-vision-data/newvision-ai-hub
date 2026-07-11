@@ -24,7 +24,7 @@ const aiTools = [
 const trustBullets = [
   "100 % herstellerunabhängig",
   "DSGVO-konform – Daten bleiben im Haus",
-  "EU AI Act berücksichtigt",
+  "Für den deutschen Mittelstand gemacht",
 ];
 
 export function Hero() {
@@ -57,10 +57,9 @@ export function Hero() {
         </Reveal>
 
         <Reveal delay={100}>
-          <h1 className="text-[2.4rem] leading-[1.02] font-semibold tracking-tight text-primary md:text-[3.4rem] lg:text-[3.8rem]">
-            KI, die zu Ihrem Betrieb{" "}
-            <span className="font-serif text-[1.08em] font-normal italic text-gradient-brand">
-              passt
+          <h1 className="text-[2.4rem] leading-[1.15] font-semibold tracking-tight text-primary md:text-[3.4rem] lg:text-[3.8rem]">
+            <span className="font-serif text-[1.05em] font-bold italic text-gradient-brand inline-block pr-[0.15em] pb-[0.12em] align-baseline">
+              KI, die zu Ihrem Betrieb passt
             </span>
             . Nicht umgekehrt.
           </h1>
@@ -110,12 +109,12 @@ export function Hero() {
       </div>
 
       {/* Marquee KI-Tools */}
-      <div className="relative mt-16 md:mt-20">
-        <p className="mb-5 text-center text-xs font-semibold tracking-[0.22em] text-muted-foreground uppercase">
+      <div className="relative mt-24 md:mt-32">
+        <p className="mb-8 text-center text-xs font-semibold tracking-[0.22em] text-muted-foreground uppercase md:mb-10">
           Hunderte KI-Werkzeuge am Markt – wir behalten den Überblick
         </p>
-        <div className="pointer-events-none absolute inset-y-8 left-0 z-10 w-24 bg-gradient-to-r from-background to-transparent" />
-        <div className="pointer-events-none absolute inset-y-8 right-0 z-10 w-24 bg-gradient-to-l from-background to-transparent" />
+        <div className="pointer-events-none absolute inset-y-14 left-0 z-10 w-24 bg-gradient-to-r from-background to-transparent" />
+        <div className="pointer-events-none absolute inset-y-14 right-0 z-10 w-24 bg-gradient-to-l from-background to-transparent" />
         <div className="flex overflow-hidden">
           <ul className="flex shrink-0 animate-marquee items-center gap-10 pr-10 text-sm font-medium text-muted-foreground">
             {[...aiTools, ...aiTools].map((tool, i) => (
@@ -137,7 +136,7 @@ export function Hero() {
             ))}
           </ul>
         </div>
-        <p className="mx-auto mt-6 max-w-2xl px-4 text-center text-sm text-muted-foreground md:px-6">
+        <p className="mx-auto mt-10 max-w-2xl px-4 text-center text-sm text-muted-foreground md:px-6">
           … und jede Woche kommen neue dazu. Niemand kann das nebenbei überblicken. Müssen Sie auch
           nicht – genau dafür gibt es uns.
         </p>
