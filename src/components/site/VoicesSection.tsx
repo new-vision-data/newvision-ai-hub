@@ -4,16 +4,19 @@ import { SectionHeading } from "./SectionHeading";
 
 const voices = [
   {
-    quote: "Endlich hat uns jemand verständlich erklärt, was KI für uns bedeutet – ohne Fachchinesisch.",
-    context: "Geschäftsführer, Handwerksbetrieb",
+    quote: "Endlich hat uns jemand verständlich erklärt, was KI für uns kann — und was nicht. Keine Verkaufsshow, sondern Klartext. Das erste Projekt hat sich nach drei Monaten bezahlt gemacht.",
+    name: "Max Mustermann",
+    role: "Geschäftsführer, Mustermann Metallbau GmbH",
   },
   {
-    quote: "Ich war skeptisch – noch ein Berater, der Software andrehen will. Es kam anders: erst zuhören, dann Vorschläge.",
-    context: "Kanzleileitung, Steuerbüro",
+    quote: "Ich war skeptisch — noch ein Berater, der uns Software andrehen will. Das Gegenteil war der Fall: Von drei Ideen haben sie uns von einer sogar abgeraten. Genau deshalb arbeiten wir weiter zusammen.",
+    name: "Sabine Beispiel",
+    role: "Inhaberin, Kanzlei Beispiel & Partner",
   },
   {
-    quote: "Wir wollten keine Spielerei, sondern echte Entlastung im Alltag. Genau das haben wir bekommen.",
-    context: "Inhaberin, Immobilienverwaltung",
+    quote: "Unsere Daten bleiben bei uns im Haus — das war die Bedingung. NewVisionData hat eine Lösung gebaut, die genau das leistet. Das Team nutzt sie inzwischen täglich, ganz ohne Berührungsängste.",
+    name: "Thomas Wagner",
+    role: "Geschäftsführer, Wagner Kunststofftechnik",
   },
 ];
 
@@ -44,8 +47,11 @@ export function VoicesSection() {
                 <blockquote className="mt-4 font-serif text-xl leading-snug font-normal text-primary italic">
                   „{v.quote}"
                 </blockquote>
-                <figcaption className="mt-auto pt-6 text-xs font-medium tracking-wide text-muted-foreground uppercase">
-                  {v.context}
+                <figcaption className="mt-auto pt-6">
+                  <div className="text-sm font-semibold text-primary">{v.name}</div>
+                  <div className="text-xs font-medium tracking-wide text-muted-foreground uppercase">
+                    {v.role}
+                  </div>
                 </figcaption>
               </figure>
             </Reveal>
