@@ -43,7 +43,7 @@ export function SectionHeading({
           {titleAccent && (
             <>
               {" "}
-              <span className="font-serif text-[1.12em] font-normal italic text-gradient-brand inline-block pr-[0.2em] pb-[0.1em] align-baseline">
+              <span className="font-serif text-[1.12em] font-normal italic text-gradient-brand inline-block px-[0.2em] py-[0.15em] align-baseline">
                 {titleAccent}
               </span>
             </>
