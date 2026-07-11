@@ -58,10 +58,10 @@ export function Hero() {
 
         <Reveal delay={100}>
           <h1 className="text-[2.4rem] leading-[1.15] font-semibold tracking-tight text-primary md:text-[3.4rem] lg:text-[3.8rem]">
-            <span className="font-serif text-[1.05em] font-bold italic text-gradient-brand inline-block pr-[0.15em] pb-[0.12em] align-baseline">
-              KI, die zu Ihrem Betrieb passt
+            KI, die zu Ihrem Betrieb passt
+            <span className="font-serif text-[1.05em] font-bold italic text-gradient-brand inline-block pl-[0.15em] pb-[0.12em] align-baseline">
+              Nicht umgekehrt.
             </span>
-            . Nicht umgekehrt.
           </h1>
         </Reveal>
 

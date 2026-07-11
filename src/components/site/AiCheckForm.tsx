@@ -121,7 +121,7 @@ type FieldName = keyof AiCheckFormValues;
 const stepMeta = [
   {
     icon: UserRound,
-    title: "Ihre Kontaktdaten",
+    title: "Ihre Daten",
     subtitle: "Damit wir uns bei Ihnen melden können.",
     fields: ["firstName", "lastName", "company", "position", "email", "phone", "website"] as FieldName[],
   },
@@ -133,13 +133,13 @@ const stepMeta = [
   },
   {
     icon: ClipboardList,
-    title: "Ihre aktuelle Situation",
+    title: "aktuelle Situation",
     subtitle: "Wo drückt der Schuh – und was ist schon im Einsatz?",
     fields: ["areas", "timeEater", "existingAiTools"] as FieldName[],
   },
   {
     icon: Target,
-    title: "Ziele & Rahmen",
+    title: "Ziele und Rahmen",
     subtitle: "Wohin soll die Reise gehen – und was ist wichtig?",
     fields: ["goals", "privacyImportance", "timeline", "message"] as FieldName[],
   },
@@ -304,7 +304,7 @@ export function AiCheckForm() {
                             <Icon className="h-4 w-4" />
                           )}
                         </span>
-                        <span className="hidden text-xs font-semibold sm:block">{i + 1}. {s.title.split(" ")[0]}</span>
+                        <span className="hidden text-xs font-semibold sm:block">{i + 1}. {s.title}</span>
                       </li>
                     );
                   })}
