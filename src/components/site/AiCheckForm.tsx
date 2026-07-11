@@ -304,7 +304,7 @@ export function AiCheckForm() {
                             <Icon className="h-4 w-4" />
                           )}
                         </span>
-                        <span className="hidden flex-1 text-center text-xs font-semibold sm:block">{i + 1}. {s.title}</span>
+                        <span className="hidden flex-1 whitespace-nowrap text-center text-xs font-semibold sm:block">{i + 1}. {s.title}</span>
                       </li>
                     );
                   })}
