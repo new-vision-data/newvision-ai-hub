@@ -267,9 +267,7 @@ export function AiCheckForm() {
         />
 
         {submitted ? (
-          <Reveal variant="scale">
-            <AiCheckSuccess firstName={form.getValues("firstName")} />
-          </Reveal>
+          <AiCheckSuccess firstName={form.getValues("firstName")} />
         ) : (
           <Reveal>
             <div className="card-luxe relative overflow-hidden p-6 md:p-10">
