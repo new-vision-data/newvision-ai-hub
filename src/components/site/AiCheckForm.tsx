@@ -203,6 +203,7 @@ export function AiCheckForm() {
       expectation: "",
       timeline: "",
       message: "",
+      privacy: false as unknown as true,
     },
   });
 
@@ -226,15 +227,24 @@ export function AiCheckForm() {
   const goBack = () => setStep((s) => Math.max(s - 1, 0));
 
   const onSubmit = async (values: AiCheckFormValues) => {
-    await submitAiCheck(values);
-    setSubmitted(true);
-    window.setTimeout(
-      () =>
-        document
-          .getElementById("ai-check")
-          ?.scrollIntoView({ behavior: "smooth", block: "start" }),
-      50,
-    );
+    setSubmitError(null);
+    try {
+      await submitAiCheck(values);
+      setSubmitted(true);
+      window.setTimeout(
+        () =>
+          document
+            .getElementById("ai-check")
+            ?.scrollIntoView({ behavior: "smooth", block: "start" }),
+        50,
+      );
+    } catch (err) {
+      setSubmitError(
+        err instanceof Error
+          ? err.message
+          : "Ihre Anfrage konnte nicht versendet werden. Bitte versuchen Sie es erneut.",
+      );
+    }
   };
 
   return (
