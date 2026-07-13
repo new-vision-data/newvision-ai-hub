@@ -49,7 +49,7 @@ export function Footer() {
               <li className="flex items-center gap-2.5">
                 <Phone className="h-4 w-4 shrink-0 text-accent" />
                 <a href="tel:+4915565000062" className="transition-colors hover:text-primary">
-                  +49 (0) 155 65 000 062
+                  +49 (0) 155 65 0000 62
                 </a>
               </li>
               <li className="flex items-center gap-2.5">
