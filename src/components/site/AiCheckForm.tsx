@@ -39,18 +39,24 @@ import { cn } from "@/lib/utils";
 
 /* ---------- Optionen ---------- */
 
-const AREAS = [
-  "Kundenkommunikation",
-  "E-Mail",
-  "Angebote",
-  "Buchhaltung",
-  "Dokumente",
-  "Interne Wissenssuche",
-  "Marketing",
-  "Vertrieb",
-  "Personal",
-  "Sonstiges",
-] as const;
+const INDUSTRIES = [
+  "Immobilienwirtschaft",
+  "Hausverwaltung",
+  "Handwerk",
+  "Bauwirtschaft",
+  "Produktion",
+  "Industrie",
+  "Handel",
+  "Dienstleistung",
+  "Kanzlei / Rechtsberatung",
+  "Steuerberatung / Wirtschaftsprüfung",
+  "Gesundheitswesen",
+  "Pflege / soziale Einrichtungen",
+  "Gastronomie / Hotellerie",
+  "Logistik / Transport",
+  "Verwaltung / öffentlicher Bereich",
+  "Sonstige Branche",
+];
 
 const SYSTEMS = [
   "Microsoft 365",
@@ -61,35 +67,39 @@ const SYSTEMS = [
   "CRM",
   "ERP",
   "Hausverwaltungssoftware",
+  "Branchensoftware",
   "Sonstiges",
 ] as const;
 
-const INDUSTRIES = [
-  "Immobilien & Hausverwaltung",
-  "Handwerk & Bau",
-  "Dienstleistung",
-  "Produktion",
-  "Kanzlei & Büro",
-  "Verwaltung & Backoffice",
-  "Andere Branche",
-];
+const AI_EXPERIENCE = [
+  "Nein",
+  "ChatGPT",
+  "Microsoft Copilot",
+  "Claude",
+  "Andere",
+  "Wir testen aktuell",
+] as const;
+
+const PROBLEMS = [
+  "Zu viele manuelle Aufgaben",
+  "Zu viele E-Mails",
+  "Dokumente kosten zu viel Zeit",
+  "Fachkräftemangel",
+  "Prozesse dauern zu lange",
+  "Wir wissen nicht, wo AI helfen kann",
+  "Sonstiges",
+] as const;
+
+const EXPECTATIONS = [
+  "Orientierung",
+  "Erste Ideen",
+  "Konkrete Umsetzung",
+  "Schulung",
+  "Noch unsicher",
+] as const;
 
 const EMPLOYEE_RANGES = ["1–9", "10–49", "50–249", "250+"];
 const TIMELINES = ["Sofort", "In 1–3 Monaten", "Später", "Erst einmal informieren"];
-const PRIVACY_LEVELS = [
-  "Sehr wichtig – Daten müssen in der EU bleiben",
-  "Wichtig – sollte berücksichtigt werden",
-  "Offen – wir lassen uns beraten",
-];
-const GOALS = [
-  "Zeit sparen im Alltag",
-  "Angebote schneller erstellen",
-  "Kundenanfragen schneller beantworten",
-  "Fehlerquote senken",
-  "Wissen im Team leichter finden",
-  "Mitarbeiter entlasten",
-  "Mehr Umsatz durch bessere Nachverfolgung",
-];
 
 /* ---------- Schema ---------- */
 
@@ -99,17 +109,17 @@ const formSchema = z.object({
   company: z.string().trim().min(1, "Bitte geben Sie Ihre Firma an.").max(200),
   position: z.string().trim().max(150).optional().or(z.literal("")),
   email: z.string().trim().email("Bitte geben Sie eine gültige E-Mail-Adresse an.").max(255),
-  phone: z.string().trim().min(5, "Bitte geben Sie Ihre Telefonnummer an.").max(50),
+  phone: z.string().trim().max(50).optional().or(z.literal("")),
   website: z.string().trim().max(255).optional().or(z.literal("")),
   industry: z.string().min(1, "Bitte wählen Sie Ihre Branche."),
+  industryOther: z.string().trim().max(200).optional().or(z.literal("")),
   employees: z.string().min(1, "Bitte wählen Sie die Unternehmensgröße."),
   systems: z.array(z.string()),
   systemsOther: z.string().trim().max(500).optional().or(z.literal("")),
-  areas: z.array(z.string()).min(1, "Bitte wählen Sie mindestens einen Bereich."),
+  aiExperience: z.array(z.string()).min(1, "Bitte wählen Sie mindestens eine Option."),
+  problems: z.array(z.string()).min(1, "Bitte wählen Sie mindestens ein Thema."),
   timeEater: z.string().trim().max(1000).optional().or(z.literal("")),
-  existingAiTools: z.string().trim().max(500).optional().or(z.literal("")),
-  goals: z.array(z.string()).min(1, "Bitte wählen Sie mindestens ein Ziel."),
-  privacyImportance: z.string().min(1, "Bitte wählen Sie eine Option."),
+  expectation: z.string().min(1, "Bitte wählen Sie eine Option."),
   timeline: z.string().min(1, "Bitte wählen Sie einen Zeitraum."),
   message: z.string().trim().max(2000).optional().or(z.literal("")),
 });
@@ -127,28 +137,24 @@ const stepMeta = [
   },
   {
     icon: Building2,
-    title: "Unternehmen",
+    title: "Firma",
     subtitle: "Ein paar Fakten für die Einordnung.",
-    fields: ["industry", "employees", "systems", "systemsOther"] as FieldName[],
+    fields: ["industry", "industryOther", "employees", "systems", "systemsOther"] as FieldName[],
   },
   {
     icon: ClipboardList,
     title: "Situation",
     subtitle: "Wo drückt der Schuh – und was ist schon im Einsatz?",
-    fields: ["areas", "timeEater", "existingAiTools"] as FieldName[],
+    fields: ["aiExperience", "problems", "timeEater"] as FieldName[],
   },
   {
     icon: Target,
     title: "Ziele",
     subtitle: "Wohin soll die Reise gehen – und was ist wichtig?",
-    fields: ["goals", "privacyImportance", "timeline", "message"] as FieldName[],
+    fields: ["expectation", "timeline", "message"] as FieldName[],
   },
 ];
 
-/**
- * Übergabepunkt für die spätere Backend-Anbindung.
- * Später hier z. B. eine Server-Function, Resend, Formspree oder eigene API anbinden.
- */
 async function submitAiCheck(values: AiCheckFormValues): Promise<void> {
   console.info("AI-Check-Anfrage (noch ohne Backend):", values);
   await new Promise((resolve) => setTimeout(resolve, 600));
@@ -171,14 +177,14 @@ export function AiCheckForm() {
       phone: "",
       website: "",
       industry: "",
+      industryOther: "",
       employees: "",
-      areas: [],
       systems: [],
       systemsOther: "",
+      aiExperience: [],
+      problems: [],
       timeEater: "",
-      existingAiTools: "",
-      goals: [],
-      privacyImportance: "",
+      expectation: "",
       timeline: "",
       message: "",
     },
@@ -206,6 +212,13 @@ export function AiCheckForm() {
   const onSubmit = async (values: AiCheckFormValues) => {
     await submitAiCheck(values);
     setSubmitted(true);
+    window.setTimeout(
+      () =>
+        document
+          .getElementById("ai-check")
+          ?.scrollIntoView({ behavior: "smooth", block: "start" }),
+      50,
+    );
   };
 
   return (
@@ -230,26 +243,55 @@ export function AiCheckForm() {
           <Reveal variant="scale">
             <div
               role="status"
-              className="card-luxe relative overflow-hidden p-10 text-center md:p-14"
+              className="card-luxe relative overflow-hidden p-8 md:p-12"
             >
               <span
                 aria-hidden
                 className="pointer-events-none absolute inset-x-0 top-0 h-40 bg-gradient-to-b from-brand-soft/70 to-transparent"
               />
-              <span className="relative mx-auto grid h-16 w-16 place-items-center rounded-full bg-gradient-brand text-primary-foreground shadow-brand-glow">
-                <CheckCircle2 className="h-8 w-8" />
-              </span>
-              <h3 className="relative mt-6 text-2xl font-semibold text-primary md:text-3xl">
-                Vielen Dank für Ihre Anfrage!
-              </h3>
-              <p className="relative mx-auto mt-3 max-w-md text-muted-foreground">
-                Wir haben Ihre Angaben erhalten und melden uns in der Regel innerhalb von 1–2
-                Werktagen bei Ihnen, um einen Termin für den kostenlosen AI-Check zu vereinbaren.
+              <div className="relative text-center">
+                <span className="mx-auto grid h-16 w-16 place-items-center rounded-full bg-gradient-brand text-primary-foreground shadow-brand-glow">
+                  <CheckCircle2 className="h-8 w-8" />
+                </span>
+                <h3 className="mt-6 text-2xl font-semibold text-primary md:text-3xl">
+                  Vielen Dank für Ihre Anfrage.
+                </h3>
+                <p className="mx-auto mt-3 max-w-md text-muted-foreground">
+                  Wir haben Ihre Angaben erhalten.
+                </p>
+              </div>
+
+              <div className="relative mx-auto mt-10 max-w-xl">
+                <p className="mb-5 text-center text-xs font-semibold tracking-widest text-accent uppercase">
+                  Wie geht es jetzt weiter?
+                </p>
+                <ol className="space-y-3">
+                  {[
+                    "Wir prüfen Ihre Angaben.",
+                    "Wir analysieren erste Potenziale.",
+                    "Innerhalb von 24 Stunden melden wir uns persönlich bei Ihnen.",
+                  ].map((text, i) => (
+                    <li
+                      key={text}
+                      className="flex items-start gap-4 rounded-2xl border border-border bg-card/70 p-4 shadow-card backdrop-blur"
+                    >
+                      <span className="grid h-9 w-9 shrink-0 place-items-center rounded-xl bg-gradient-brand text-sm font-semibold text-primary-foreground shadow-brand-glow">
+                        {i + 1}
+                      </span>
+                      <p className="pt-1.5 text-sm text-primary md:text-base">{text}</p>
+                    </li>
+                  ))}
+                </ol>
+              </div>
+
+              <p className="relative mt-8 text-center text-sm text-muted-foreground">
+                <ShieldCheck className="mr-1 inline h-4 w-4 text-accent" />
+                Ihre Angaben werden vertraulich behandelt.
               </p>
-              <p className="relative mt-6 text-sm text-muted-foreground">
+              <p className="relative mt-3 text-center text-sm text-muted-foreground">
                 Dringende Fragen? Rufen Sie uns gerne an:{" "}
                 <a href="tel:+4915565000062" className="font-semibold text-accent hover:underline">
-                  015565000062
+                  +49 (0) 155 65 000 062
                 </a>
               </p>
             </div>
@@ -304,7 +346,9 @@ export function AiCheckForm() {
                             <Icon className="h-4 w-4" />
                           )}
                         </span>
-                        <span className="hidden flex-1 whitespace-nowrap text-center text-xs font-semibold sm:block">{i + 1}. {s.title}</span>
+                        <span className="hidden flex-1 whitespace-nowrap text-center text-xs font-semibold sm:block">
+                          {i + 1}. {s.title}
+                        </span>
                       </li>
                     );
                   })}
@@ -396,6 +440,49 @@ export function AiCheckForm() {
 
 type StepProps = { form: ReturnType<typeof useForm<AiCheckFormValues>> };
 
+function ChipCheckboxGroup({
+  form,
+  name,
+  options,
+}: {
+  form: StepProps["form"];
+  name: "systems" | "aiExperience" | "problems";
+  options: readonly string[];
+}) {
+  return (
+    <div className="mt-1 flex flex-wrap gap-2">
+      {options.map((option) => (
+        <FormField
+          key={option}
+          control={form.control}
+          name={name}
+          render={({ field }) => {
+            const value = (field.value as string[]) ?? [];
+            const checked = value.includes(option);
+            return (
+              <FormItem>
+                <FormLabel className="flex cursor-pointer items-center gap-2 rounded-full border border-border bg-background px-3.5 py-2 text-sm font-medium transition-all has-[[data-state=checked]]:border-accent has-[[data-state=checked]]:bg-brand-soft has-[[data-state=checked]]:text-primary has-[[data-state=checked]]:shadow-card">
+                  <FormControl>
+                    <Checkbox
+                      checked={checked}
+                      onCheckedChange={(v) =>
+                        field.onChange(
+                          v ? [...value, option] : value.filter((s: string) => s !== option),
+                        )
+                      }
+                    />
+                  </FormControl>
+                  {option}
+                </FormLabel>
+              </FormItem>
+            );
+          }}
+        />
+      ))}
+    </div>
+  );
+}
+
 function StepContact({ form }: StepProps) {
   return (
     <div className="grid gap-5 sm:grid-cols-2">
@@ -406,7 +493,7 @@ function StepContact({ form }: StepProps) {
           <FormItem>
             <FormLabel>Vorname *</FormLabel>
             <FormControl>
-              <Input placeholder="Max" autoComplete="given-name" {...field} />
+              <Input placeholder="Ihr Vorname" autoComplete="given-name" {...field} />
             </FormControl>
             <FormMessage />
           </FormItem>
@@ -419,7 +506,7 @@ function StepContact({ form }: StepProps) {
           <FormItem>
             <FormLabel>Nachname *</FormLabel>
             <FormControl>
-              <Input placeholder="Mustermann" autoComplete="family-name" {...field} />
+              <Input placeholder="Ihr Nachname" autoComplete="family-name" {...field} />
             </FormControl>
             <FormMessage />
           </FormItem>
@@ -432,7 +519,7 @@ function StepContact({ form }: StepProps) {
           <FormItem>
             <FormLabel>Firma *</FormLabel>
             <FormControl>
-              <Input placeholder="Mustermann GmbH" autoComplete="organization" {...field} />
+              <Input placeholder="Name Ihres Unternehmens" autoComplete="organization" {...field} />
             </FormControl>
             <FormMessage />
           </FormItem>
@@ -443,10 +530,10 @@ function StepContact({ form }: StepProps) {
         name="position"
         render={({ field }) => (
           <FormItem>
-            <FormLabel>Position / Funktion</FormLabel>
+            <FormLabel>Position / Funktion (optional)</FormLabel>
             <FormControl>
               <Input
-                placeholder="z. B. Geschäftsführer"
+                placeholder="z. B. Geschäftsführung, Teamleitung"
                 autoComplete="organization-title"
                 {...field}
               />
@@ -462,7 +549,12 @@ function StepContact({ form }: StepProps) {
           <FormItem>
             <FormLabel>E-Mail *</FormLabel>
             <FormControl>
-              <Input type="email" placeholder="max@firma.de" autoComplete="email" {...field} />
+              <Input
+                type="email"
+                placeholder="Ihre geschäftliche E-Mail-Adresse"
+                autoComplete="email"
+                {...field}
+              />
             </FormControl>
             <FormMessage />
           </FormItem>
@@ -473,9 +565,14 @@ function StepContact({ form }: StepProps) {
         name="phone"
         render={({ field }) => (
           <FormItem>
-            <FormLabel>Telefonnummer *</FormLabel>
+            <FormLabel>Telefonnummer (optional)</FormLabel>
             <FormControl>
-              <Input type="tel" placeholder="0151 23456789" autoComplete="tel" {...field} />
+              <Input
+                type="tel"
+                placeholder="Für einen kurzen Rückruf"
+                autoComplete="tel"
+                {...field}
+              />
             </FormControl>
             <FormMessage />
           </FormItem>
@@ -486,9 +583,14 @@ function StepContact({ form }: StepProps) {
         name="website"
         render={({ field }) => (
           <FormItem className="sm:col-span-2">
-            <FormLabel>Website des Unternehmens</FormLabel>
+            <FormLabel>Website des Unternehmens (optional)</FormLabel>
             <FormControl>
-              <Input type="url" placeholder="https://www.firma.de" autoComplete="url" {...field} />
+              <Input
+                type="url"
+                placeholder="https://www.ihre-firma.de"
+                autoComplete="url"
+                {...field}
+              />
             </FormControl>
             <FormMessage />
           </FormItem>
@@ -499,6 +601,7 @@ function StepContact({ form }: StepProps) {
 }
 
 function StepCompany({ form }: StepProps) {
+  const industry = form.watch("industry");
   const systems = form.watch("systems");
   return (
     <div className="grid gap-5 sm:grid-cols-2">
@@ -550,43 +653,28 @@ function StepCompany({ form }: StepProps) {
           </FormItem>
         )}
       />
+      {industry === "Sonstige Branche" && (
+        <FormField
+          control={form.control}
+          name="industryOther"
+          render={({ field }) => (
+            <FormItem className="sm:col-span-2">
+              <FormLabel>Welche Branche?</FormLabel>
+              <FormControl>
+                <Input placeholder="Bitte kurz beschreiben" {...field} />
+              </FormControl>
+              <FormMessage />
+            </FormItem>
+          )}
+        />
+      )}
       <FormField
         control={form.control}
         name="systems"
         render={() => (
           <FormItem className="sm:col-span-2">
-            <FormLabel>Welche Systeme sind bereits im Einsatz?</FormLabel>
-            <div className="mt-1 flex flex-wrap gap-2">
-              {SYSTEMS.map((system) => (
-                <FormField
-                  key={system}
-                  control={form.control}
-                  name="systems"
-                  render={({ field }) => {
-                    const checked = field.value.includes(system);
-                    return (
-                      <FormItem>
-                        <FormLabel className="flex cursor-pointer items-center gap-2 rounded-full border border-border bg-background px-3.5 py-2 text-sm font-medium transition-all has-[[data-state=checked]]:border-accent has-[[data-state=checked]]:bg-brand-soft has-[[data-state=checked]]:text-primary has-[[data-state=checked]]:shadow-card">
-                          <FormControl>
-                            <Checkbox
-                              checked={checked}
-                              onCheckedChange={(value) =>
-                                field.onChange(
-                                  value
-                                    ? [...field.value, system]
-                                    : field.value.filter((s) => s !== system),
-                                )
-                              }
-                            />
-                          </FormControl>
-                          {system}
-                        </FormLabel>
-                      </FormItem>
-                    );
-                  }}
-                />
-              ))}
-            </div>
+            <FormLabel>Welche Systeme nutzen Sie regelmäßig?</FormLabel>
+            <ChipCheckboxGroup form={form} name="systems" options={SYSTEMS} />
             <FormMessage />
           </FormItem>
         )}
@@ -615,41 +703,27 @@ function StepSituation({ form }: StepProps) {
     <div className="grid gap-5">
       <FormField
         control={form.control}
-        name="areas"
+        name="aiExperience"
         render={() => (
           <FormItem>
-            <FormLabel>Welche Bereiche sollen verbessert werden? *</FormLabel>
-            <div className="mt-1 flex flex-wrap gap-2">
-              {AREAS.map((area) => (
-                <FormField
-                  key={area}
-                  control={form.control}
-                  name="areas"
-                  render={({ field }) => {
-                    const checked = field.value.includes(area);
-                    return (
-                      <FormItem>
-                        <FormLabel className="flex cursor-pointer items-center gap-2 rounded-full border border-border bg-background px-3.5 py-2 text-sm font-medium transition-all has-[[data-state=checked]]:border-accent has-[[data-state=checked]]:bg-brand-soft has-[[data-state=checked]]:text-primary has-[[data-state=checked]]:shadow-card">
-                          <FormControl>
-                            <Checkbox
-                              checked={checked}
-                              onCheckedChange={(value) =>
-                                field.onChange(
-                                  value
-                                    ? [...field.value, area]
-                                    : field.value.filter((a) => a !== area),
-                                )
-                              }
-                            />
-                          </FormControl>
-                          {area}
-                        </FormLabel>
-                      </FormItem>
-                    );
-                  }}
-                />
-              ))}
-            </div>
+            <FormLabel>
+              Haben Sie bereits Erfahrungen mit künstlicher Intelligenz gesammelt? *
+            </FormLabel>
+            <ChipCheckboxGroup form={form} name="aiExperience" options={AI_EXPERIENCE} />
+            <FormMessage />
+          </FormItem>
+        )}
+      />
+      <FormField
+        control={form.control}
+        name="problems"
+        render={() => (
+          <FormItem>
+            <FormLabel className="flex items-center gap-1.5">
+              <Sparkles className="h-4 w-4 text-accent" />
+              Was ist aktuell Ihr größtes Problem? *
+            </FormLabel>
+            <ChipCheckboxGroup form={form} name="problems" options={PROBLEMS} />
             <FormMessage />
           </FormItem>
         )}
@@ -659,26 +733,13 @@ function StepSituation({ form }: StepProps) {
         name="timeEater"
         render={({ field }) => (
           <FormItem>
-            <FormLabel>Was ist aktuell der größte Zeitfresser im Unternehmen?</FormLabel>
+            <FormLabel>Was ist aktuell der größte Zeitfresser im Unternehmen? (optional)</FormLabel>
             <FormControl>
               <Textarea
                 rows={4}
                 placeholder="z. B. E-Mails sortieren und beantworten, Angebote schreiben, Dokumente ablegen …"
                 {...field}
               />
-            </FormControl>
-            <FormMessage />
-          </FormItem>
-        )}
-      />
-      <FormField
-        control={form.control}
-        name="existingAiTools"
-        render={({ field }) => (
-          <FormItem>
-            <FormLabel>Gibt es bereits AI-Tools im Einsatz?</FormLabel>
-            <FormControl>
-              <Input placeholder="z. B. ChatGPT, Copilot – oder: noch keine" {...field} />
             </FormControl>
             <FormMessage />
           </FormItem>
@@ -691,57 +752,13 @@ function StepSituation({ form }: StepProps) {
 function StepGoals({ form }: StepProps) {
   return (
     <div className="grid gap-5">
-      <FormField
-        control={form.control}
-        name="goals"
-        render={() => (
-          <FormItem>
-            <FormLabel className="flex items-center gap-1.5">
-              <Sparkles className="h-4 w-4 text-accent" />
-              Welche Verbesserungen wünschen Sie sich? *
-            </FormLabel>
-            <div className="mt-1 flex flex-wrap gap-2">
-              {GOALS.map((goal) => (
-                <FormField
-                  key={goal}
-                  control={form.control}
-                  name="goals"
-                  render={({ field }) => {
-                    const checked = field.value.includes(goal);
-                    return (
-                      <FormItem>
-                        <FormLabel className="flex cursor-pointer items-center gap-2 rounded-full border border-border bg-background px-3.5 py-2 text-sm font-medium transition-all has-[[data-state=checked]]:border-accent has-[[data-state=checked]]:bg-brand-soft has-[[data-state=checked]]:text-primary has-[[data-state=checked]]:shadow-card">
-                          <FormControl>
-                            <Checkbox
-                              checked={checked}
-                              onCheckedChange={(value) =>
-                                field.onChange(
-                                  value
-                                    ? [...field.value, goal]
-                                    : field.value.filter((g) => g !== goal),
-                                )
-                              }
-                            />
-                          </FormControl>
-                          {goal}
-                        </FormLabel>
-                      </FormItem>
-                    );
-                  }}
-                />
-              ))}
-            </div>
-            <FormMessage />
-          </FormItem>
-        )}
-      />
       <div className="grid gap-5 sm:grid-cols-2">
         <FormField
           control={form.control}
-          name="privacyImportance"
+          name="expectation"
           render={({ field }) => (
             <FormItem>
-              <FormLabel>Wie wichtig ist Datenschutz / EU-Speicherung? *</FormLabel>
+              <FormLabel>Was erwarten Sie von unserem Gespräch? *</FormLabel>
               <Select onValueChange={field.onChange} value={field.value}>
                 <FormControl>
                   <SelectTrigger>
@@ -749,9 +766,9 @@ function StepGoals({ form }: StepProps) {
                   </SelectTrigger>
                 </FormControl>
                 <SelectContent>
-                  {PRIVACY_LEVELS.map((p) => (
-                    <SelectItem key={p} value={p}>
-                      {p}
+                  {EXPECTATIONS.map((e) => (
+                    <SelectItem key={e} value={e}>
+                      {e}
                     </SelectItem>
                   ))}
                 </SelectContent>
@@ -790,7 +807,7 @@ function StepGoals({ form }: StepProps) {
         name="message"
         render={({ field }) => (
           <FormItem>
-            <FormLabel>Nachricht / Freitext</FormLabel>
+            <FormLabel>Nachricht / Freitext (optional)</FormLabel>
             <FormControl>
               <Textarea
                 rows={4}
