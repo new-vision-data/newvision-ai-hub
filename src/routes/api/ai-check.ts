@@ -176,6 +176,30 @@ export const Route = createFileRoute("/api/ai-check")({
             );
           }
 
+          // Confirmation email to customer (non-blocking failure)
+          try {
+            const confRes = await fetch("https://connector-gateway.lovable.dev/resend/emails", {
+              method: "POST",
+              headers: {
+                "Content-Type": "application/json",
+                Authorization: `Bearer ${LOVABLE_API_KEY}`,
+                "X-Connection-Api-Key": RESEND_API_KEY,
+              },
+              body: JSON.stringify({
+                from: "NewVisionData <website@newvisiondata.de>",
+                to: [data.email],
+                reply_to: "info@newvisiondata.de",
+                subject: "Vielen Dank für Ihre Anfrage | NewVisionData GmbH",
+                html: buildCustomerHtml(data),
+              }),
+            });
+            if (!confRes.ok) {
+              console.error(`Confirmation email failed [${confRes.status}]:`, await confRes.text());
+            }
+          } catch (e) {
+            console.error("Confirmation email error:", e);
+          }
+
           return Response.json({ ok: true });
         } catch (err) {
           console.error("AI-Check send failed:", err);
