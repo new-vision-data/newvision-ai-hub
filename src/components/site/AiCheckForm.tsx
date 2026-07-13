@@ -445,6 +445,15 @@ export function AiCheckForm() {
                     )}
                   </div>
 
+                  {isLast && submitError && (
+                    <div
+                      role="alert"
+                      className="rounded-xl border border-destructive/40 bg-destructive/5 p-3 text-center text-sm text-destructive"
+                    >
+                      {submitError}
+                    </div>
+                  )}
+
                   {isLast && (
                     <p className="pt-1 text-center text-xs text-muted-foreground">
                       <ShieldCheck className="mr-1 inline h-3.5 w-3.5 text-accent" />
