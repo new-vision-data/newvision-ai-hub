@@ -191,7 +191,7 @@ export function AiCheckSuccess({ firstName }: Props) {
         </div>
         <div className="mt-5 grid gap-4 sm:grid-cols-3">
           <a
-            href="tel:+4915565000062"
+            href={CONTACT.phoneTel}
             className="group flex items-start gap-3 rounded-xl border border-border bg-background/60 p-3.5 transition-all hover:border-accent/60 hover:shadow-card"
           >
             <span className="grid h-9 w-9 shrink-0 place-items-center rounded-lg bg-gradient-brand text-primary-foreground shadow-brand-glow">
@@ -202,7 +202,7 @@ export function AiCheckSuccess({ firstName }: Props) {
                 Telefon
               </p>
               <p className="text-sm font-medium text-primary group-hover:text-accent">
-                01556 5000062
+                {CONTACT.phoneDisplay}
               </p>
             </div>
           </a>
