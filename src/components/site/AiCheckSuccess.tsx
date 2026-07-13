@@ -16,6 +16,7 @@ import {
   UserRound,
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { CONTACT } from "@/lib/contact";
 
 interface Props {
   firstName?: string;
