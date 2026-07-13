@@ -122,6 +122,9 @@ const formSchema = z.object({
   expectation: z.string().min(1, "Bitte wählen Sie eine Option."),
   timeline: z.string().min(1, "Bitte wählen Sie einen Zeitraum."),
   message: z.string().trim().max(2000).optional().or(z.literal("")),
+  privacy: z.literal(true, {
+    errorMap: () => ({ message: "Bitte stimmen Sie der Datenschutzerklärung zu." }),
+  }),
 });
 
 export type AiCheckFormValues = z.infer<typeof formSchema>;
