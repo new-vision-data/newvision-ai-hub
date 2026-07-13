@@ -58,7 +58,7 @@ function Impressum() {
             <p className="mt-3 leading-relaxed">
               Telefon:{" "}
               <a href="tel:+4915565000062" className="text-accent hover:underline">
-                +49 (0) 155 65 000 062
+                +49 (0) 155 65 0000 62
               </a>
               <br />
               E-Mail:{" "}
