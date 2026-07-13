@@ -116,7 +116,7 @@ export const Route = createFileRoute("/api/ai-check")({
               "X-Connection-Api-Key": RESEND_API_KEY,
             },
             body: JSON.stringify({
-              from: "NewVisionData AI-Check <onboarding@resend.dev>",
+              from: "NewVisionData <website@newvisiondata.de>",
               to: ["info@newvisiondata.de"],
               reply_to: data.email,
               subject,
