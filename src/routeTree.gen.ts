@@ -13,6 +13,7 @@ import { Route as SitemapDotxmlRouteImport } from './routes/sitemap[.]xml'
 import { Route as ImpressumRouteImport } from './routes/impressum'
 import { Route as DatenschutzRouteImport } from './routes/datenschutz'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as ApiAiCheckRouteImport } from './routes/api/ai-check'
 
 const SitemapDotxmlRoute = SitemapDotxmlRouteImport.update({
   id: '/sitemap.xml',
@@ -34,18 +35,25 @@ const IndexRoute = IndexRouteImport.update({
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const ApiAiCheckRoute = ApiAiCheckRouteImport.update({
+  id: '/api/ai-check',
+  path: '/api/ai-check',
+  getParentRoute: () => rootRouteImport,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/datenschutz': typeof DatenschutzRoute
   '/impressum': typeof ImpressumRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
+  '/api/ai-check': typeof ApiAiCheckRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/datenschutz': typeof DatenschutzRoute
   '/impressum': typeof ImpressumRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
+  '/api/ai-check': typeof ApiAiCheckRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
@@ -53,13 +61,25 @@ export interface FileRoutesById {
   '/datenschutz': typeof DatenschutzRoute
   '/impressum': typeof ImpressumRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
+  '/api/ai-check': typeof ApiAiCheckRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/datenschutz' | '/impressum' | '/sitemap.xml'
+  fullPaths:
+    | '/'
+    | '/datenschutz'
+    | '/impressum'
+    | '/sitemap.xml'
+    | '/api/ai-check'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/datenschutz' | '/impressum' | '/sitemap.xml'
-  id: '__root__' | '/' | '/datenschutz' | '/impressum' | '/sitemap.xml'
+  to: '/' | '/datenschutz' | '/impressum' | '/sitemap.xml' | '/api/ai-check'
+  id:
+    | '__root__'
+    | '/'
+    | '/datenschutz'
+    | '/impressum'
+    | '/sitemap.xml'
+    | '/api/ai-check'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -67,6 +87,7 @@ export interface RootRouteChildren {
   DatenschutzRoute: typeof DatenschutzRoute
   ImpressumRoute: typeof ImpressumRoute
   SitemapDotxmlRoute: typeof SitemapDotxmlRoute
+  ApiAiCheckRoute: typeof ApiAiCheckRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -99,6 +120,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/api/ai-check': {
+      id: '/api/ai-check'
+      path: '/api/ai-check'
+      fullPath: '/api/ai-check'
+      preLoaderRoute: typeof ApiAiCheckRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
@@ -107,17 +135,8 @@ const rootRouteChildren: RootRouteChildren = {
   DatenschutzRoute: DatenschutzRoute,
   ImpressumRoute: ImpressumRoute,
   SitemapDotxmlRoute: SitemapDotxmlRoute,
+  ApiAiCheckRoute: ApiAiCheckRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
   ._addFileTypes<FileRouteTypes>()
-
-import type { getRouter } from './router.tsx'
-import type { startInstance } from './start.ts'
-declare module '@tanstack/react-start' {
-  interface Register {
-    ssr: true
-    router: Awaited<ReturnType<typeof getRouter>>
-    config: Awaited<ReturnType<typeof startInstance.getOptions>>
-  }
-}

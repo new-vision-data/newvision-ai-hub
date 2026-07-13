@@ -154,17 +154,30 @@ const stepMeta = [
     icon: Target,
     title: "Ziele",
     subtitle: "Wohin soll die Reise gehen – und was ist wichtig?",
-    fields: ["expectation", "timeline", "message"] as FieldName[],
+    fields: ["expectation", "timeline", "message", "privacy"] as FieldName[],
   },
 ];
 
 async function submitAiCheck(values: AiCheckFormValues): Promise<void> {
-  console.info("AI-Check-Anfrage (noch ohne Backend):", values);
-  await new Promise((resolve) => setTimeout(resolve, 600));
+  const res = await fetch("/api/ai-check", {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify(values),
+  });
+  let payload: { ok?: boolean; error?: string } = {};
+  try {
+    payload = await res.json();
+  } catch {
+    /* ignore */
+  }
+  if (!res.ok || !payload.ok) {
+    throw new Error(payload.error || "Ihre Anfrage konnte nicht versendet werden. Bitte versuchen Sie es erneut.");
+  }
 }
 
 export function AiCheckForm() {
   const [submitted, setSubmitted] = useState(false);
+  const [submitError, setSubmitError] = useState<string | null>(null);
   const [step, setStep] = useState(0);
   const totalSteps = stepMeta.length;
 
