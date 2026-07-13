@@ -268,60 +268,7 @@ export function AiCheckForm() {
 
         {submitted ? (
           <Reveal variant="scale">
-            <div
-              role="status"
-              className="card-luxe relative overflow-hidden p-8 md:p-12"
-            >
-              <span
-                aria-hidden
-                className="pointer-events-none absolute inset-x-0 top-0 h-40 bg-gradient-to-b from-brand-soft/70 to-transparent"
-              />
-              <div className="relative text-center">
-                <span className="mx-auto grid h-16 w-16 place-items-center rounded-full bg-gradient-brand text-primary-foreground shadow-brand-glow">
-                  <CheckCircle2 className="h-8 w-8" />
-                </span>
-                <h3 className="mt-6 text-2xl font-semibold text-primary md:text-3xl">
-                  Vielen Dank für Ihre Anfrage.
-                </h3>
-                <p className="mx-auto mt-3 max-w-md text-muted-foreground">
-                  Wir haben Ihre Angaben erhalten.
-                </p>
-              </div>
-
-              <div className="relative mx-auto mt-10 max-w-xl">
-                <p className="mb-5 text-center text-xs font-semibold tracking-widest text-accent uppercase">
-                  Wie geht es jetzt weiter?
-                </p>
-                <ol className="space-y-3">
-                  {[
-                    "Wir prüfen Ihre Angaben.",
-                    "Wir analysieren erste Potenziale.",
-                    "Innerhalb von 24 Stunden melden wir uns persönlich bei Ihnen.",
-                  ].map((text, i) => (
-                    <li
-                      key={text}
-                      className="flex items-start gap-4 rounded-2xl border border-border bg-card/70 p-4 shadow-card backdrop-blur"
-                    >
-                      <span className="grid h-9 w-9 shrink-0 place-items-center rounded-xl bg-gradient-brand text-sm font-semibold text-primary-foreground shadow-brand-glow">
-                        {i + 1}
-                      </span>
-                      <p className="pt-1.5 text-sm text-primary md:text-base">{text}</p>
-                    </li>
-                  ))}
-                </ol>
-              </div>
-
-              <p className="relative mt-8 text-center text-sm text-muted-foreground">
-                <ShieldCheck className="mr-1 inline h-4 w-4 text-accent" />
-                Ihre Angaben werden vertraulich behandelt.
-              </p>
-              <p className="relative mt-3 text-center text-sm text-muted-foreground">
-                Dringende Fragen? Rufen Sie uns gerne an:{" "}
-                <a href="tel:+4915565000062" className="font-semibold text-accent hover:underline">
-                  +49 (0) 155 65 000 062
-                </a>
-              </p>
-            </div>
+            <AiCheckSuccess firstName={form.getValues("firstName")} />
           </Reveal>
         ) : (
           <Reveal>
