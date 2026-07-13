@@ -74,6 +74,49 @@ ${section("4. Ziele", [
 </div></body></html>`;
 }
 
+function buildCustomerHtml(d: z.infer<typeof payloadSchema>) {
+  const brand = "#1e40af";
+  return `<!doctype html><html><body style="margin:0;background:#f8fafc;padding:24px;font-family:-apple-system,Segoe UI,Roboto,sans-serif;color:#0f172a;">
+<div style="max-width:640px;margin:0 auto;background:#ffffff;border:1px solid #e2e8f0;border-radius:16px;overflow:hidden;box-shadow:0 4px 24px -8px rgba(15,23,42,0.08);">
+  <div style="background:linear-gradient(135deg,#1e3a8a,#3b82f6);padding:32px 28px;color:#ffffff;">
+    <p style="margin:0 0 6px;font-size:12px;letter-spacing:0.18em;text-transform:uppercase;opacity:0.85;">NewVisionData GmbH</p>
+    <h1 style="margin:0;font-size:24px;line-height:1.3;font-weight:700;">Vielen Dank für Ihre Anfrage</h1>
+  </div>
+  <div style="padding:32px 28px;">
+    <p style="margin:0 0 16px;font-size:16px;">Hallo ${esc(d.firstName)},</p>
+    <p style="margin:0 0 14px;font-size:15px;line-height:1.6;">vielen Dank für Ihre Anfrage und Ihr Vertrauen. Wir haben Ihre Angaben erfolgreich erhalten.</p>
+    <p style="margin:0 0 14px;font-size:15px;line-height:1.6;">Unser Team bereitet Ihr persönliches Erstgespräch bereits anhand Ihrer Informationen vor. Dadurch können wir direkt über konkrete Möglichkeiten für Ihr Unternehmen sprechen.</p>
+
+    <h2 style="margin:28px 0 12px;font-size:16px;font-weight:600;color:${brand};">Wie geht es jetzt weiter?</h2>
+    <ul style="margin:0;padding:0;list-style:none;">
+      ${[
+        "Ihre Angaben werden analysiert.",
+        "Ein Ansprechpartner meldet sich innerhalb von 24 Stunden persönlich bei Ihnen.",
+        "Gemeinsam besprechen wir, welche KI-Lösungen für Ihren Betrieb sinnvoll sind.",
+        "Falls wir der Meinung sind, dass sich eine Lösung für Sie nicht lohnt, sagen wir Ihnen das ebenfalls offen.",
+      ]
+        .map(
+          (t) =>
+            `<li style="padding:10px 0 10px 28px;position:relative;font-size:14px;line-height:1.55;border-bottom:1px solid #f1f5f9;"><span style="position:absolute;left:0;top:12px;width:18px;height:18px;border-radius:50%;background:${brand};color:#fff;font-size:11px;line-height:18px;text-align:center;">✓</span>${esc(t)}</li>`,
+        )
+        .join("")}
+    </ul>
+
+    <p style="margin:24px 0 0;font-size:15px;line-height:1.6;">Unser Anspruch ist eine ehrliche, herstellerunabhängige Beratung mit konkretem Mehrwert. Wir freuen uns auf das Gespräch.</p>
+
+    <p style="margin:28px 0 4px;font-size:15px;">Freundliche Grüße</p>
+    <p style="margin:0;font-size:15px;font-weight:600;">Dennis Schmidt Gantikow<br/>Viola Schmidt Gantikow</p>
+  </div>
+  <div style="border-top:1px solid #e2e8f0;padding:24px 28px;background:#f8fafc;font-size:13px;line-height:1.6;color:#475569;">
+    <p style="margin:0 0 8px;font-weight:600;color:#0f172a;">NewVisionData GmbH</p>
+    <p style="margin:0;">Telefon: <a href="tel:+4915565000062" style="color:${brand};text-decoration:none;">01556 5000062</a></p>
+    <p style="margin:0;">E-Mail: <a href="mailto:info@newvisiondata.de" style="color:${brand};text-decoration:none;">info@newvisiondata.de</a></p>
+    <p style="margin:0;">Website: <a href="https://www.newvisiondata.de" style="color:${brand};text-decoration:none;">www.newvisiondata.de</a></p>
+  </div>
+</div>
+</body></html>`;
+}
+
 export const Route = createFileRoute("/api/ai-check")({
   server: {
     handlers: {
