@@ -61,7 +61,7 @@ export function FinalCta() {
                 >
                   <a href="tel:+4915565000062">
                     <Phone className="mr-1 h-4 w-4" />
-                    +49 (0) 155 65 000 062
+                    +49 (0) 155 65 0000 62
                   </a>
                 </Button>
               </div>
