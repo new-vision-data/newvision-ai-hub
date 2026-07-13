@@ -35,6 +35,7 @@ import {
 import { Textarea } from "@/components/ui/textarea";
 import { Reveal } from "./Reveal";
 import { SectionHeading } from "./SectionHeading";
+import { AiCheckSuccess } from "./AiCheckSuccess";
 import { cn } from "@/lib/utils";
 
 /* ---------- Optionen ---------- */
