@@ -122,6 +122,9 @@ const formSchema = z.object({
   expectation: z.string().min(1, "Bitte wählen Sie eine Option."),
   timeline: z.string().min(1, "Bitte wählen Sie einen Zeitraum."),
   message: z.string().trim().max(2000).optional().or(z.literal("")),
+  privacy: z.literal(true, {
+    errorMap: () => ({ message: "Bitte stimmen Sie der Datenschutzerklärung zu." }),
+  }),
 });
 
 export type AiCheckFormValues = z.infer<typeof formSchema>;
@@ -151,17 +154,30 @@ const stepMeta = [
     icon: Target,
     title: "Ziele",
     subtitle: "Wohin soll die Reise gehen – und was ist wichtig?",
-    fields: ["expectation", "timeline", "message"] as FieldName[],
+    fields: ["expectation", "timeline", "message", "privacy"] as FieldName[],
   },
 ];
 
 async function submitAiCheck(values: AiCheckFormValues): Promise<void> {
-  console.info("AI-Check-Anfrage (noch ohne Backend):", values);
-  await new Promise((resolve) => setTimeout(resolve, 600));
+  const res = await fetch("/api/ai-check", {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify(values),
+  });
+  let payload: { ok?: boolean; error?: string } = {};
+  try {
+    payload = await res.json();
+  } catch {
+    /* ignore */
+  }
+  if (!res.ok || !payload.ok) {
+    throw new Error(payload.error || "Ihre Anfrage konnte nicht versendet werden. Bitte versuchen Sie es erneut.");
+  }
 }
 
 export function AiCheckForm() {
   const [submitted, setSubmitted] = useState(false);
+  const [submitError, setSubmitError] = useState<string | null>(null);
   const [step, setStep] = useState(0);
   const totalSteps = stepMeta.length;
 
@@ -187,6 +203,7 @@ export function AiCheckForm() {
       expectation: "",
       timeline: "",
       message: "",
+      privacy: false as unknown as true,
     },
   });
 
@@ -210,15 +227,24 @@ export function AiCheckForm() {
   const goBack = () => setStep((s) => Math.max(s - 1, 0));
 
   const onSubmit = async (values: AiCheckFormValues) => {
-    await submitAiCheck(values);
-    setSubmitted(true);
-    window.setTimeout(
-      () =>
-        document
-          .getElementById("ai-check")
-          ?.scrollIntoView({ behavior: "smooth", block: "start" }),
-      50,
-    );
+    setSubmitError(null);
+    try {
+      await submitAiCheck(values);
+      setSubmitted(true);
+      window.setTimeout(
+        () =>
+          document
+            .getElementById("ai-check")
+            ?.scrollIntoView({ behavior: "smooth", block: "start" }),
+        50,
+      );
+    } catch (err) {
+      setSubmitError(
+        err instanceof Error
+          ? err.message
+          : "Ihre Anfrage konnte nicht versendet werden. Bitte versuchen Sie es erneut.",
+      );
+    }
   };
 
   return (
@@ -418,6 +444,15 @@ export function AiCheckForm() {
                       </Button>
                     )}
                   </div>
+
+                  {isLast && submitError && (
+                    <div
+                      role="alert"
+                      className="rounded-xl border border-destructive/40 bg-destructive/5 p-3 text-center text-sm text-destructive"
+                    >
+                      {submitError}
+                    </div>
+                  )}
 
                   {isLast && (
                     <p className="pt-1 text-center text-xs text-muted-foreground">
@@ -815,6 +850,36 @@ function StepGoals({ form }: StepProps) {
                 {...field}
               />
             </FormControl>
+            <FormMessage />
+          </FormItem>
+        )}
+      />
+      <FormField
+        control={form.control}
+        name="privacy"
+        render={({ field }) => (
+          <FormItem>
+            <FormLabel className="flex cursor-pointer items-start gap-3 rounded-xl border border-border bg-background/60 p-4 text-sm font-normal leading-relaxed transition-all has-[[data-state=checked]]:border-accent has-[[data-state=checked]]:bg-brand-soft">
+              <FormControl>
+                <Checkbox
+                  checked={field.value === true}
+                  onCheckedChange={(v) => field.onChange(v === true)}
+                  className="mt-0.5"
+                />
+              </FormControl>
+              <span className="text-muted-foreground">
+                Ich habe die{" "}
+                <a
+                  href="/datenschutz"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="font-semibold text-accent hover:underline"
+                >
+                  Datenschutzerklärung
+                </a>{" "}
+                gelesen und stimme der Verarbeitung meiner Angaben zur Bearbeitung meiner Anfrage zu.
+              </span>
+            </FormLabel>
             <FormMessage />
           </FormItem>
         )}
