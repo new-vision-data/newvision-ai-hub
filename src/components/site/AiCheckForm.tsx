@@ -854,6 +854,36 @@ function StepGoals({ form }: StepProps) {
           </FormItem>
         )}
       />
+      <FormField
+        control={form.control}
+        name="privacy"
+        render={({ field }) => (
+          <FormItem>
+            <FormLabel className="flex cursor-pointer items-start gap-3 rounded-xl border border-border bg-background/60 p-4 text-sm font-normal leading-relaxed transition-all has-[[data-state=checked]]:border-accent has-[[data-state=checked]]:bg-brand-soft">
+              <FormControl>
+                <Checkbox
+                  checked={field.value === true}
+                  onCheckedChange={(v) => field.onChange(v === true)}
+                  className="mt-0.5"
+                />
+              </FormControl>
+              <span className="text-muted-foreground">
+                Ich habe die{" "}
+                <a
+                  href="/datenschutz"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="font-semibold text-accent hover:underline"
+                >
+                  Datenschutzerklärung
+                </a>{" "}
+                gelesen und stimme der Verarbeitung meiner Angaben zur Bearbeitung meiner Anfrage zu.
+              </span>
+            </FormLabel>
+            <FormMessage />
+          </FormItem>
+        )}
+      />
     </div>
   );
 }
