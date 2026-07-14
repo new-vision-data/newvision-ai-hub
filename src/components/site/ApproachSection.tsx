@@ -7,7 +7,7 @@ const steps = [
     icon: Search,
     step: "01",
     title: "Analyse vor Ort",
-    text: "Wir schauen uns Ihre Abläufe an – nicht zuerst Ihre Server. Wo geht Zeit verloren? Wo wiederholt sich Arbeit? Daraus entsteht Ihre Potenzial-Landkarte: welche Abläufe sich verschlanken lassen.",
+    text: "Wir schauen uns Ihre Abläufe an – nicht zuerst Ihre Server. Wo geht Zeit verloren? Wo wiederholt sich Arbeit? Daraus entsteht Ihre Potenzial-Landkarte.",
     tags: ["Ist-Aufnahme", "Zeitfresser", "Potenzial"],
   },
   {
@@ -28,7 +28,7 @@ const steps = [
     icon: GraduationCap,
     step: "04",
     title: "Schulung & Betreuung",
-    text: "Ihr Team lernt souverän damit zu arbeiten – ohne Fachchinesisch. Und wir bleiben ansprechbar, wenn Fragen kommen oder sich Ihr Bedarf ändert.",
+    text: "Ihr Team lernt souverän damit zu arbeiten – ohne Fachchinesisch. Wir bleiben ansprechbar, wenn Fragen kommen oder sich Ihr Bedarf ändert.",
     tags: ["Training", "Praxis", "Support"],
   },
 ];
