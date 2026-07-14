@@ -22,23 +22,23 @@ const founders = [
 const pillars = [
   {
     icon: ShieldCheck,
-    title: "Herstellerunabhängige Beratung",
-    text: "Wir empfehlen die Lösung, die zu Ihrem Unternehmen passt, unabhängig von bestimmten Anbietern oder Verkaufsinteressen.",
+    title: "Herstellerunabhängig",
+    text: "Wir empfehlen die Lösung, die zu Ihrem Unternehmen passt – unabhängig von Anbietern oder Verkaufsinteressen.",
   },
   {
     icon: Workflow,
     title: "Praxis statt Theorie",
-    text: "Unsere Empfehlungen entstehen aus konkreten Abläufen und Herausforderungen Ihres Unternehmens, nicht aus allgemeinen Präsentationen.",
+    text: "Unsere Empfehlungen entstehen aus konkreten Abläufen Ihres Unternehmens, nicht aus allgemeinen Präsentationen.",
   },
   {
     icon: Zap,
-    title: "Automatisierung mit echtem Mehrwert",
-    text: "Wir automatisieren dort, wo sich Arbeitsaufwand reduzieren, Zeit sparen und Prozesse nachhaltig verbessern lassen.",
+    title: "Echter Mehrwert",
+    text: "Wir automatisieren dort, wo sich Aufwand reduzieren, Zeit sparen und Prozesse nachhaltig verbessern lassen.",
   },
   {
     icon: Sparkles,
-    title: "Individuelle KI-Lösungen für den Mittelstand",
-    text: "Keine Standardlösung für alle, sondern eine Umsetzung, die zu Ihren Strukturen, Zielen und vorhandenen Systemen passt.",
+    title: "Für den Mittelstand",
+    text: "Keine Standardlösung, sondern eine Umsetzung, die zu Ihren Strukturen, Zielen und Systemen passt.",
   },
 ];
 
@@ -52,7 +52,7 @@ export function AboutSection() {
           titleAccent="der Ihre Sprache spricht."
         />
 
-        <div className="mx-auto max-w-2xl space-y-5 text-[15px] leading-relaxed text-muted-foreground md:text-lg">
+        <div className="mx-auto max-w-2xl space-y-6 text-[15px] leading-[1.8] text-muted-foreground md:text-lg md:leading-[1.8]">
           <Reveal delay={80}>
             <p>
               Wir haben NewVisionData gegründet, weil wir immer wieder dasselbe gesehen haben:
@@ -79,31 +79,60 @@ export function AboutSection() {
           </Reveal>
         </div>
 
-        <div className="mt-14 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
-          {pillars.map((p, i) => (
-            <Reveal key={p.title} delay={i * 100} variant="scale">
-              <div className="card-luxe group flex h-full flex-col p-6 transition-transform duration-300 hover:-translate-y-1">
-                <div
-                  aria-hidden
-                  className="grid h-11 w-11 place-items-center rounded-xl bg-gradient-brand text-primary-foreground shadow-brand-glow"
-                >
-                  <p.icon className="h-5 w-5" />
+        {/* Vorteilskarten – kompakter, direkter am Text */}
+        <div className="mx-auto mt-12 max-w-3xl">
+          <Reveal variant="fade">
+            <p className="mb-5 text-center text-[11px] font-semibold tracking-[0.22em] text-accent uppercase">
+              <span aria-hidden className="mr-2 inline-block h-px w-6 align-middle bg-accent/60" />
+              Was uns ausmacht
+            </p>
+          </Reveal>
+          <div className="grid gap-3 sm:grid-cols-2">
+            {pillars.map((p, i) => (
+              <Reveal key={p.title} delay={i * 80} variant="scale">
+                <div className="card-luxe group flex h-full items-start gap-3.5 p-4 transition-transform duration-300 hover:-translate-y-0.5">
+                  <div
+                    aria-hidden
+                    className="grid h-9 w-9 shrink-0 place-items-center rounded-lg bg-gradient-brand text-primary-foreground shadow-brand-glow"
+                  >
+                    <p.icon className="h-4 w-4" />
+                  </div>
+                  <div className="min-w-0 flex-1">
+                    <h3 className="font-display text-[0.95rem] font-semibold leading-tight text-primary">
+                      {p.title}
+                    </h3>
+                    <p className="mt-1 text-[13px] leading-relaxed text-muted-foreground">
+                      {p.text}
+                    </p>
+                  </div>
                 </div>
-                <h3 className="mt-5 font-display text-base font-semibold text-primary">
-                  {p.title}
-                </h3>
-                <p className="mt-2 text-sm leading-relaxed text-muted-foreground">{p.text}</p>
-              </div>
-            </Reveal>
-          ))}
+              </Reveal>
+            ))}
+          </div>
         </div>
 
-        <Reveal delay={120}>
-          <div className="mx-auto mt-16 grid max-w-md grid-cols-2 gap-5 sm:max-w-lg">
+        {/* Team – nahtloser Abschluss */}
+        <div className="mx-auto mt-16 max-w-3xl">
+          <Reveal variant="fade">
+            <div className="mb-8 text-center">
+              <p className="mb-3 inline-flex items-center justify-center gap-2 text-[11px] font-semibold tracking-[0.22em] text-accent uppercase">
+                <span aria-hidden className="inline-block h-px w-6 bg-accent/60" />
+                Unser Team
+              </p>
+              <h3 className="font-display text-2xl font-semibold text-primary md:text-3xl">
+                Die Menschen hinter{" "}
+                <span className="font-serif text-[1.12em] font-normal italic text-gradient-brand">
+                  NewVisionData
+                </span>
+              </h3>
+            </div>
+          </Reveal>
+
+          <div className="mx-auto grid max-w-lg grid-cols-2 gap-5">
             {founders.map((f, i) => (
               <Reveal key={f.name} delay={i * 120} variant="scale">
-                <div className="card-luxe relative overflow-hidden p-5 text-center">
-                  <div className="relative mx-auto aspect-square w-full max-w-[11rem] overflow-hidden rounded-2xl shadow-brand-glow">
+                <div className="card-luxe flex h-full flex-col p-5 text-center">
+                  <div className="relative mx-auto aspect-square w-full overflow-hidden rounded-xl shadow-brand-glow">
                     <img
                       src={f.image}
                       alt={`Porträt von ${f.name}`}
@@ -112,13 +141,13 @@ export function AboutSection() {
                       style={{ objectPosition: f.objectPosition }}
                     />
                   </div>
-                  <p className="mt-4 font-semibold text-primary">{f.name}</p>
+                  <p className="mt-4 font-display font-semibold text-primary">{f.name}</p>
                   <p className="mt-1 text-sm text-muted-foreground">{f.role}</p>
                 </div>
               </Reveal>
             ))}
           </div>
-        </Reveal>
+        </div>
       </div>
     </section>
   );
