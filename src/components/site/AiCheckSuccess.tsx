@@ -262,10 +262,11 @@ export function AiCheckSuccess({ firstName }: Props) {
           size="lg"
           className="rounded-full bg-gradient-brand shadow-brand-glow transition-transform hover:scale-[1.02] sm:px-8"
         >
-          <a href="/">
+          <Link to="/">
             Zur Startseite
             <ArrowRight className="ml-1 h-4 w-4" />
-          </a>
+          </Link>
+
         </Button>
       </div>
     </div>
