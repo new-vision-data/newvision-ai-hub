@@ -43,9 +43,9 @@ const examples = [
     text: "Häufige Fragen beantworten sich selbst – rund um die Uhr, in Ihrem Ton.",
   },
   {
-    icon: Calendar,
-    title: "Termin- & Ressourcenplanung",
-    text: "Aufträge, Personal und Maschinen werden intelligent aufeinander abgestimmt.",
+    icon: Globe,
+    title: "KI-gestützte Weblösungen",
+    text: "Von der professionellen Unternehmenswebsite bis zur individuellen Webanwendung: Wir entwickeln digitale Lösungen mit modernsten KI-Technologien und automatisieren Prozesse direkt im Web.",
   },
   {
     icon: BarChart3,
