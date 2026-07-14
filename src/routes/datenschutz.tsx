@@ -40,9 +40,9 @@ function Datenschutz() {
             <p className="mt-3 leading-relaxed">
               NewVisionData GmbH
               <br />
-              Lindenallee 13
+              Hügelstr. 11a
               <br />
-              16831 Rheinsberg
+              49179 Ostercappeln
               <br />
               Telefon:{" "}
               <a href="tel:+4915565000062" className="text-accent hover:underline">

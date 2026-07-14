@@ -123,9 +123,9 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
           email: "info@newvisiondata.de",
           address: {
             "@type": "PostalAddress",
-            streetAddress: "Lindenallee 13",
-            postalCode: "16831",
-            addressLocality: "Rheinsberg",
+            streetAddress: "Hügelstr. 11a",
+            postalCode: "49179",
+            addressLocality: "Ostercappeln",
             addressCountry: "DE",
           },
           founder: [

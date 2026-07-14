@@ -40,9 +40,9 @@ function Impressum() {
             <p className="mt-3 leading-relaxed">
               NewVisionData GmbH
               <br />
-              Lindenallee 13
+              Hügelstr. 11a
               <br />
-              16831 Rheinsberg
+              49179 Ostercappeln
             </p>
           </section>
 
@@ -75,9 +75,9 @@ function Impressum() {
             <p className="mt-3 leading-relaxed">
               Dennis Schmidt Gantikow und Viola Schmidt Gantikow
               <br />
-              Lindenallee 13
+              Hügelstr. 11a
               <br />
-              16831 Rheinsberg
+              49179 Ostercappeln
             </p>
           </section>
 

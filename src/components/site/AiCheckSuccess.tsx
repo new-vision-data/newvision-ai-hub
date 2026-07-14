@@ -234,9 +234,9 @@ export function AiCheckSuccess({ firstName }: Props) {
               <p className="text-sm font-medium text-primary">
                 NewVisionData GmbH
                 <br />
-                Lindenallee 13
+                Hügelstr. 11a
                 <br />
-                16831 Rheinsberg
+                49179 Ostercappeln
               </p>
             </div>
           </div>
