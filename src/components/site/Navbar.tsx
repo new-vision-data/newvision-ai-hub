@@ -3,6 +3,8 @@ import { Link } from "@tanstack/react-router";
 import { ArrowRight, Menu, X } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
+import logoAsset from "@/assets/nvd-logo-official.png.asset.json";
+
 
 const navLinks = [
   { label: "So arbeiten wir", href: "#ablauf" },
