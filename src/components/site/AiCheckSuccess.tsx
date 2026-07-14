@@ -20,8 +20,6 @@ import { Button } from "@/components/ui/button";
 import { SectionLink } from "./SectionLink";
 import { CONTACT } from "@/lib/contact";
 
-
-
 interface Props {
   firstName?: string;
 }
@@ -30,24 +28,22 @@ const steps = [
   {
     icon: MailCheck,
     title: "Eingang bestätigt",
-    text: "Sie erhalten innerhalb weniger Minuten eine Eingangsbestätigung per E-Mail.",
+    text: "Sie erhalten in Kürze eine Bestätigung per E-Mail.",
   },
   {
     icon: Brain,
     title: "Analyse beginnt",
-    text: "Wir prüfen bereits jetzt Ihre Angaben und identifizieren erste Potenziale für den Einsatz von Künstlicher Intelligenz.",
+    text: "Wir prüfen Ihre Angaben und erkennen erste Potenziale.",
   },
   {
     icon: Handshake,
     title: "Persönlicher Kontakt",
-    text: "Ein Ansprechpartner aus unserem Team meldet sich innerhalb von 24 Stunden persönlich bei Ihnen.",
-    small: "Keine Hotline. Keine automatisierten Verkaufsgespräche.",
+    text: "Ein Ansprechpartner meldet sich innerhalb von 24 Stunden.",
   },
   {
     icon: Lightbulb,
     title: "Ihr individuelles Konzept",
-    text: "Im Erstgespräch erhalten Sie konkrete Handlungsempfehlungen für Ihr Unternehmen.",
-    small: "Falls KI für einen Bereich keinen Mehrwert bringt, sagen wir Ihnen das ebenfalls offen.",
+    text: "Im Erstgespräch erhalten Sie konkrete Empfehlungen für Ihr Unternehmen.",
   },
 ];
 
@@ -62,33 +58,33 @@ export function AiCheckSuccess({ firstName }: Props) {
   return (
     <div
       role="status"
-      className="card-luxe relative overflow-hidden p-6 md:p-12 animate-scale-in"
+      className="card-luxe relative overflow-hidden p-5 md:p-8 animate-scale-in"
     >
       {/* Ambient glow */}
       <span
         aria-hidden
-        className="pointer-events-none absolute -top-24 left-1/2 h-72 w-[42rem] -translate-x-1/2 rounded-full bg-gradient-to-b from-brand-soft/70 via-accent/10 to-transparent blur-3xl"
+        className="pointer-events-none absolute -top-20 left-1/2 h-56 w-[36rem] -translate-x-1/2 rounded-full bg-gradient-to-b from-brand-soft/70 via-accent/10 to-transparent blur-3xl"
       />
       <span
         aria-hidden
-        className="pointer-events-none absolute -bottom-24 -right-16 h-64 w-64 rounded-full bg-accent/10 blur-3xl"
+        className="pointer-events-none absolute -bottom-20 -right-14 h-52 w-52 rounded-full bg-accent/10 blur-3xl"
       />
       <span
         aria-hidden
-        className="pointer-events-none absolute top-16 right-12 h-2 w-2 animate-pulse rounded-full bg-accent/70"
+        className="pointer-events-none absolute top-12 right-10 h-2 w-2 animate-pulse rounded-full bg-accent/70"
       />
       <span
         aria-hidden
-        className="pointer-events-none absolute top-32 left-10 h-1.5 w-1.5 animate-pulse rounded-full bg-accent/50 [animation-delay:400ms]"
+        className="pointer-events-none absolute top-28 left-8 h-1.5 w-1.5 animate-pulse rounded-full bg-accent/50 [animation-delay:400ms]"
       />
       <span
         aria-hidden
-        className="pointer-events-none absolute bottom-40 left-20 h-1 w-1 animate-pulse rounded-full bg-primary/40 [animation-delay:800ms]"
+        className="pointer-events-none absolute bottom-32 left-16 h-1 w-1 animate-pulse rounded-full bg-primary/40 [animation-delay:800ms]"
       />
 
       {/* Header */}
       <div className="relative text-center">
-        <div className="relative mx-auto grid h-20 w-20 place-items-center">
+        <div className="relative mx-auto grid h-16 w-16 place-items-center">
           <span
             aria-hidden
             className="absolute inset-0 animate-ping rounded-full bg-emerald-400/30"
@@ -97,88 +93,68 @@ export function AiCheckSuccess({ firstName }: Props) {
             aria-hidden
             className="absolute inset-2 rounded-full bg-emerald-400/20"
           />
-          <span className="relative grid h-16 w-16 place-items-center rounded-full bg-gradient-to-br from-emerald-400 to-emerald-600 text-white shadow-[0_10px_40px_-10px_rgba(16,185,129,0.6)]">
-            <CheckCircle2 className="h-9 w-9" strokeWidth={2.5} />
+          <span className="relative grid h-12 w-12 place-items-center rounded-full bg-gradient-to-br from-emerald-400 to-emerald-600 text-white shadow-[0_10px_40px_-10px_rgba(16,185,129,0.6)]">
+            <CheckCircle2 className="h-7 w-7" strokeWidth={2.5} />
           </span>
         </div>
-        <h3 className="mt-6 text-3xl font-semibold text-primary md:text-4xl">
+        <h3 className="mt-4 text-2xl font-semibold text-primary md:text-3xl">
           {firstName ? `Vielen Dank, ${firstName}!` : "Vielen Dank für Ihre Anfrage!"}
         </h3>
-        <p className="mt-3 text-base text-muted-foreground md:text-lg">
-          Ihre Angaben wurden erfolgreich übermittelt.
-        </p>
-        <p className="mx-auto mt-5 max-w-xl text-sm leading-relaxed text-muted-foreground md:text-base">
-          Vielen Dank für Ihr Vertrauen. Wir bereiten Ihr persönliches Erstgespräch bereits
-          anhand Ihrer Angaben vor. Dadurch können wir direkt über konkrete Möglichkeiten
-          für Ihr Unternehmen sprechen – ohne Zeit mit allgemeinen Präsentationen zu
-          verlieren.
+        <p className="mt-2 text-base text-muted-foreground md:text-lg">
+          Ihre Angaben wurden erfolgreich übermittelt. Wir prüfen Ihre Informationen und bereiten Ihr persönliches Erstgespräch vor.
         </p>
       </div>
 
       {/* Prozess-Karten */}
-      <div className="relative mt-10 grid gap-4 md:mt-12 md:grid-cols-2">
+      <div className="relative mt-6 grid auto-rows-fr gap-3 md:grid-cols-2">
         {steps.map((s, i) => {
           const Icon = s.icon;
           return (
             <div
               key={s.title}
-              className="group relative rounded-2xl border border-border bg-card/80 p-5 shadow-card backdrop-blur transition-all hover:-translate-y-0.5 hover:shadow-brand-glow"
+              className="group relative flex flex-col rounded-xl border border-border bg-card/80 p-4 shadow-card backdrop-blur transition-all hover:-translate-y-0.5 hover:shadow-brand-glow"
             >
-              <div className="mb-3 flex items-center gap-3">
-                <span className="grid h-10 w-10 place-items-center rounded-xl bg-gradient-brand text-primary-foreground shadow-brand-glow">
-                  <Icon className="h-5 w-5" />
+              <div className="mb-2 flex items-center gap-2.5">
+                <span className="grid h-9 w-9 place-items-center rounded-lg bg-gradient-brand text-primary-foreground shadow-brand-glow">
+                  <Icon className="h-4.5 w-4.5" />
                 </span>
                 <span className="text-[11px] font-semibold tracking-widest text-accent uppercase">
                   Schritt {i + 1}
                 </span>
               </div>
-              <h4 className="text-lg font-semibold text-primary">{s.title}</h4>
-              <p className="mt-1.5 text-sm leading-relaxed text-muted-foreground">
+              <h4 className="text-base font-semibold text-primary">{s.title}</h4>
+              <p className="mt-1 text-sm leading-relaxed text-muted-foreground">
                 {s.text}
               </p>
-              {s.small && (
-                <p className="mt-2 text-xs italic text-muted-foreground/80">{s.small}</p>
-              )}
             </div>
           );
         })}
       </div>
 
       {/* Vertrauensbox */}
-      <div className="relative mt-10 overflow-hidden rounded-2xl border border-accent/30 bg-gradient-to-br from-brand-soft/70 via-card to-card p-6 shadow-card md:p-8">
-        <span
-          aria-hidden
-          className="pointer-events-none absolute -top-16 -right-16 h-48 w-48 rounded-full bg-accent/15 blur-3xl"
-        />
-        <div className="relative flex items-start gap-4">
-          <span className="grid h-11 w-11 shrink-0 place-items-center rounded-xl bg-gradient-brand text-primary-foreground shadow-brand-glow">
-            <Sparkles className="h-5 w-5" />
+      <div className="relative mt-5 rounded-xl border border-accent/30 bg-gradient-to-br from-brand-soft/70 via-card to-card p-4 shadow-card">
+        <div className="flex items-start gap-3">
+          <span className="grid h-9 w-9 shrink-0 place-items-center rounded-lg bg-gradient-brand text-primary-foreground shadow-brand-glow">
+            <Sparkles className="h-4.5 w-4.5" />
           </span>
-          <div>
-            <h4 className="text-lg font-semibold text-primary md:text-xl">
-              Warum dieser Fragebogen?
-            </h4>
-            <p className="mt-2 text-sm leading-relaxed text-muted-foreground md:text-base">
-              Je mehr wir bereits vor unserem Gespräch über Ihr Unternehmen wissen, desto
-              konkreter können wir Sie beraten. Unser Ziel ist keine allgemeine
-              KI-Präsentation. Wir möchten Ihnen bereits im ersten Gespräch konkrete Ideen
-              zeigen, die in Ihrem Unternehmen realistisch umsetzbar sind.
-            </p>
-          </div>
+          <p className="text-sm leading-relaxed text-muted-foreground md:text-base">
+            <span className="font-medium text-primary">Warum dieser Fragebogen?</span>{" "}
+            Je mehr wir bereits vor dem Gespräch über Ihr Unternehmen wissen, desto konkreter können wir Sie beraten und bereits erste realistische Potenziale aufzeigen.
+          </p>
         </div>
       </div>
 
       {/* Qualitätsversprechen */}
-      <div className="relative mt-8 grid gap-2.5 sm:grid-cols-2">
+      <div className="relative mt-5 grid gap-2 sm:grid-cols-2">
         {badges.map((b) => {
           const Icon = b.icon;
           return (
             <div
               key={b.text}
-              className="flex items-center gap-2.5 rounded-xl border border-border bg-card/60 px-3.5 py-2.5 text-sm text-primary backdrop-blur"
+              className="flex items-center gap-2.5 rounded-lg border border-border bg-card/60 px-3 py-2 text-sm text-primary backdrop-blur"
             >
-              <span className="grid h-7 w-7 shrink-0 place-items-center rounded-lg bg-emerald-100 text-emerald-700">
-                <Icon className="h-4 w-4" />
+              <span className="grid h-6 w-6 shrink-0 place-items-center rounded-md bg-emerald-100 text-emerald-700">
+                <Icon className="h-3.5 w-3.5" />
               </span>
               <span className="font-medium">{b.text}</span>
             </div>
@@ -187,23 +163,23 @@ export function AiCheckSuccess({ firstName }: Props) {
       </div>
 
       {/* Kontakt */}
-      <div className="relative mt-8 overflow-hidden rounded-2xl border border-border bg-card/80 p-6 shadow-card backdrop-blur md:p-8">
-        <div className="flex items-center gap-3">
-          <span className="grid h-10 w-10 place-items-center rounded-xl bg-primary/5 text-primary">
-            <FileCheck2 className="h-5 w-5" />
+      <div className="relative mt-5 overflow-hidden rounded-xl border border-border bg-card/80 p-4 shadow-card backdrop-blur">
+        <div className="flex items-center gap-2.5">
+          <span className="grid h-8 w-8 place-items-center rounded-lg bg-primary/5 text-primary">
+            <FileCheck2 className="h-4 w-4" />
           </span>
-          <h4 className="text-lg font-semibold text-primary md:text-xl">Noch Fragen?</h4>
+          <h4 className="text-base font-semibold text-primary md:text-lg">Noch Fragen?</h4>
         </div>
-        <div className="mt-5 grid gap-4 sm:grid-cols-3">
+        <div className="mt-3 grid gap-3 sm:grid-cols-3">
           <a
             href={CONTACT.phoneTel}
-            className="group flex items-start gap-3 rounded-xl border border-border bg-background/60 p-3.5 transition-all hover:border-accent/60 hover:shadow-card"
+            className="group flex items-start gap-2.5 rounded-lg border border-border bg-background/60 p-3 transition-all hover:border-accent/60 hover:shadow-card"
           >
-            <span className="grid h-9 w-9 shrink-0 place-items-center rounded-lg bg-gradient-brand text-primary-foreground shadow-brand-glow">
-              <Phone className="h-4 w-4" />
+            <span className="grid h-8 w-8 shrink-0 place-items-center rounded-lg bg-gradient-brand text-primary-foreground shadow-brand-glow">
+              <Phone className="h-3.5 w-3.5" />
             </span>
             <div className="min-w-0">
-              <p className="text-[11px] font-semibold tracking-widest text-muted-foreground uppercase">
+              <p className="text-[10px] font-semibold tracking-widest text-muted-foreground uppercase">
                 Telefon
               </p>
               <p className="text-sm font-medium text-primary group-hover:text-accent">
@@ -212,35 +188,35 @@ export function AiCheckSuccess({ firstName }: Props) {
             </div>
           </a>
           <a
-            href="mailto:info@newvisiondata.de"
-            className="group flex items-start gap-3 rounded-xl border border-border bg-background/60 p-3.5 transition-all hover:border-accent/60 hover:shadow-card"
+            href={`mailto:${CONTACT.email}`}
+            className="group flex items-start gap-2.5 rounded-lg border border-border bg-background/60 p-3 transition-all hover:border-accent/60 hover:shadow-card"
           >
-            <span className="grid h-9 w-9 shrink-0 place-items-center rounded-lg bg-gradient-brand text-primary-foreground shadow-brand-glow">
-              <Mail className="h-4 w-4" />
+            <span className="grid h-8 w-8 shrink-0 place-items-center rounded-lg bg-gradient-brand text-primary-foreground shadow-brand-glow">
+              <Mail className="h-3.5 w-3.5" />
             </span>
             <div className="min-w-0">
-              <p className="text-[11px] font-semibold tracking-widest text-muted-foreground uppercase">
+              <p className="text-[10px] font-semibold tracking-widest text-muted-foreground uppercase">
                 E-Mail
               </p>
-              <p className="truncate text-sm font-medium text-primary group-hover:text-accent">
-                info@newvisiondata.de
+              <p className="text-sm font-medium text-primary group-hover:text-accent">
+                {CONTACT.email}
               </p>
             </div>
           </a>
-          <div className="flex items-start gap-3 rounded-xl border border-border bg-background/60 p-3.5">
-            <span className="grid h-9 w-9 shrink-0 place-items-center rounded-lg bg-gradient-brand text-primary-foreground shadow-brand-glow">
-              <MapPin className="h-4 w-4" />
+          <div className="flex items-start gap-2.5 rounded-lg border border-border bg-background/60 p-3">
+            <span className="grid h-8 w-8 shrink-0 place-items-center rounded-lg bg-gradient-brand text-primary-foreground shadow-brand-glow">
+              <MapPin className="h-3.5 w-3.5" />
             </span>
             <div className="min-w-0">
-              <p className="text-[11px] font-semibold tracking-widest text-muted-foreground uppercase">
+              <p className="text-[10px] font-semibold tracking-widest text-muted-foreground uppercase">
                 Adresse
               </p>
               <p className="text-sm font-medium text-primary">
-                NewVisionData GmbH
+                {CONTACT.companyName}
                 <br />
-                Hügelstr. 11a
+                {CONTACT.street}
                 <br />
-                49179 Ostercappeln
+                {CONTACT.city}
               </p>
             </div>
           </div>
@@ -248,25 +224,24 @@ export function AiCheckSuccess({ firstName }: Props) {
       </div>
 
       {/* CTA */}
-      <div className="relative mt-8 flex flex-col-reverse gap-3 sm:flex-row sm:items-center sm:justify-center">
+      <div className="relative mt-5 flex flex-col-reverse gap-3 sm:flex-row sm:items-center sm:justify-center">
         <Button
           asChild
           variant="outline"
-          size="lg"
+          size="default"
           className="rounded-full"
         >
           <SectionLink hash="beispiele">Weitere Leistungen entdecken</SectionLink>
         </Button>
         <Button
           asChild
-          size="lg"
-          className="rounded-full bg-gradient-brand shadow-brand-glow transition-transform hover:scale-[1.02] sm:px-8"
+          size="default"
+          className="rounded-full bg-gradient-brand shadow-brand-glow transition-transform hover:scale-[1.02] sm:px-6"
         >
           <Link to="/">
             Zur Startseite
             <ArrowRight className="ml-1 h-4 w-4" />
           </Link>
-
         </Button>
       </div>
     </div>
