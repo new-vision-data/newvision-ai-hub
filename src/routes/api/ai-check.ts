@@ -142,7 +142,6 @@ type SendResult =
 
 async function sendEmail(params: {
   apiKey: string;
-  connectionKey: string;
   from: string;
   to: string[];
   replyTo: string;
@@ -150,12 +149,11 @@ async function sendEmail(params: {
   html: string;
 }): Promise<SendResult> {
   try {
-    const res = await fetch("https://connector-gateway.lovable.dev/resend/emails", {
+    const res = await fetch("https://api.resend.com/emails", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
         Authorization: `Bearer ${params.apiKey}`,
-        "X-Connection-Api-Key": params.connectionKey,
       },
       body: JSON.stringify({
         from: params.from,
@@ -190,10 +188,9 @@ export const Route = createFileRoute("/api/ai-check")({
   server: {
     handlers: {
       POST: async ({ request }) => {
-        const LOVABLE_API_KEY = process.env.LOVABLE_API_KEY;
         const RESEND_API_KEY = process.env.RESEND_API_KEY;
-        if (!LOVABLE_API_KEY || !RESEND_API_KEY) {
-          console.error("[ai-check] Missing LOVABLE_API_KEY or RESEND_API_KEY");
+        if (!RESEND_API_KEY) {
+          console.error("[ai-check] Missing RESEND_API_KEY");
           return Response.json(
             { ok: false, error: "E-Mail-Versand ist derzeit nicht konfiguriert." },
             { status: 500 },
@@ -220,8 +217,7 @@ export const Route = createFileRoute("/api/ai-check")({
         // Send BOTH emails independently. Neither one may block the other.
         const [internalResult, customerResult] = await Promise.all([
           sendEmail({
-            apiKey: LOVABLE_API_KEY,
-            connectionKey: RESEND_API_KEY,
+            apiKey: RESEND_API_KEY,
             from,
             to: [CONTACT.email],
             replyTo: data.email,
@@ -229,8 +225,7 @@ export const Route = createFileRoute("/api/ai-check")({
             html: buildInternalHtml(data),
           }),
           sendEmail({
-            apiKey: LOVABLE_API_KEY,
-            connectionKey: RESEND_API_KEY,
+            apiKey: RESEND_API_KEY,
             from,
             to: [data.email],
             replyTo: CONTACT.email,
@@ -238,6 +233,7 @@ export const Route = createFileRoute("/api/ai-check")({
             html: buildCustomerHtml(data),
           }),
         ]);
+
 
         if (internalResult.ok) {
           console.log(`[ai-check] internal email sent OK id=${internalResult.id ?? "unknown"} to=${CONTACT.email}`);
@@ -254,7 +250,7 @@ export const Route = createFileRoute("/api/ai-check")({
           );
         }
 
-        if (!internalResult.ok) {
+        if (!internalResult.ok || !customerResult.ok) {
           return Response.json(
             {
               ok: false,
@@ -264,6 +260,7 @@ export const Route = createFileRoute("/api/ai-check")({
             { status: 502 },
           );
         }
+
 
         return Response.json({
           ok: true,
