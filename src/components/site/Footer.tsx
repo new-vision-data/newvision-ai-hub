@@ -12,7 +12,7 @@ export function Footer() {
         aria-hidden
         className="pointer-events-none absolute -top-40 left-1/2 h-80 w-[70rem] -translate-x-1/2 rounded-full bg-gradient-to-b from-brand-soft/70 to-transparent blur-3xl"
       />
-      <div className="relative mx-auto max-w-6xl px-4 py-14 md:px-6 md:py-20">
+      <div className="relative mx-auto max-w-6xl px-4 py-10 md:px-6 md:py-12">
         <div className="grid gap-12 md:grid-cols-[1.3fr_1fr_1fr]">
           <div>
             <img
