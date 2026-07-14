@@ -83,10 +83,10 @@ export function Hero() {
               size="lg"
               className="group rounded-full bg-gradient-brand text-base shadow-brand-glow transition-transform hover:scale-[1.02]"
             >
-              <a href="#ai-check">
+              <SectionLink hash="ai-check">
                 Kostenlosen KI-Check starten
                 <ArrowRight className="ml-1 h-4 w-4 transition-transform group-hover:translate-x-1" />
-              </a>
+              </SectionLink>
             </Button>
             <Button
               asChild
@@ -94,9 +94,10 @@ export function Hero() {
               variant="outline"
               className="rounded-full border-border/80 bg-background/60 text-base backdrop-blur"
             >
-              <a href="#ablauf">So arbeiten wir</a>
+              <SectionLink hash="ablauf">So arbeiten wir</SectionLink>
             </Button>
           </div>
+
         </Reveal>
 
         <Reveal delay={360}>
