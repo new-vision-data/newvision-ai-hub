@@ -18,7 +18,6 @@ const founders = [
   },
 ];
 
-
 export function AboutSection() {
   return (
     <section id="ueber-uns" className="relative py-20 md:py-28">
@@ -55,7 +54,6 @@ export function AboutSection() {
             </p>
           </Reveal>
         </div>
-
 
         {/* Team – nahtloser Abschluss */}
         <div className="mx-auto mt-20 max-w-3xl">
