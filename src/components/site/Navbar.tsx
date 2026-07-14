@@ -3,7 +3,7 @@ import { Link } from "@tanstack/react-router";
 import { ArrowRight, Menu, X } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
-import logoAsset from "@/assets/nvd-logo-official.png.asset.json";
+import logoAsset from "@/assets/nvd-logo-lang.png.asset.json";
 
 
 const navLinks = [
@@ -37,20 +37,20 @@ export function Navbar() {
         className={cn(
           "mx-auto flex items-center justify-between transition-all duration-500",
           scrolled
-            ? "mx-3 max-w-6xl rounded-full border border-border/70 bg-background/80 px-4 py-2.5 shadow-elevated backdrop-blur-xl md:mx-auto md:px-5"
-            : "h-[4.5rem] max-w-6xl px-4 md:px-6",
+            ? "mx-3 max-w-6xl rounded-full border border-border/70 bg-background/80 px-4 py-2 shadow-elevated backdrop-blur-xl md:mx-auto md:px-5"
+            : "h-20 max-w-6xl px-4 md:px-6",
         )}
       >
         <Link
           to="/"
-          className="flex items-center"
+          className="flex items-center bg-transparent focus:outline-none focus-visible:ring-2 focus-visible:ring-accent/50 rounded-sm"
           aria-label="NewVisionData – Startseite"
           onClick={() => setOpen(false)}
         >
           <img
             src={logoAsset.url}
-            alt="NewVisionData"
-            className="h-9 w-auto md:h-10"
+            alt="NewVisionData – Beraten. Umsetzen. Schulen. Zukunft gestalten."
+            className="block h-10 w-auto object-contain sm:h-11 md:h-12"
             loading="eager"
             decoding="async"
           />
