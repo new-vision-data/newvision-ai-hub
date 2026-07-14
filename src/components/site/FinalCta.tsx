@@ -1,6 +1,8 @@
 import { ArrowRight, Phone } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Reveal } from "./Reveal";
+import { SectionLink } from "./SectionLink";
+
 
 export function FinalCta() {
   return (
