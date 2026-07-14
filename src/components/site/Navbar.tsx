@@ -62,25 +62,26 @@ export function Navbar() {
 
         <div className="hidden items-center gap-0.5 lg:flex">
           {navLinks.map((link) => (
-            <a
-              key={link.href}
-              href={link.href}
+            <SectionLink
+              key={link.hash}
+              hash={link.hash}
               className="rounded-full px-3.5 py-2 text-sm font-medium text-muted-foreground transition-colors hover:bg-secondary hover:text-primary"
             >
               {link.label}
-            </a>
+            </SectionLink>
           ))}
           <Button
             asChild
             size="sm"
             className="ml-3 rounded-full bg-gradient-brand pl-4 shadow-brand-glow transition-transform hover:scale-[1.03]"
           >
-            <a href="#ai-check">
+            <SectionLink hash="ai-check">
               KI-Check starten
               <ArrowRight className="ml-1 h-4 w-4" />
-            </a>
+            </SectionLink>
           </Button>
         </div>
+
 
         <button
           type="button"
