@@ -18,7 +18,7 @@ export function Footer() {
             <img
               src={logoAsset.url}
               alt="NewVisionData – Beraten. Umsetzen. Zukunft gestalten."
-              className="block h-auto w-[280px] object-contain sm:w-[320px] md:w-[360px]"
+              className="block h-auto w-[220px] object-contain sm:w-[260px] md:w-[280px]"
               loading="lazy"
               decoding="async"
             />
