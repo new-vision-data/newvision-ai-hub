@@ -1,7 +1,7 @@
 import { Reveal } from "./Reveal";
 import { SectionHeading } from "./SectionHeading";
-import dennisAsset from "@/assets/dennis.png.asset.json";
-import mauriceAsset from "@/assets/maurice.png.asset.json";
+import dennisUrl from "@/assets/dennis.png";
+import mauriceUrl from "@/assets/maurice.png";
 
 const founders = [
   {
