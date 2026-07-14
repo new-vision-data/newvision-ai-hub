@@ -1,5 +1,7 @@
 import { Link } from "@tanstack/react-router";
 import { ArrowUpRight, Mail, MapPin, Phone } from "lucide-react";
+import logoAsset from "@/assets/nvd-logo-official.png.asset.json";
+
 
 export function Footer() {
   return (
