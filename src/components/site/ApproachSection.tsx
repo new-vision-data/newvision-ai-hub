@@ -54,7 +54,7 @@ export function ApproachSection() {
             className="absolute top-8 left-0 hidden h-px w-full bg-gradient-to-r from-transparent via-accent/40 to-transparent lg:block"
           />
 
-          <ol className="grid auto-rows-fr gap-5 sm:grid-cols-2 lg:grid-cols-4">
+          <ol className="grid auto-rows-fr gap-4 sm:grid-cols-2 lg:grid-cols-4">
             {steps.map((s, i) => (
               <Reveal key={s.step} delay={i * 110} className="h-full">
                 <li className="group relative h-full">
@@ -62,22 +62,24 @@ export function ApproachSection() {
                     aria-hidden
                     className="absolute top-[1.85rem] left-1/2 hidden h-4 w-4 -translate-x-1/2 rounded-full border-2 border-background bg-gradient-brand shadow-brand-glow lg:block"
                   />
-                  <div className="card-luxe mt-12 flex h-full flex-col p-5 lg:mt-12">
-                    <div className="flex flex-col gap-3">
-                      <span className="font-serif text-2xl leading-none font-normal text-brand-soft/70 italic select-none transition-colors group-hover:text-accent/30">
-                        {s.step}
-                      </span>
-                      <span className="grid h-10 w-10 place-items-center rounded-lg bg-gradient-brand text-primary-foreground shadow-brand-glow">
-                        <s.icon className="h-4 w-4" />
-                      </span>
-                      <h3 className="text-base font-semibold text-primary">{s.title}</h3>
-                      <p className="text-sm leading-snug text-muted-foreground">{s.text}</p>
+                  <div className="card-luxe mt-12 flex h-full flex-col pt-3 px-3 pb-2 lg:mt-12">
+                    <div className="flex flex-col gap-2">
+                      <div className="flex flex-col gap-1.5">
+                        <span className="font-serif text-2xl leading-none font-normal text-brand-soft/70 italic select-none transition-colors group-hover:text-accent/30">
+                          {s.step}
+                        </span>
+                        <span className="grid h-10 w-10 place-items-center rounded-lg bg-gradient-brand text-primary-foreground shadow-brand-glow">
+                          <s.icon className="h-4 w-4" />
+                        </span>
+                        <h3 className="text-base font-semibold text-primary">{s.title}</h3>
+                      </div>
+                      <p className="text-sm leading-tight text-muted-foreground">{s.text}</p>
                     </div>
-                    <div className="mt-2 flex flex-wrap gap-1.5">
+                    <div className="mt-auto flex flex-wrap gap-1.5">
                       {s.tags.map((t) => (
                         <span
                           key={t}
-                          className="rounded-md bg-gradient-to-br from-brand-soft/90 to-brand-soft/50 px-2 py-0.5 text-[10px] font-semibold tracking-wide text-primary"
+                          className="rounded-md bg-gradient-to-br from-brand-soft/90 to-brand-soft/50 px-2.5 py-1 text-[11px] font-semibold tracking-wide text-primary"
                         >
                           {t}
                         </span>
