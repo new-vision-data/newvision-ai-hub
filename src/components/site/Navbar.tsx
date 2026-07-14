@@ -51,7 +51,7 @@ export function Navbar() {
           onClick={() => setOpen(false)}
         >
           <img
-            src={logoAsset.url}
+            src={logoUrl}
             alt="NewVisionData – Beraten. Umsetzen. Zukunft gestalten."
             className="block h-auto w-[200px] object-contain sm:w-[220px] md:w-[240px]"
             loading="eager"

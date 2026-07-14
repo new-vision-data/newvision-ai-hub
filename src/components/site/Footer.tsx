@@ -16,7 +16,7 @@ export function Footer() {
         <div className="grid gap-12 md:grid-cols-[1.3fr_1fr_1fr]">
           <div>
             <img
-              src={logoAsset.url}
+              src={logoUrl}
               alt="NewVisionData – Beraten. Umsetzen. Zukunft gestalten."
               className="block h-auto w-[220px] object-contain sm:w-[260px] md:w-[280px]"
               loading="lazy"
