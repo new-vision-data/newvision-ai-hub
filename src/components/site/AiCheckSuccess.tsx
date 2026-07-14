@@ -58,7 +58,7 @@ export function AiCheckSuccess({ firstName }: Props) {
   return (
     <div
       role="status"
-      className="card-luxe relative overflow-hidden p-5 md:p-8 animate-scale-in"
+      className="card-luxe relative overflow-hidden p-4 md:p-6 animate-scale-in"
     >
       {/* Ambient glow */}
       <span
@@ -106,13 +106,13 @@ export function AiCheckSuccess({ firstName }: Props) {
       </div>
 
       {/* Prozess-Karten */}
-      <div className="relative mt-6 grid auto-rows-fr gap-3 md:grid-cols-2">
+      <div className="relative mt-4 grid auto-rows-fr gap-3 md:grid-cols-2">
         {steps.map((s, i) => {
           const Icon = s.icon;
           return (
             <div
               key={s.title}
-              className="group relative flex flex-col rounded-xl border border-border bg-card/80 p-4 shadow-card backdrop-blur transition-all hover:-translate-y-0.5 hover:shadow-brand-glow"
+              className="group relative flex h-full flex-col rounded-xl border border-border bg-card/80 p-3.5 shadow-card backdrop-blur transition-all hover:-translate-y-0.5 hover:shadow-brand-glow"
             >
               <div className="mb-2 flex items-center gap-2.5">
                 <span className="grid h-9 w-9 place-items-center rounded-lg bg-gradient-brand text-primary-foreground shadow-brand-glow">
@@ -132,12 +132,12 @@ export function AiCheckSuccess({ firstName }: Props) {
       </div>
 
       {/* Vertrauensbox */}
-      <div className="relative mt-5 rounded-xl border border-accent/30 bg-gradient-to-br from-brand-soft/70 via-card to-card p-4 shadow-card">
+      <div className="relative mt-4 rounded-xl border border-accent/30 bg-gradient-to-br from-brand-soft/70 via-card to-card p-2.5 shadow-card">
         <div className="flex items-start gap-3">
-          <span className="grid h-9 w-9 shrink-0 place-items-center rounded-lg bg-gradient-brand text-primary-foreground shadow-brand-glow">
-            <Sparkles className="h-4 w-4" />
+          <span className="grid h-7 w-7 shrink-0 place-items-center rounded-lg bg-gradient-brand text-primary-foreground shadow-brand-glow">
+            <Sparkles className="h-3.5 w-3.5" />
           </span>
-          <p className="text-sm leading-relaxed text-muted-foreground md:text-base">
+          <p className="text-xs leading-snug text-muted-foreground md:text-sm">
             <span className="font-medium text-primary">Warum dieser Fragebogen?</span>{" "}
             Je mehr wir bereits vor dem Gespräch über Ihr Unternehmen wissen, desto konkreter können wir Sie beraten und bereits erste realistische Potenziale aufzeigen.
           </p>
@@ -145,16 +145,16 @@ export function AiCheckSuccess({ firstName }: Props) {
       </div>
 
       {/* Qualitätsversprechen */}
-      <div className="relative mt-5 grid gap-2 sm:grid-cols-2">
+      <div className="relative mt-4 grid auto-rows-fr gap-2 sm:grid-cols-2">
         {badges.map((b) => {
           const Icon = b.icon;
           return (
             <div
               key={b.text}
-              className="flex items-center gap-2.5 rounded-lg border border-border bg-card/60 px-3 py-2 text-sm text-primary backdrop-blur"
+              className="flex h-full items-center gap-2 rounded-lg border border-border bg-card/60 px-2.5 py-2 text-sm text-primary backdrop-blur"
             >
-              <span className="grid h-6 w-6 shrink-0 place-items-center rounded-md bg-emerald-100 text-emerald-700">
-                <Icon className="h-3.5 w-3.5" />
+              <span className="grid h-5 w-5 shrink-0 place-items-center rounded-md bg-emerald-100 text-emerald-700">
+                <Icon className="h-3 w-3" />
               </span>
               <span className="font-medium">{b.text}</span>
             </div>
@@ -163,7 +163,7 @@ export function AiCheckSuccess({ firstName }: Props) {
       </div>
 
       {/* Kontakt */}
-      <div className="relative mt-5 overflow-hidden rounded-xl border border-border bg-card/80 p-4 shadow-card backdrop-blur">
+      <div className="relative mt-4 overflow-hidden rounded-xl border border-border bg-card/80 p-3.5 shadow-card backdrop-blur">
         <div className="flex items-center gap-2.5">
           <span className="grid h-8 w-8 place-items-center rounded-lg bg-primary/5 text-primary">
             <FileCheck2 className="h-4 w-4" />
@@ -173,7 +173,7 @@ export function AiCheckSuccess({ firstName }: Props) {
         <div className="mt-3 grid gap-3 sm:grid-cols-3">
           <a
             href={CONTACT.phoneTel}
-            className="group flex items-start gap-2.5 rounded-lg border border-border bg-background/60 p-3 transition-all hover:border-accent/60 hover:shadow-card"
+            className="group flex h-full items-start gap-2.5 rounded-lg border border-border bg-background/60 p-2.5 transition-all hover:border-accent/60 hover:shadow-card"
           >
             <span className="grid h-8 w-8 shrink-0 place-items-center rounded-lg bg-gradient-brand text-primary-foreground shadow-brand-glow">
               <Phone className="h-3.5 w-3.5" />
@@ -182,14 +182,14 @@ export function AiCheckSuccess({ firstName }: Props) {
               <p className="text-[10px] font-semibold tracking-widest text-muted-foreground uppercase">
                 Telefon
               </p>
-              <p className="text-sm font-medium text-primary group-hover:text-accent">
+              <p className="break-words text-sm font-medium text-primary group-hover:text-accent">
                 {CONTACT.phoneDisplay}
               </p>
             </div>
           </a>
           <a
             href={`mailto:${CONTACT.email}`}
-            className="group flex items-start gap-2.5 rounded-lg border border-border bg-background/60 p-3 transition-all hover:border-accent/60 hover:shadow-card"
+            className="group flex h-full items-start gap-2.5 rounded-lg border border-border bg-background/60 p-2.5 transition-all hover:border-accent/60 hover:shadow-card"
           >
             <span className="grid h-8 w-8 shrink-0 place-items-center rounded-lg bg-gradient-brand text-primary-foreground shadow-brand-glow">
               <Mail className="h-3.5 w-3.5" />
@@ -198,12 +198,12 @@ export function AiCheckSuccess({ firstName }: Props) {
               <p className="text-[10px] font-semibold tracking-widest text-muted-foreground uppercase">
                 E-Mail
               </p>
-              <p className="text-sm font-medium text-primary group-hover:text-accent">
+              <p className="break-words text-sm font-medium text-primary group-hover:text-accent">
                 {CONTACT.email}
               </p>
             </div>
           </a>
-          <div className="flex items-start gap-2.5 rounded-lg border border-border bg-background/60 p-3">
+          <div className="flex h-full items-start gap-2.5 rounded-lg border border-border bg-background/60 p-2.5">
             <span className="grid h-8 w-8 shrink-0 place-items-center rounded-lg bg-gradient-brand text-primary-foreground shadow-brand-glow">
               <MapPin className="h-3.5 w-3.5" />
             </span>
@@ -224,7 +224,7 @@ export function AiCheckSuccess({ firstName }: Props) {
       </div>
 
       {/* CTA */}
-      <div className="relative mt-5 flex flex-col-reverse gap-3 sm:flex-row sm:items-center sm:justify-center">
+      <div className="relative mt-4 flex flex-col-reverse gap-3 sm:flex-row sm:items-center sm:justify-center">
         <Button
           asChild
           variant="outline"
