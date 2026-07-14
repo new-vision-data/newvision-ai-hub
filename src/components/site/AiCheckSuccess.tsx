@@ -116,7 +116,7 @@ export function AiCheckSuccess({ firstName }: Props) {
             >
               <div className="mb-2 flex items-center gap-2.5">
                 <span className="grid h-9 w-9 place-items-center rounded-lg bg-gradient-brand text-primary-foreground shadow-brand-glow">
-                  <Icon className="h-4.5 w-4.5" />
+                  <Icon className="h-5 w-5" />
                 </span>
                 <span className="text-[11px] font-semibold tracking-widest text-accent uppercase">
                   Schritt {i + 1}
@@ -135,7 +135,7 @@ export function AiCheckSuccess({ firstName }: Props) {
       <div className="relative mt-5 rounded-xl border border-accent/30 bg-gradient-to-br from-brand-soft/70 via-card to-card p-4 shadow-card">
         <div className="flex items-start gap-3">
           <span className="grid h-9 w-9 shrink-0 place-items-center rounded-lg bg-gradient-brand text-primary-foreground shadow-brand-glow">
-            <Sparkles className="h-4.5 w-4.5" />
+            <Sparkles className="h-4 w-4" />
           </span>
           <p className="text-sm leading-relaxed text-muted-foreground md:text-base">
             <span className="font-medium text-primary">Warum dieser Fragebogen?</span>{" "}
