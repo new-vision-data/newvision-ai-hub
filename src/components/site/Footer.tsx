@@ -18,7 +18,7 @@ export function Footer() {
             <img
               src={logoAsset.url}
               alt="NewVisionData – Beraten. Umsetzen. Zukunft gestalten."
-              className="block h-auto w-[280px] object-contain sm:w-[320px] md:w-[360px]"
+              className="block h-auto w-[220px] object-contain sm:w-[260px] md:w-[280px]"
               loading="lazy"
               decoding="async"
             />
@@ -96,7 +96,6 @@ export function Footer() {
 
         <div className="mt-14 flex flex-col items-center justify-between gap-3 border-t border-border pt-6 text-center text-xs text-muted-foreground sm:flex-row sm:text-left">
           <p>© {new Date().getFullYear()} NewVisionData GmbH. Alle Rechte vorbehalten.</p>
-          <p className="font-serif italic">Beraten. Umsetzen. Schulen. Zukunft gestalten.</p>
         </div>
       </div>
     </footer>
