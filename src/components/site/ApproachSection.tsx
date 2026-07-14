@@ -72,12 +72,14 @@ export function ApproachSection() {
                       </span>
                     </div>
                     <h3 className="mt-4 text-lg font-semibold text-primary">{s.title}</h3>
-                    <p className="mt-2 flex-1 text-sm leading-relaxed text-muted-foreground">{s.text}</p>
-                    <div className="mt-auto pt-6 flex flex-wrap gap-2">
+                    <p className="mt-2 flex flex-1 items-end text-sm leading-snug text-muted-foreground">
+                      {s.text}
+                    </p>
+                    <div className="mt-3 flex flex-wrap gap-1.5">
                       {s.tags.map((t) => (
                         <span
                           key={t}
-                          className="rounded-full bg-brand-soft/60 px-2 py-0.5 text-[10px] font-medium tracking-wide text-navy-light"
+                          className="rounded-full bg-brand-soft/50 px-2 py-0.5 text-[10px] font-medium tracking-wide text-navy-light/80"
                         >
                           {t}
                         </span>
