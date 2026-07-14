@@ -35,7 +35,7 @@ export function ResultsSection() {
       <div className="mx-auto max-w-6xl px-4 md:px-6">
         <SectionHeading
           eyebrow="Ergebnisse"
-          title="Keine Buzzwords."
+          title="Keine leeren Versprechen."
           titleAccent="Gesparte Stunden."
           subtitle="So sieht es aus, wenn Abläufe im Mittelstand gezielt verschlankt werden – typische Potenziale aus Projekten im deutschen Mittelstand."
         />
