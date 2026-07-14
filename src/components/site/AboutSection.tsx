@@ -59,12 +59,8 @@ export function AboutSection() {
         <div className="mx-auto mt-20 max-w-3xl">
           <Reveal variant="fade">
             <div className="mb-8 text-center">
-              <p className="mb-3 inline-flex items-center justify-center gap-2 text-[11px] font-semibold tracking-[0.22em] text-accent uppercase">
-                <span aria-hidden className="inline-block h-px w-6 bg-accent/60" />
-                Unser Team
-              </p>
               <h3 className="font-display text-2xl font-semibold text-primary md:text-3xl">
-                Lernen Sie uns kennen
+                Ihre Ansprechpartner
               </h3>
             </div>
           </Reveal>
