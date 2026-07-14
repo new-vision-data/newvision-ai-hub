@@ -54,7 +54,7 @@ export function VoicesSection() {
                 </blockquote>
                 <figcaption className="mt-auto pt-6">
                   <div className="text-xs font-medium tracking-wide text-muted-foreground uppercase">
-                    {v.role} –
+                    {v.role} -
                   </div>
                   <div className="text-xs font-medium tracking-wide text-muted-foreground uppercase">
                     {v.company}
