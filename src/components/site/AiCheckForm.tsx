@@ -249,7 +249,7 @@ export function AiCheckForm() {
   };
 
   return (
-    <section id="ai-check" className="relative py-20 md:py-28">
+    <section id="ai-check" className="relative overflow-hidden py-20 md:py-28">
       <div
         aria-hidden
         className="absolute inset-0 -z-10 bg-gradient-to-b from-background via-secondary/50 to-background"
