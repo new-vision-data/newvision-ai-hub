@@ -1,4 +1,3 @@
-import { ShieldCheck, Workflow, Zap, Sparkles } from "lucide-react";
 import { Reveal } from "./Reveal";
 import { SectionHeading } from "./SectionHeading";
 import dennisAsset from "@/assets/dennis.png.asset.json";
@@ -6,41 +5,19 @@ import mauriceAsset from "@/assets/maurice.png.asset.json";
 
 const founders = [
   {
-    name: "Dennis Schmidt",
-    role: "Gründer & Geschäftsführer",
+    name: "Dennis Schmidt Gantikow",
+    role: "Geschäftsführer | KI- & Prozessberatung",
     image: dennisAsset.url,
     objectPosition: "50% 20%",
   },
   {
     name: "Maurice Schmidt",
-    role: "Gründer",
+    role: "Entwicklung | Automatisierung & KI-Lösungen",
     image: mauriceAsset.url,
     objectPosition: "50% 20%",
   },
 ];
 
-const pillars = [
-  {
-    icon: ShieldCheck,
-    title: "Herstellerunabhängig",
-    text: "Wir empfehlen die Lösung, die zu Ihrem Unternehmen passt – unabhängig von Anbietern oder Verkaufsinteressen.",
-  },
-  {
-    icon: Workflow,
-    title: "Praxis statt Theorie",
-    text: "Unsere Empfehlungen entstehen aus konkreten Abläufen Ihres Unternehmens, nicht aus allgemeinen Präsentationen.",
-  },
-  {
-    icon: Zap,
-    title: "Echter Mehrwert",
-    text: "Wir automatisieren dort, wo sich Aufwand reduzieren, Zeit sparen und Prozesse nachhaltig verbessern lassen.",
-  },
-  {
-    icon: Sparkles,
-    title: "Für den Mittelstand",
-    text: "Keine Standardlösung, sondern eine Umsetzung, die zu Ihren Strukturen, Zielen und Systemen passt.",
-  },
-];
 
 export function AboutSection() {
   return (
@@ -79,40 +56,9 @@ export function AboutSection() {
           </Reveal>
         </div>
 
-        {/* Vorteilskarten – kompakter, direkter am Text */}
-        <div className="mx-auto mt-12 max-w-3xl">
-          <Reveal variant="fade">
-            <p className="mb-5 text-center text-[11px] font-semibold tracking-[0.22em] text-accent uppercase">
-              <span aria-hidden className="mr-2 inline-block h-px w-6 align-middle bg-accent/60" />
-              Was uns ausmacht
-            </p>
-          </Reveal>
-          <div className="grid gap-3 sm:grid-cols-2">
-            {pillars.map((p, i) => (
-              <Reveal key={p.title} delay={i * 80} variant="scale">
-                <div className="card-luxe group flex h-full items-start gap-3.5 p-4 transition-transform duration-300 hover:-translate-y-0.5">
-                  <div
-                    aria-hidden
-                    className="grid h-9 w-9 shrink-0 place-items-center rounded-lg bg-gradient-brand text-primary-foreground shadow-brand-glow"
-                  >
-                    <p.icon className="h-4 w-4" />
-                  </div>
-                  <div className="min-w-0 flex-1">
-                    <h3 className="font-display text-[0.95rem] font-semibold leading-tight text-primary">
-                      {p.title}
-                    </h3>
-                    <p className="mt-1 text-[13px] leading-relaxed text-muted-foreground">
-                      {p.text}
-                    </p>
-                  </div>
-                </div>
-              </Reveal>
-            ))}
-          </div>
-        </div>
 
         {/* Team – nahtloser Abschluss */}
-        <div className="mx-auto mt-16 max-w-3xl">
+        <div className="mx-auto mt-20 max-w-3xl">
           <Reveal variant="fade">
             <div className="mb-8 text-center">
               <p className="mb-3 inline-flex items-center justify-center gap-2 text-[11px] font-semibold tracking-[0.22em] text-accent uppercase">
@@ -120,10 +66,7 @@ export function AboutSection() {
                 Unser Team
               </p>
               <h3 className="font-display text-2xl font-semibold text-primary md:text-3xl">
-                Die Menschen hinter{" "}
-                <span className="font-serif text-[1.12em] font-normal italic text-gradient-brand">
-                  NewVisionData
-                </span>
+                Lernen Sie uns kennen
               </h3>
             </div>
           </Reveal>
