@@ -4,7 +4,7 @@ import { ArrowRight, Menu, X } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 import { SectionLink } from "./SectionLink";
-import logoAsset from "@/assets/nvd-logo-cropped.png.asset.json";
+import logoUrl from "@/assets/nvd-logo-cropped.png";
 
 
 
