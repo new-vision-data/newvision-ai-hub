@@ -3,7 +3,9 @@ import { Link } from "@tanstack/react-router";
 import { ArrowRight, Menu, X } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
+import { SectionLink } from "./SectionLink";
 import logoAsset from "@/assets/nvd-logo-lang.png.asset.json";
+
 
 
 const navLinks = [
