@@ -9,12 +9,13 @@ import logoAsset from "@/assets/nvd-logo-lang.png.asset.json";
 
 
 const navLinks = [
-  { label: "So arbeiten wir", href: "#ablauf" },
-  { label: "Beispiele", href: "#beispiele" },
-  { label: "Ergebnisse", href: "#ergebnisse" },
-  { label: "Über uns", href: "#ueber-uns" },
-  { label: "FAQ", href: "#faq" },
+  { label: "So arbeiten wir", hash: "ablauf" },
+  { label: "Beispiele", hash: "beispiele" },
+  { label: "Ergebnisse", hash: "ergebnisse" },
+  { label: "Über uns", hash: "ueber-uns" },
+  { label: "FAQ", hash: "faq" },
 ];
+
 
 export function Navbar() {
   const [scrolled, setScrolled] = useState(false);
