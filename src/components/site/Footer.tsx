@@ -1,7 +1,7 @@
 import { Link } from "@tanstack/react-router";
 import { ArrowUpRight, Mail, MapPin, Phone } from "lucide-react";
 import { SectionLink } from "./SectionLink";
-import logoAsset from "@/assets/nvd-logo-main.png.asset.json";
+import logoAsset from "@/assets/nvd-logo-cropped.png.asset.json";
 
 
 
@@ -12,7 +12,7 @@ export function Footer() {
         aria-hidden
         className="pointer-events-none absolute -top-40 left-1/2 h-80 w-[70rem] -translate-x-1/2 rounded-full bg-gradient-to-b from-brand-soft/70 to-transparent blur-3xl"
       />
-      <div className="relative mx-auto max-w-6xl px-4 py-14 md:px-6 md:py-20">
+      <div className="relative mx-auto max-w-6xl px-4 py-10 md:px-6 md:py-12">
         <div className="grid gap-12 md:grid-cols-[1.3fr_1fr_1fr]">
           <div>
             <img
@@ -94,7 +94,7 @@ export function Footer() {
           </div>
         </div>
 
-        <div className="mt-14 flex flex-col items-center justify-between gap-3 border-t border-border pt-6 text-center text-xs text-muted-foreground sm:flex-row sm:text-left">
+        <div className="mt-10 flex flex-col items-center justify-between gap-3 border-t border-border pt-6 text-center text-xs text-muted-foreground sm:flex-row sm:text-left">
           <p>© {new Date().getFullYear()} NewVisionData GmbH. Alle Rechte vorbehalten.</p>
         </div>
       </div>
