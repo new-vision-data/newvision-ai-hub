@@ -1,9 +1,9 @@
 import {
   BarChart3,
-  Calendar,
   FileSearch,
   FileText,
   FolderKanban,
+  Globe,
   Headphones,
   Mail,
   Receipt,
