@@ -27,13 +27,14 @@ export function Footer() {
               Unabhängige KI-Beratung für den deutschen Mittelstand. Wir prüfen, wählen aus und
               integrieren KI sicher und DSGVO-konform – damit Ihre Daten im Haus bleiben.
             </p>
-            <a
-              href="#ai-check"
+            <SectionLink
+              hash="ai-check"
               className="mt-6 inline-flex items-center gap-1.5 text-sm font-semibold text-accent transition-colors hover:text-primary"
             >
               Kostenlosen KI-Check starten
               <ArrowUpRight className="h-4 w-4" />
-            </a>
+            </SectionLink>
+
           </div>
 
           <div>
