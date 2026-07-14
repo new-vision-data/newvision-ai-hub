@@ -50,10 +50,11 @@ export function FinalCta() {
                   size="lg"
                   className="rounded-full bg-primary-foreground text-base font-semibold text-primary transition-transform hover:scale-[1.03] hover:bg-primary-foreground/90"
                 >
-                  <a href="#ai-check">
+                  <SectionLink hash="ai-check">
                     Kostenlosen KI-Check vereinbaren
                     <ArrowRight className="ml-1 h-4 w-4" />
-                  </a>
+                  </SectionLink>
+
                 </Button>
                 <Button
                   asChild
