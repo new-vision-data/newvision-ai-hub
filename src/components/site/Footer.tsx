@@ -1,7 +1,7 @@
 import { Link } from "@tanstack/react-router";
 import { ArrowUpRight, Mail, MapPin, Phone } from "lucide-react";
 import { SectionLink } from "./SectionLink";
-import logoAsset from "@/assets/nvd-logo-cropped.png.asset.json";
+import logoUrl from "@/assets/nvd-logo-cropped.png";
 
 
 
