@@ -15,9 +15,11 @@ import {
   Sparkles,
   UserRound,
 } from "lucide-react";
+import { Link } from "@tanstack/react-router";
 import { Button } from "@/components/ui/button";
 import { SectionLink } from "./SectionLink";
 import { CONTACT } from "@/lib/contact";
+
 
 
 interface Props {
