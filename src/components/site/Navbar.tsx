@@ -43,18 +43,19 @@ export function Navbar() {
       >
         <Link
           to="/"
-          className="flex items-center gap-2.5 font-display text-lg font-semibold tracking-tight text-primary"
+          className="flex items-center"
+          aria-label="NewVisionData – Startseite"
           onClick={() => setOpen(false)}
         >
-          <span
-            aria-hidden
-            className="relative grid h-9 w-9 place-items-center overflow-hidden rounded-xl bg-gradient-brand font-display text-sm font-extrabold text-primary-foreground shadow-brand-glow"
-          >
-            <span className="relative z-10">N</span>
-            <span className="absolute inset-0 bg-gradient-to-tr from-white/0 via-white/25 to-white/0" />
-          </span>
-          NewVision<span className="text-accent">Data</span>
+          <img
+            src={logoAsset.url}
+            alt="NewVisionData"
+            className="h-9 w-auto md:h-10"
+            loading="eager"
+            decoding="async"
+          />
         </Link>
+
 
         <div className="hidden items-center gap-0.5 lg:flex">
           {navLinks.map((link) => (
