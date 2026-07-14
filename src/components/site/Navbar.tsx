@@ -4,7 +4,7 @@ import { ArrowRight, Menu, X } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 import { SectionLink } from "./SectionLink";
-import logoAsset from "@/assets/nvd-logo-lang.png.asset.json";
+import logoAsset from "@/assets/nvd-logo-main.png.asset.json";
 
 
 
@@ -40,8 +40,8 @@ export function Navbar() {
         className={cn(
           "mx-auto flex items-center justify-between transition-all duration-500",
           scrolled
-            ? "mx-3 max-w-6xl rounded-full border border-border/70 bg-background/80 px-4 py-2 shadow-elevated backdrop-blur-xl md:mx-auto md:px-5"
-            : "h-20 max-w-6xl px-4 md:px-6",
+            ? "mx-3 max-w-6xl rounded-full border border-border/70 bg-background/80 px-4 py-2.5 shadow-elevated backdrop-blur-xl md:mx-auto md:px-5"
+            : "h-24 max-w-6xl px-4 md:h-28 md:px-6",
         )}
       >
         <Link
@@ -52,8 +52,11 @@ export function Navbar() {
         >
           <img
             src={logoAsset.url}
-            alt="NewVisionData – Beraten. Umsetzen. Schulen. Zukunft gestalten."
-            className="block h-10 w-auto object-contain sm:h-11 md:h-12"
+            alt="NewVisionData – Beraten. Umsetzen. Zukunft gestalten."
+            className={cn(
+              "block w-auto object-contain transition-all duration-500",
+              scrolled ? "h-12 sm:h-14" : "h-16 sm:h-20 md:h-24",
+            )}
             loading="eager"
             decoding="async"
           />

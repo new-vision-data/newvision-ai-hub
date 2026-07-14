@@ -1,7 +1,7 @@
 import { Link } from "@tanstack/react-router";
 import { ArrowUpRight, Mail, MapPin, Phone } from "lucide-react";
 import { SectionLink } from "./SectionLink";
-import logoAsset from "@/assets/nvd-logo-lang.png.asset.json";
+import logoAsset from "@/assets/nvd-logo-main.png.asset.json";
 
 
 
@@ -17,8 +17,8 @@ export function Footer() {
           <div>
             <img
               src={logoAsset.url}
-              alt="NewVisionData – Beraten. Umsetzen. Schulen. Zukunft gestalten."
-              className="block h-auto w-[220px] object-contain sm:w-[260px] md:w-[280px]"
+              alt="NewVisionData – Beraten. Umsetzen. Zukunft gestalten."
+              className="block h-auto w-[280px] object-contain sm:w-[320px] md:w-[360px]"
               loading="lazy"
               decoding="async"
             />
