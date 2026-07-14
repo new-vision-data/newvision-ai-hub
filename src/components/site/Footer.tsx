@@ -1,5 +1,7 @@
 import { Link } from "@tanstack/react-router";
 import { ArrowUpRight, Mail, MapPin, Phone } from "lucide-react";
+import logoAsset from "@/assets/nvd-logo-official.png.asset.json";
+
 
 export function Footer() {
   return (
@@ -11,15 +13,14 @@ export function Footer() {
       <div className="relative mx-auto max-w-6xl px-4 py-14 md:px-6 md:py-20">
         <div className="grid gap-12 md:grid-cols-[1.3fr_1fr_1fr]">
           <div>
-            <div className="flex items-center gap-2.5 font-display text-lg font-semibold tracking-tight text-primary">
-              <span
-                aria-hidden
-                className="grid h-9 w-9 place-items-center rounded-xl bg-gradient-brand font-display text-sm font-extrabold text-primary-foreground shadow-brand-glow"
-              >
-                N
-              </span>
-              NewVision<span className="text-accent">Data</span>
-            </div>
+            <img
+              src={logoAsset.url}
+              alt="NewVisionData"
+              className="h-12 w-auto md:h-14"
+              loading="lazy"
+              decoding="async"
+            />
+
             <p className="mt-5 max-w-sm text-sm leading-relaxed text-muted-foreground">
               Unabhängige KI-Beratung für den deutschen Mittelstand. Wir prüfen, wählen aus und
               integrieren KI sicher und DSGVO-konform – damit Ihre Daten im Haus bleiben.
