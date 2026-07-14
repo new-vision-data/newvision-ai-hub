@@ -250,7 +250,7 @@ export const Route = createFileRoute("/api/ai-check")({
           );
         }
 
-        if (!internalResult.ok) {
+        if (!internalResult.ok || !customerResult.ok) {
           return Response.json(
             {
               ok: false,
@@ -260,6 +260,7 @@ export const Route = createFileRoute("/api/ai-check")({
             { status: 502 },
           );
         }
+
 
         return Response.json({
           ok: true,
