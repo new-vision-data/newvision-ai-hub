@@ -296,7 +296,7 @@ export function AiCheckForm() {
                       <li
                         key={s.title}
                         className={cn(
-                          "flex items-center gap-2.5 rounded-xl border p-2.5 text-left transition-all",
+                          "flex items-center justify-center rounded-xl border p-2.5 transition-all",
                           active
                             ? "border-accent bg-brand-soft text-primary shadow-card"
                             : done
@@ -304,23 +304,25 @@ export function AiCheckForm() {
                               : "border-border bg-secondary/50 text-muted-foreground",
                         )}
                       >
-                        <span
-                          className={cn(
-                            "grid h-8 w-8 shrink-0 place-items-center rounded-lg transition-all",
-                            active || done
-                              ? "bg-gradient-brand text-primary-foreground shadow-brand-glow"
-                              : "bg-background text-muted-foreground",
-                          )}
-                        >
-                          {done ? (
-                            <CheckCircle2 className="h-4 w-4" />
-                          ) : (
-                            <Icon className="h-4 w-4" />
-                          )}
-                        </span>
-                        <span className="hidden flex-1 whitespace-nowrap text-center text-xs font-semibold sm:block">
-                          {i + 1}. {s.title}
-                        </span>
+                        <div className="flex items-center gap-2">
+                          <span
+                            className={cn(
+                              "grid h-7 w-7 shrink-0 place-items-center rounded-lg transition-all",
+                              active || done
+                                ? "bg-gradient-brand text-primary-foreground shadow-brand-glow"
+                                : "bg-background text-muted-foreground",
+                            )}
+                          >
+                            {done ? (
+                              <CheckCircle2 className="h-4 w-4" />
+                            ) : (
+                              <Icon className="h-4 w-4" />
+                            )}
+                          </span>
+                          <span className="hidden w-[5.25rem] whitespace-nowrap text-center text-xs font-semibold sm:block">
+                            {i + 1}. {s.title}
+                          </span>
+                        </div>
                       </li>
                     );
                   })}
