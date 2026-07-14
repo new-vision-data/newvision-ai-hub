@@ -62,7 +62,7 @@ export function ApproachSection() {
                     aria-hidden
                     className="absolute top-[1.85rem] left-1/2 hidden h-4 w-4 -translate-x-1/2 rounded-full border-2 border-background bg-gradient-brand shadow-brand-glow lg:block"
                   />
-                  <div className="card-luxe mt-12 flex h-full flex-col pt-3 px-3 pb-2 lg:mt-12">
+                  <div className="card-luxe mt-12 flex h-full flex-col pt-2.5 px-3 pb-2 lg:mt-12">
                     <div className="flex flex-col gap-2">
                       <div className="flex flex-col gap-1.5">
                         <span className="font-serif text-2xl leading-none font-normal text-brand-soft/70 italic select-none transition-colors group-hover:text-accent/30">
