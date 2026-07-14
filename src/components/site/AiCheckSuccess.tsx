@@ -253,7 +253,7 @@ export function AiCheckSuccess({ firstName }: Props) {
           size="lg"
           className="rounded-full"
         >
-          <a href="#leistungen">Weitere Leistungen entdecken</a>
+          <SectionLink hash="beispiele">Weitere Leistungen entdecken</SectionLink>
         </Button>
         <Button
           asChild
