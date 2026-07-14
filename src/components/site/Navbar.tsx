@@ -4,7 +4,7 @@ import { ArrowRight, Menu, X } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 import { SectionLink } from "./SectionLink";
-import logoAsset from "@/assets/nvd-logo-cropped.png.asset.json";
+import logoUrl from "@/assets/nvd-logo-cropped.png";
 
 
 
@@ -51,7 +51,7 @@ export function Navbar() {
           onClick={() => setOpen(false)}
         >
           <img
-            src={logoAsset.url}
+            src={logoUrl}
             alt="NewVisionData – Beraten. Umsetzen. Zukunft gestalten."
             className="block h-auto w-[200px] object-contain sm:w-[220px] md:w-[240px]"
             loading="eager"

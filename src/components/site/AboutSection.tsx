@@ -1,19 +1,19 @@
 import { Reveal } from "./Reveal";
 import { SectionHeading } from "./SectionHeading";
-import dennisAsset from "@/assets/dennis.png.asset.json";
-import mauriceAsset from "@/assets/maurice.png.asset.json";
+import dennisUrl from "@/assets/dennis.png";
+import mauriceUrl from "@/assets/maurice.png";
 
 const founders = [
   {
     name: "Dennis Schmidt Gantikow",
     role: "Geschäftsführer | KI- & Prozessberatung",
-    image: dennisAsset.url,
+    image: dennisUrl,
     objectPosition: "50% 20%",
   },
   {
     name: "Maurice Schmidt",
     role: "Entwicklung | Automatisierung & KI-Lösungen",
-    image: mauriceAsset.url,
+    image: mauriceUrl,
     objectPosition: "50% 20%",
   },
 ];
