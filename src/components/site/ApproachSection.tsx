@@ -7,28 +7,28 @@ const steps = [
     icon: Search,
     step: "01",
     title: "Analyse vor Ort",
-    text: "Wir schauen uns Ihre Abläufe an – nicht zuerst Ihre Server. Wo geht Zeit verloren? Wo wiederholt sich Arbeit? Daraus entsteht Ihre Potenzial-Landkarte: welche Abläufe sich verschlanken lassen und was das bringt.",
+    text: "Wir schauen uns Ihre Abläufe an – nicht zuerst Ihre Server. Wo geht Zeit verloren? Wo wiederholt sich Arbeit? Daraus entsteht Ihre Potenzial-Landkarte: welche Abläufe sich verschlanken lassen.",
     tags: ["Ist-Aufnahme", "Zeitfresser", "Potenzial"],
   },
   {
     icon: ClipboardCheck,
     step: "02",
     title: "Neutrale Tool-Auswahl",
-    text: "Wir vergleichen herstellerunabhängig, was zu Ihnen passt – und sagen auch klar, was Sie nicht brauchen. Wir verdienen an keiner Empfehlung mit.",
+    text: "Wir vergleichen herstellerunabhängig, was zu Ihnen passt – und sagen klar, was Sie nicht brauchen. Wir verdienen an keiner Empfehlung mit.",
     tags: ["Vergleich", "Nutzen", "Klartext"],
   },
   {
     icon: Wrench,
     step: "03",
     title: "Sichere Integration",
-    text: "Wir binden die Lösung DSGVO-konform in Ihre bestehende IT ein – auf Wunsch komplett im eigenen Haus betrieben. Ihre Daten bleiben Ihre Daten.",
-    tags: ["DSGVO", "Integration", "On-Prem möglich"],
+    text: "Wir binden die Lösung DSGVO-konform in Ihre bestehende IT ein – auf Wunsch komplett im eigenen Haus betrieben.",
+    tags: ["DSGVO", "Integration", "On-Prem"],
   },
   {
     icon: GraduationCap,
     step: "04",
     title: "Schulung & Betreuung",
-    text: "Ihr Team lernt, souverän damit zu arbeiten – ohne Fachchinesisch. Und wir bleiben ansprechbar, wenn Fragen kommen oder sich Ihr Bedarf ändert.",
+    text: "Ihr Team lernt souverän damit zu arbeiten – ohne Fachchinesisch. Und wir bleiben ansprechbar, wenn Fragen kommen oder sich Ihr Bedarf ändert.",
     tags: ["Training", "Praxis", "Support"],
   },
 ];
@@ -56,7 +56,7 @@ export function ApproachSection() {
 
           <ol className="grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
             {steps.map((s, i) => (
-              <Reveal key={s.step} delay={i * 110}>
+              <Reveal key={s.step} delay={i * 110} className="h-full">
                 <li className="group relative h-full">
                   <span
                     aria-hidden
@@ -72,12 +72,12 @@ export function ApproachSection() {
                       </span>
                     </div>
                     <h3 className="mt-4 text-lg font-semibold text-primary">{s.title}</h3>
-                    <p className="mt-2 text-sm leading-relaxed text-muted-foreground">{s.text}</p>
-                    <div className="mt-5 flex flex-wrap gap-1.5">
+                    <p className="mt-2 flex-1 text-sm leading-relaxed text-muted-foreground">{s.text}</p>
+                    <div className="mt-auto pt-6 flex flex-wrap gap-2">
                       {s.tags.map((t) => (
                         <span
                           key={t}
-                          className="rounded-full border border-border bg-background/70 px-2.5 py-1 text-[11px] font-medium text-muted-foreground"
+                          className="rounded-full bg-brand-soft/60 px-2 py-0.5 text-[10px] font-medium tracking-wide text-navy-light"
                         >
                           {t}
                         </span>
