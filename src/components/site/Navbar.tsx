@@ -98,20 +98,21 @@ export function Navbar() {
         <div className="mx-3 mt-2 rounded-2xl border border-border/70 bg-background/95 shadow-elevated backdrop-blur-xl lg:hidden">
           <div className="flex flex-col gap-1 p-3">
             {navLinks.map((link) => (
-              <a
-                key={link.href}
-                href={link.href}
+              <SectionLink
+                key={link.hash}
+                hash={link.hash}
                 className="rounded-lg px-3 py-2.5 text-sm font-medium text-foreground transition-colors hover:bg-secondary"
                 onClick={() => setOpen(false)}
               >
                 {link.label}
-              </a>
+              </SectionLink>
             ))}
             <Button asChild className="mt-2 rounded-full bg-gradient-brand">
-              <a href="#ai-check" onClick={() => setOpen(false)}>
+              <SectionLink hash="ai-check" onClick={() => setOpen(false)}>
                 Kostenlosen KI-Check buchen
-              </a>
+              </SectionLink>
             </Button>
+
           </div>
         </div>
       )}
