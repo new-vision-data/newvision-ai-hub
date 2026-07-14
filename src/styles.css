@@ -232,6 +232,17 @@
       animation-duration: 0.01ms !important;
       transition-duration: 0.01ms !important;
     }
+    /* Marquee is a continuous, infinite loop — collapsing its duration to
+       0.01ms turns it into a blur/strobe on iOS when Reduce Motion is on.
+       Stop the animation entirely instead of shortening it. */
+    .animate-marquee,
+    .animate-float-slow,
+    .animate-float-slower,
+    .animate-pulse-ring,
+    .animate-gradient-shift,
+    .animate-shimmer-line {
+      animation: none !important;
+    }
   }
 }
 
