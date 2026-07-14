@@ -5,19 +5,23 @@ import { SectionHeading } from "./SectionHeading";
 const voices = [
   {
     quote: "Was uns überzeugt hat: Die Beratung war von Anfang an verständlich. Keine Technik-Schau, sondern ein klarer Plan, der zu unserem Betrieb passt. So stellen wir uns KI vor.",
-    role: "Geschäftsführung Floor 21 GmbH",
+    role: "Geschäftsführung",
+    company: "Floor 21 GmbH",
   },
   {
     quote: "Wir haben vorher Geld für Software ausgegeben, die wir kaum nutzen. NewVisionData hat uns gezeigt, wie wir mit weniger Werkzeug mehr erreichen. Das macht den Unterschied.",
-    role: "Geschäftsführung Familienrösterei & Chocolaterie Pape",
+    role: "Geschäftsführung",
+    company: "Familienrösterei & Chocolaterie Pape",
   },
   {
     quote: "Von drei vorgeschlagenen Ansätzen haben sie uns von einer Variante abgeraten – weil sie für uns nicht sinnvoll war. Diese Ehrlichkeit hat uns das Vertrauen gegeben, weiter zusammenzuarbeiten.",
-    role: "Geschäftsführung ProNova GmbH",
+    role: "Geschäftsführung",
+    company: "ProNova GmbH",
   },
   {
     quote: "Wir wollten KI nicht um jeden Preis, sondern dort, wo sie wirklich hilft. Die Lösung läuft mittlerweile in unserem Alltag und spart uns täglich wertvolle Zeit.",
-    role: "Geschäftsführung Kuleana Hausverwaltung GmbH",
+    role: "Geschäftsführung",
+    company: "Kuleana Hausverwaltung GmbH",
   },
 ];
 
@@ -50,7 +54,10 @@ export function VoicesSection() {
                 </blockquote>
                 <figcaption className="mt-auto pt-6">
                   <div className="text-xs font-medium tracking-wide text-muted-foreground uppercase">
-                    {v.role}
+                    {v.role} -
+                  </div>
+                  <div className="text-xs font-medium tracking-wide text-muted-foreground uppercase">
+                    {v.company}
                   </div>
                 </figcaption>
               </figure>
