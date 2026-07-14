@@ -62,7 +62,7 @@ export function ExamplesSection() {
           eyebrow="Beispiele für den Mittelstand"
           title="Wo KI im Alltag"
           titleAccent="tatsächlich hilft."
-          subtitle="Konkrete Ansatzpunkte für Geschäftsführung, IT-Verantwortliche und Teams – statt Buzzwords."
+          subtitle="Konkrete Ansatzpunkte für Geschäftsführung, IT-Verantwortliche und Teams – statt oberflächlicher Trends."
         />
 
         <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
