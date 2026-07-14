@@ -62,7 +62,7 @@ export function ApproachSection() {
                     aria-hidden
                     className="absolute top-[1.85rem] left-1/2 hidden h-4 w-4 -translate-x-1/2 rounded-full border-2 border-background bg-gradient-brand shadow-brand-glow lg:block"
                   />
-                  <div className="card-luxe mt-16 flex h-full flex-col p-6 lg:mt-16">
+                  <div className="card-luxe mt-16 block h-full p-6 lg:mt-16">
                     <div className="flex items-start justify-between">
                       <span className="font-serif text-[3.2rem] leading-none font-normal text-brand-soft italic select-none group-hover:text-accent/40">
                         {s.step}
@@ -71,11 +71,11 @@ export function ApproachSection() {
                         <s.icon className="h-5 w-5" />
                       </span>
                     </div>
-                    <h3 className="mt-4 text-lg font-semibold text-primary">{s.title}</h3>
-                    <p className="mt-2 flex flex-1 items-end text-sm leading-snug text-muted-foreground">
+                    <h3 className="mt-5 text-lg font-semibold text-primary">{s.title}</h3>
+                    <p className="mt-2 text-sm leading-relaxed text-muted-foreground">
                       {s.text}
                     </p>
-                    <div className="mt-3 flex flex-wrap gap-1.5">
+                    <div className="mt-4 flex flex-wrap gap-1.5">
                       {s.tags.map((t) => (
                         <span
                           key={t}
@@ -86,6 +86,7 @@ export function ApproachSection() {
                       ))}
                     </div>
                   </div>
+
                 </li>
               </Reveal>
             ))}
