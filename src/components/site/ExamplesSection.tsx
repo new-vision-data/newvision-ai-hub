@@ -45,7 +45,7 @@ const examples = [
   {
     icon: Globe,
     title: "KI-gestützte Weblösungen",
-    text: "Von der professionellen Unternehmenswebsite bis zur individuellen Webanwendung: Wir entwickeln digitale Lösungen mit modernsten KI-Technologien und automatisieren Prozesse direkt im Web.",
+    text: "Moderne Websites, automatisierte Abläufe und individuelle Webanwendungen – effizient, intelligent und miteinander vernetzt.",
   },
   {
     icon: BarChart3,
