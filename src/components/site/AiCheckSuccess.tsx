@@ -15,8 +15,12 @@ import {
   Sparkles,
   UserRound,
 } from "lucide-react";
+import { Link } from "@tanstack/react-router";
 import { Button } from "@/components/ui/button";
+import { SectionLink } from "./SectionLink";
 import { CONTACT } from "@/lib/contact";
+
+
 
 interface Props {
   firstName?: string;
@@ -251,17 +255,18 @@ export function AiCheckSuccess({ firstName }: Props) {
           size="lg"
           className="rounded-full"
         >
-          <a href="#leistungen">Weitere Leistungen entdecken</a>
+          <SectionLink hash="beispiele">Weitere Leistungen entdecken</SectionLink>
         </Button>
         <Button
           asChild
           size="lg"
           className="rounded-full bg-gradient-brand shadow-brand-glow transition-transform hover:scale-[1.02] sm:px-8"
         >
-          <a href="/">
+          <Link to="/">
             Zur Startseite
             <ArrowRight className="ml-1 h-4 w-4" />
-          </a>
+          </Link>
+
         </Button>
       </div>
     </div>
