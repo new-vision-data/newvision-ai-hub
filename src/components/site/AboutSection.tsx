@@ -31,26 +31,29 @@ export function AboutSection() {
         <div className="mx-auto max-w-2xl space-y-6 text-[15px] leading-[1.8] text-muted-foreground md:text-lg md:leading-[1.8]">
           <Reveal delay={80}>
             <p>
-              Wir haben NewVisionData gegründet, weil wir immer wieder dasselbe gesehen haben:
-              solide Betriebe, die zwischen KI-Hype und Hilflosigkeit feststecken. Auf der einen
-              Seite Berater mit Buzzword-Präsentationen, auf der anderen Software-Anbieter, die
-              vor allem verkaufen wollen. Dazwischen: der Mittelstand, der einfach nur wissen
-              will, was funktioniert.
+              Wir haben NewVisionData gegründet, weil wir im Berufsalltag immer wieder dasselbe
+              Bild gesehen haben. Solide Mittelstandsbetriebe stehen zwischen KI-Hype und
+              Hilflosigkeit – zwischen Beratern, die mit Fachbegriffen glänzen wollen, und
+              Software-Anbietern, die vor allem eines im Kopf haben: den nächsten Verkauf.
+              Dazwischen stehen Unternehmer, die einfach nur wissen wollen, was wirklich
+              funktioniert.
             </p>
           </Reveal>
           <Reveal delay={140}>
             <p>
-              Unser Ansatz ist ein anderer: Wir hören zu, schauen uns Ihre Abläufe an und
-              empfehlen nur, was sich für Sie rechnet. Manchmal ist das ein neues Werkzeug, das
-              Ihrem Team Routinearbeit abnimmt. Manchmal ist es der Satz: „Das brauchen Sie
-              nicht." Beides ist gute Beratung.
+              Unser Ansatz ist daher ein anderer. Wir hören zuerst zu, verstehen Ihre Abläufe und
+              empfehlen nur das, was sich für Ihren Betrieb auch rechnet. Manchmal ist das ein
+              Werkzeug, das Ihrem Team Routineaufgaben abnimmt. Manchmal ist es der ehrliche
+              Satz, dass etwas gerade nicht nötig ist – denn beides gehört für uns zu guter
+              Beratung.
             </p>
           </Reveal>
           <Reveal delay={200}>
             <p>
-              Wir bringen langjährige Erfahrung aus IT, Prozessgestaltung und Zusammenarbeit mit
-              mittelständischen Betrieben mit und arbeiten bewusst herstellerunabhängig, damit
-              unsere Empfehlung immer nur eines im Blick hat: Ihren Betrieb.
+              Wir bringen langjährige Erfahrung aus IT, Prozessgestaltung und der Zusammenarbeit
+              mit mittelständischen Betrieben mit. Und wir arbeiten bewusst herstellerunabhängig,
+              weil unsere Empfehlung nicht an einen Anbieter gebunden sein soll, sondern an eines –
+              Ihren Betrieb.
             </p>
           </Reveal>
         </div>
