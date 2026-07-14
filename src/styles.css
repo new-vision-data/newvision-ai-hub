@@ -232,10 +232,12 @@
       animation-duration: 0.01ms !important;
       transition-duration: 0.01ms !important;
     }
-    /* Marquee is a continuous, infinite loop — collapsing its duration to
-       0.01ms turns it into a blur/strobe on iOS when Reduce Motion is on.
-       Stop the animation entirely instead of shortening it. */
-    .animate-marquee,
+    /* Marquee is a horizontal, non-disorienting loop — keep it running under
+       Reduce Motion, but restore full duration so the universal 0.01ms
+       override above doesn't turn it into a strobe. */
+    .animate-marquee {
+      animation: marquee 42s linear infinite !important;
+    }
     .animate-float-slow,
     .animate-float-slower,
     .animate-pulse-ring,

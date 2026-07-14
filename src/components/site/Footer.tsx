@@ -41,9 +41,9 @@ export function Footer() {
                 <span>
                   NewVisionData GmbH
                   <br />
-                  Lindenallee 13
+                  Hügelstr. 11a
                   <br />
-                  16831 Rheinsberg
+                  49179 Ostercappeln
                 </span>
               </li>
               <li className="flex items-center gap-2.5">

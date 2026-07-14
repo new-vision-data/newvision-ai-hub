@@ -7,7 +7,7 @@ export const CONTACT = {
   senderEmail: "website@newvisiondata.de",
   senderName: "NewVisionData",
   companyName: "NewVisionData GmbH",
-  street: "Lindenallee 13",
-  city: "16831 Rheinsberg",
+  street: "Hügelstr. 11a",
+  city: "49179 Ostercappeln",
   signature: "Ihr NewVisionData-Team",
 } as const;
