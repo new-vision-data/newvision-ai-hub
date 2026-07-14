@@ -53,7 +53,7 @@ export function Navbar() {
           <img
             src={logoAsset.url}
             alt="NewVisionData – Beraten. Umsetzen. Zukunft gestalten."
-            className="block h-10 w-auto object-contain sm:h-11 md:h-12"
+            className="block h-auto w-[200px] object-contain sm:w-[220px] md:w-[240px]"
             loading="eager"
             decoding="async"
           />
