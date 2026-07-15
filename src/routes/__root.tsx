@@ -77,6 +77,7 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
     meta: [
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
+      { name: "google-site-verification", content: "Pv_vM0MN3OUGhWqTbY-Pmf-BsKvp5N-1Wvp4VGn4kF0" },
       { title: "NewVisionData GmbH | AI-Beratung für den Mittelstand" },
       {
         name: "description",
