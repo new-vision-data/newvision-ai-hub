@@ -82,7 +82,7 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       {
         name: "description",
         content:
-          "AI- und Automatisierungslösungen für den deutschen Mittelstand. Herstellerunabhängig, DSGVO-bewusst, praxisnah. Kostenloser AI-Check.",
+          "AI- und Automatisierungslösungen für den Mittelstand. Herstellerunabhängig, DSGVO-bewusst, praxisnah.",
       },
       { name: "author", content: "NewVisionData GmbH" },
       {
@@ -92,11 +92,25 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       {
         property: "og:description",
         content:
-          "Wir zeigen Unternehmen, welche AI- und Automatisierungslösungen wirklich sinnvoll sind – und setzen sie sicher und praxistauglich um.",
+          "AI- und Automatisierungslösungen für den Mittelstand. Herstellerunabhängig, DSGVO-bewusst, praxisnah.",
       },
       { property: "og:type", content: "website" },
+      { property: "og:site_name", content: "NewVisionData GmbH" },
       { property: "og:locale", content: "de_DE" },
+      { property: "og:url", content: "https://www.newvisiondata.de/" },
+      { property: "og:image", content: "https://www.newvisiondata.de/og-image.jpg" },
+      { property: "og:image:width", content: "1200" },
+      { property: "og:image:height", content: "630" },
+      { property: "og:image:alt", content: "NewVisionData GmbH – AI-Beratung für den Mittelstand" },
       { name: "twitter:card", content: "summary_large_image" },
+      { name: "twitter:title", content: "NewVisionData GmbH | AI-Beratung für den Mittelstand" },
+      {
+        name: "twitter:description",
+        content:
+          "AI- und Automatisierungslösungen für den Mittelstand. Herstellerunabhängig, DSGVO-bewusst, praxisnah.",
+      },
+      { name: "twitter:image", content: "https://www.newvisiondata.de/og-image.jpg" },
+      { name: "twitter:image:alt", content: "NewVisionData GmbH – AI-Beratung für den Mittelstand" },
     ],
     links: [
       {
