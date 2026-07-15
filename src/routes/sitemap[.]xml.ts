@@ -2,7 +2,7 @@ import { createFileRoute } from "@tanstack/react-router";
 import type {} from "@tanstack/react-start";
 
 // TODO: Nach Veröffentlichung durch die finale Domain ersetzen (z. B. https://www.newvisiondata.de)
-const BASE_URL = "";
+const BASE_URL = "https://www.newvisiondata.de";
 
 interface SitemapEntry {
   path: string;
